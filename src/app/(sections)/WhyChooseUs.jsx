@@ -28,6 +28,7 @@ const items = [
 export default function WhyChooseUs() {
   return (
     <section className="py-20 bg-black">
+      {/* Header */}
       <div className="container mx-auto px-6 text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -42,22 +43,23 @@ export default function WhyChooseUs() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {items.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.2 }}
-            className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-2xl hover:scale-105 transition-transform"
-          >
-            <div className="mb-4">{item.icon}</div>
-            <h3 className="text-xl font-bold text-gray-200 mb-2">
-              {item.title}
-            </h3>
-            <p className="text-gray-400 text-sm">{item.desc}</p>
-          </motion.div>
-        ))}
+      {/* کارت‌ها */}
+      <div className="flex justify-center">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-screen-xl w-full px-6">
+          {items.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.2 }}
+              className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-2xl hover:scale-105 transition-transform"
+            >
+              <div className="mb-4">{item.icon}</div>
+              <h3 className="text-xl font-bold text-gray-200 mb-2">{item.title}</h3>
+              <p className="text-gray-400 text-sm">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
