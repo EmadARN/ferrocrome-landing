@@ -26,7 +26,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 shadow-lg",
         "bg-blue-600/40 backdrop-blur-md border border-white/20",
-        isScrolled ? "w-[95%] md:w-[20%] rounded-xl" : "w-full rounded-none"
+        isScrolled ? "w-[95%] md:w-[22%] rounded-xl" : "w-full rounded-none"
       )}
     >
       <div className="flex items-center px-6 py-3">
