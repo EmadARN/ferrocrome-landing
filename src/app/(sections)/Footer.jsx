@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-black py-16 border-t border-gray-800">
@@ -11,24 +13,24 @@ export default function Footer() {
             قابل اعتماد در بیش از 40 کشور.
           </p>
           <div className="flex gap-4">
-            <a
+            <Link
               href="#"
               className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold"
             >
               in
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold"
             >
               f
-            </a>
-            <a
+            </Link>
+            <Link
               href="#"
               className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold"
             >
               @
-            </a>
+            </Link>
           </div>
         </div>
 
