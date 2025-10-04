@@ -32,3 +32,6 @@ body {
   min-height: 100dvh;
   user-select: none;
 }
+* {
+  scroll-behavior: smooth;
+}
