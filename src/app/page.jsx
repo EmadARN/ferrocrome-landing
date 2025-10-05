@@ -1,6 +1,7 @@
 import About from "./(sections)/About";
 import Contact from "./(sections)/Contact";
 import Footer from "./(sections)/Footer";
+import Header from "./(sections)/Header";
 import Hero from "./(sections)/Hero";
 import Products from "./(sections)/Product";
 import ProductCarousel from "./(sections)/ProductCarousel";
@@ -10,8 +11,8 @@ import WhyChooseUs from "./(sections)/WhyChooseUs";
 export default function Home() {
   return (
     <main>
-      <Navbar />
-      <section id="hero">
+      <Header />
+      <section id="hero" className=" lg:pt-32">
         <Hero />
       </section>
       <section id="about">
@@ -24,7 +25,7 @@ export default function Home() {
       <section id="whyus">
         <WhyChooseUs />
       </section>
-        <section id="carousel">
+      <section id="carousel">
         <ProductCarousel />
       </section>
       <section id="contact">
