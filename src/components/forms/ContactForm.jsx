@@ -2,15 +2,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { sendCustomerRequest } from "@/services/api";
 import Button from "../ui/Button";
-
-const contactSchema = z.object({
-  fullName: z.string().min(2, "نام کامل لازم است"),
-  email: z.string().email("ایمیل معتبر وارد کنید"),
-  phone: z.string().optional(),
-  company: z.string().min(2, "نام شرکت لازم است"),
-  message: z.string().min(10, "پیام خیلی کوتاه است"),
-});
+import { customerRequestSchema } from "@/lib/validations";
 
 export default function ContactForm() {
   const {
@@ -19,13 +13,23 @@ export default function ContactForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(customerRequestSchema),
   });
 
   const onSubmit = async (data) => {
-    console.log("فرم ارسال شد:", data);
-    alert("پیام شما ارسال شد!");
-    reset();
+    const payload = {
+      ...data,
+      is_response: false,
+    };
+
+    try {
+      await sendCustomerRequest(payload);
+      alert("پیام شما با موفقیت ارسال شد! ✅");
+      reset();
+    } catch (err) {
+      console.error(err);
+      alert("خطا در ارسال پیام ❌");
+    }
   };
 
   return (
@@ -35,7 +39,7 @@ export default function ContactForm() {
           <label className="block text-gray-200 mb-2">نام کامل *</label>
           <input
             type="text"
-            {...register("fullName")}
+            {...register("name")}
             className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             placeholder="نام خود را وارد کنید"
           />
@@ -65,7 +69,7 @@ export default function ContactForm() {
           <label className="block text-gray-200 mb-2">شماره تلفن</label>
           <input
             type="tel"
-            {...register("phone")}
+            {...register("phone_number")}
             className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             placeholder="+98 912 123 4567"
           />
@@ -75,7 +79,7 @@ export default function ContactForm() {
           <label className="block text-gray-200 mb-2">نام شرکت *</label>
           <input
             type="text"
-            {...register("company")}
+            {...register("company_name")}
             className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             placeholder="نام شرکت"
           />
@@ -106,7 +110,7 @@ export default function ContactForm() {
         disabled={isSubmitting}
         className="w-full text-lg"
       >
-        ارسال پیام
+        {isSubmitting ? "در حال ارسال..." : "ارسال پیام"}
       </Button>
     </form>
   );
