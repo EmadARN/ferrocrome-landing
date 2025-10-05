@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const products = [
@@ -31,6 +31,19 @@ const products = [
 
 export default function ProductsWithModal() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [waveIndex, setWaveIndex] = useState(null);
+
+  // موج رندوم روی یک کارت
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * products.length);
+      setWaveIndex(randomIndex);
+
+      const timeout = setTimeout(() => setWaveIndex(null), 2000); // طول موج 2 ثانیه
+      return () => clearTimeout(timeout);
+    }, 4000); // هر 4 ثانیه موج جدید
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="py-24 bg-gradient-to-b from-black to-gray-900 text-gray-300">
@@ -53,7 +66,6 @@ export default function ProductsWithModal() {
           می‌دهیم تا نیازهای مختلف صنایع فولاد و آلیاژسازی را برطرف کنیم.
         </motion.p>
 
-        {/* Grid محصولات */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {products.map((product, index) => (
             <motion.div
@@ -62,15 +74,22 @@ export default function ProductsWithModal() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-800/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-700 hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer relative"
+              className="relative bg-gray-800/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-700 hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
               onClick={() => setSelectedProduct(product)}
             >
-              {/* Badge کلیک */}
-              <div className="absolute top-3 right-3 bg-yellow-400 text-black text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
-                کلیک کنید
-              </div>
+              {/* موج رندوم */}
+              {waveIndex === index && (
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
+                  className="absolute inset-0 pointer-events-none"
+                >
+                  <div className="w-full h-full bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-3xl"></div>
+                </motion.div>
+              )}
 
-              <div className="h-56 w-full overflow-hidden">
+              <div className="h-56 w-full overflow-hidden relative z-10">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -78,7 +97,7 @@ export default function ProductsWithModal() {
                 />
               </div>
 
-              <div className="p-6 text-right">
+              <div className="p-6 text-right relative z-10">
                 <h3 className="text-2xl font-bold text-yellow-400 mb-3">
                   {product.name}
                 </h3>
@@ -124,10 +143,15 @@ export default function ProductsWithModal() {
                 alt={selectedProduct.name}
                 className="w-full h-64 object-cover rounded-xl mb-4"
               />
-              <p className="text-gray-400 mb-4">{selectedProduct.description}</p>
+              <p className="text-gray-400 mb-4">
+                {selectedProduct.description}
+              </p>
               <ul className="text-sm space-y-2">
                 {selectedProduct.features.map((f, i) => (
-                  <li key={i} className="flex items-center justify-end gap-x-2">
+                  <li
+                    key={i}
+                    className="flex items-center justify-start gap-x-2"
+                  >
                     <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
                     {f}
                   </li>
