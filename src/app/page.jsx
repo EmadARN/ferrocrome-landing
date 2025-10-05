@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main>
       <Header />
-      <section id="hero">
+      <section id="hero" className=" lg:pt-32">
         <Hero />
       </section>
       <section id="about">
@@ -25,7 +25,7 @@ export default function Home() {
       <section id="whyus">
         <WhyChooseUs />
       </section>
-        <section id="carousel">
+      <section id="carousel">
         <ProductCarousel />
       </section>
       <section id="contact">
