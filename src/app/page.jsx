@@ -1,6 +1,7 @@
 import About from "./(sections)/About";
 import Contact from "./(sections)/Contact";
 import Footer from "./(sections)/Footer";
+import Header from "./(sections)/Header";
 import Hero from "./(sections)/Hero";
 import Navbar from "./(sections)/Navbar";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
@@ -8,7 +9,7 @@ import WhyChooseUs from "./(sections)/WhyChooseUs";
 export default function Home() {
   return (
     <main>
-      <Navbar />
+      <Header />
       <section id="hero">
         <Hero />
       </section>
