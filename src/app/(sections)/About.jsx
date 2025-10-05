@@ -1,82 +1,154 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import Image from "next/image";
+import { useEffect } from "react";
 
 export default function About() {
+  const stats = [
+    { value: "30+", label: "سال تجربه", color: "text-yellow-400" },
+    { value: "500K+", label: "تن تولید سالانه", color: "text-blue-400" },
+    { value: "40+", label: "کشور مقصد صادرات", color: "text-yellow-400" },
+  ];
+
+  const images = [
+    "/images/high-carbon-ferrochrome.Webp",
+    "/images/low-carbon-ferrochrome.jpg",
+    "/images/micro-carbon-ferrochrome.webp",
+  ];
+
+  // انیمیشن افتادن و شناور شدن
+  const fallVariants = {
+    initial: (id) => ({
+      y: -500,
+      opacity: 0,
+      rotateX: Math.random() * 60 - 30,
+      rotateY: Math.random() * 60 - 30,
+      x: 0,
+    }),
+    animate: (idx) => {
+      const angle = (idx / images.length) * 2 * Math.PI;
+      const radius = 14 * 16; // 14rem به px
+      return {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        rotateY: 0,
+        x: Math.cos(angle) * radius,
+        y: Math.sin(angle) * radius,
+        transition: {
+          delay: idx * 0.3,
+          duration: 1.5,
+          type: "spring",
+          stiffness: 80,
+          damping: 20,
+          ease: [0.4, 0, 0.2, 1],
+        },
+      };
+    },
+    hover: {
+      scale: 1.05,
+      y: -15,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+    float: {
+      y: [0, -12, 0],
+      rotateX: [0, 10, -10, 0],
+      rotateY: [0, 15, -15, 0],
+      opacity: [0.9, 1, 0.9],
+      transition: { duration: 6, repeat: Infinity, repeatDelay: 1, ease: "easeInOut" },
+    },
+  };
+
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-900 to-black text-gray-300">
-      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        
-        {/* متن معرفی */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4">
-            درباره ما
-          </h2>
+    <section className="relative py-24 bg-gradient-to-br from-gray-900 via-gray-950 to-black overflow-hidden text-gray-300">
+      {/* Floating background shapes */}
+      <motion.div
+        animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-20 left-20 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{ y: [0, 15, 0], scale: [1, 0.9, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-10 right-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
+      />
 
-          <p className="text-lg leading-relaxed text-gray-300">
-            صنایع فروکروم، با بیش از سه دهه سابقه درخشان در تولید و صادرات
-            فروکروم، یکی از پیشگامان صنعت فلزات آلیاژی در منطقه است. ما با تکیه
-            بر تکنولوژی مدرن، نیروی انسانی متخصص و استانداردهای جهانی، محصولاتی
-            با کیفیت ممتاز و پایدار تولید می‌کنیم.
-          </p>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* تصاویر */}
+          <div className="relative flex justify-center items-center w-full h-[28rem] sm:h-[32rem] lg:h-[36rem]">
+            {images.map((src, idx) => (
+              <motion.div
+                key={idx}
+                custom={idx}
+                variants={fallVariants}
+                initial="initial"
+                animate={["animate", "float"]}
+                whileHover="hover"
+                className="absolute w-80 h-72 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer"
+                style={{ zIndex: 10 + idx, perspective: 1000 }}
+              >
+                <Image
+                  src={src}
+                  alt={`کارخانه ${idx + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={idx === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30"></div>
+              </motion.div>
+            ))}
+          </div>
 
-          <p className="text-lg leading-relaxed text-gray-400">
-            مأموریت ما ارائه‌ی فروکروم با بالاترین خلوص و استحکام است تا نیازهای
-            صنایع فولاد، آلیاژسازی و متالورژی را در سراسر دنیا برآورده کنیم.
-            کارخانه‌های ما با بهره‌گیری از سیستم‌های کنترل کیفی دقیق و فناوری‌های
-            نوین ذوب، تضمین‌کننده‌ی محصولی قابل اعتماد و منطبق با نیاز بازارهای
-            جهانی هستند.
-          </p>
+          {/* متن و آمار */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-tight">
+              درباره ما
+            </h2>
 
-          <div className="border-l-4 border-yellow-400 pl-5 mt-6">
-            <p className="italic text-gray-400">
-              "کیفیت اتفاقی نیست؛ نتیجه‌ی سه دهه تلاش، تخصص و نوآوری است."
+            <p className="text-lg text-gray-300 leading-relaxed">
+              صنایع فروکروم با بیش از سه دهه تجربه، پیشرو در تولید و صادرات
+              فروکروم است. ما با استفاده از فناوری مدرن و نیروی متخصص، محصولاتی
+              با کیفیت بالا و قابل اعتماد ارائه می‌کنیم.
             </p>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-10 text-center">
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">30+</div>
-              <div className="text-gray-400 text-sm">سال تجربه</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-400">500K+</div>
-              <div className="text-gray-400 text-sm">تن تولید سالانه</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-yellow-400">40+</div>
-              <div className="text-gray-400 text-sm">کشور مقصد صادرات</div>
-            </div>
-          </div>
-        </motion.div>
+            <p className="text-lg text-gray-400 leading-relaxed">
+              مأموریت ما تولید فروکروم با بالاترین خلوص و استحکام است تا نیازهای
+              صنایع فولاد و آلیاژسازی در سراسر جهان برآورده شود.
+            </p>
 
-        {/* تصویر یا نمای گرافیکی */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="relative flex items-center justify-center"
-        >
-          <div className="bg-gray-800/40 backdrop-blur-md rounded-3xl p-12 w-full h-full flex items-center justify-center shadow-xl border border-gray-700">
-            {/* جایگزین با عکس کارخانه یا آیکون مرتبط */}
-            <svg
-              className="w-72 h-72 text-gray-500"
-              fill="currentColor"
-              viewBox="0 0 24 24"
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="bg-gray-800/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-gray-600 hover:scale-105 transition-transform cursor-default"
+                >
+                  <div className={`text-3xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
+                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-10 border-l-4 border-yellow-400 pl-5 italic text-gray-400"
             >
-              <path d="M12 3L2 12h3v8h14v-8h3L12 3z" />
-              <path d="M9 13h2v4H9v-4zm4 0h2v4h-2v-4z" fill="currentColor" />
-            </svg>
-          </div>
-
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-yellow-500/10 to-blue-400/10 blur-3xl -z-10"></div>
-        </motion.div>
+              "کیفیت نتیجه تخصص، نوآوری و سه دهه تجربه است."
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
