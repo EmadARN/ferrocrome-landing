@@ -20,7 +20,7 @@ export default function Home() {
         <About />
       </section>
 
-      <section id="ferrochrome">
+      <section id="ferrochrome" >
         <WhatIsFerroChrome />
       </section>
 

@@ -10,12 +10,12 @@ export default function About() {
   ];
 
   const images = [
-    "/images/high-carbon-ferrochrome.Webp",
+    "/images/high-carbon-ferrochrome.webp",
     "/images/micro-carbon-ferrochrome.webp",
   ];
 
   const fallVariants = {
-    initial: (id) => ({
+    initial: () => ({
       y: -500,
       opacity: 0,
       rotateX: Math.random() * 60 - 30,
@@ -24,7 +24,7 @@ export default function About() {
     }),
     animate: (idx) => {
       const angle = (idx / images.length) * 2 * Math.PI;
-      const radius = 8 * 2; // فاصله کمتر بین تصاویر
+      const radius = 16;
       return {
         y: 0,
         x: Math.cos(angle) * radius,
@@ -60,7 +60,7 @@ export default function About() {
   };
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-gray-900 via-gray-950 to-black overflow-hidden text-gray-300">
+    <section className="relative mx-auto px-6 py-24 bg-gradient-to-br from-gray-900 via-gray-950 to-black overflow-hidden text-gray-300">
       {/* اشکال پس‌زمینه */}
       <motion.div
         animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
@@ -75,39 +75,13 @@ export default function About() {
 
       <div className="container mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* تصاویر */}
-          <div className="flex flex-col sm:flex-row justify-center items-center w-full gap-6 h-auto sm:h-[32rem] lg:h-[36rem] relative">
-            {images.map((src, idx) => (
-              <motion.div
-                key={idx}
-                custom={idx}
-                variants={fallVariants}
-                initial="initial"
-                animate={["animate", "float"]}
-                whileHover="hover"
-                className="relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer"
-                style={{ perspective: 1000, zIndex: 10 + idx }}
-              >
-                <Image
-                  src={src}
-                  alt={`کارخانه ${idx + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 33vw"
-                  priority={idx === 0}
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30"></div>
-              </motion.div>
-            ))}
-          </div>
-
           {/* متن و آمار */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-6 order-1 lg:order-2"
           >
             <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-tight">
               درباره ما
@@ -150,6 +124,32 @@ export default function About() {
               "کیفیت نتیجه تخصص، نوآوری و سه دهه تجربه است."
             </motion.div>
           </motion.div>
+
+          {/* تصاویر */}
+          <div className="flex flex-col justify-center items-center w-full gap-6 h-auto sm:h-[32rem] lg:h-[36rem] relative order-2 lg:order-1">
+            {images.map((src, idx) => (
+              <motion.div
+                key={idx}
+                custom={idx}
+                variants={fallVariants}
+                initial="initial"
+                animate={["animate", "float"]}
+                whileHover="hover"
+                className="relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer"
+                style={{ perspective: 1000, zIndex: 10 + idx }}
+              >
+                <Image
+                  src={src}
+                  alt={`کارخانه ${idx + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={idx === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30"></div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

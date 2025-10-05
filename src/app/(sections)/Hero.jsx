@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const navItems = [
   "فروکروم پرکربن",
@@ -74,20 +75,20 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap gap-6 mt-8"
+            className="flex gap-6 mt-8 whitespace-nowrap"
           >
-            <a
+            <Link
               href="#contact"
-              className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] font-bold text-black shadow-lg hover:scale-105 transition-transform"
+              className="px-4 py-3 rounded-lg bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] font-bold text-sm md:text-md text-black shadow-lg hover:scale-105 transition-transform"
             >
               درخواست قیمت
-            </a>
-            <a
+            </Link>
+            <Link
               href="#products"
-              className="px-6 py-3 rounded-lg border border-gray-400 text-gray-200 hover:bg-gray-700 transition-all"
+              className="px-4 py-3 rounded-lg border border-gray-400 text-sm md:text-m text-gray-200 hover:bg-gray-700 transition-all"
             >
               مشاهده محصولات
-            </a>
+            </Link>
           </motion.div>
         </div>
 
