@@ -1,43 +1,78 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const navItems = [
-  "فروکروم پرکربن",
-  "فروکروم کم‌کربن",
-  "فروکروم نیتروژن‌دار",
-  "کروم متال",
-];
-
 export default function Hero() {
-  return (
-    <section className="relative min-h-screen bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden">
-      {/* Floating and decorative elements */}
-      <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-16 w-24 h-24 bg-gradient-to-br from-[#FFD700]/30 to-transparent rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-60 left-10 w-16 h-16 bg-gradient-to-br from-[#4682B4]/30 to-transparent rounded-full blur-2xl"
-      />
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 right-32 w-28 h-28 bg-gradient-to-br from-[#C0C0C0]/20 to-transparent rounded-full blur-3xl"
-      />
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const floatingLights = Array.from({ length: 12 });
+  const tinyStars = Array.from({ length: 30 });
 
-      <div className="container mx-auto px-6 lg:px-24 py-20 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+  const handleMouseMove = (e) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  return (
+ <section
+  onMouseMove={handleMouseMove}
+  className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh] lg:min-h-[80vh]"
+>
+
+      <div className="container mx-auto px-6 lg:px-24 py-16 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Text */}
-        <div className="space-y-6 lg:pr-8">
+        <div className="space-y-6 lg:pr-8 relative z-10">
+          <div className="absolute inset-0 z-0 lg:hidden">
+            {tinyStars.map((_, idx) => (
+              <motion.div
+                key={idx}
+                animate={{
+                  x: [-80, 80, -80],
+                  y: [-40, 40, -40],
+                  opacity: [0.1, 0.7, 0.1],
+                }}
+                transition={{
+                  duration: 10 + idx,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: idx * 0.1,
+                }}
+                className="absolute w-1 h-1 bg-white/70 rounded-full blur-sm"
+              />
+            ))}
+
+            {floatingLights.map((_, idx) => (
+              <motion.div
+                key={idx}
+                animate={{
+                  x: [-50, 50, -50].map((x) => x + (mousePos.x / 50 || 0)),
+                  y: [-30, 30, -30].map((y) => y + (mousePos.y / 50 || 0)),
+                  opacity: [0.3, 0.9, 0.3],
+                }}
+                transition={{
+                  duration: 6 + idx,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: idx * 0.2,
+                }}
+                className="absolute w-6 h-6 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] rounded-full blur-xl"
+              />
+            ))}
+
+            <motion.div
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.6, 1, 0.6],
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-36 h-36 bg-gradient-to-r from-[#FFD700]/50 to-[#F4D03F]/50 rounded-full blur-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            />
+          </div>
+
           <motion.h1
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight relative z-10"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] block">
               بهترین
@@ -45,13 +80,12 @@ export default function Hero() {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C0C0C0] via-white to-[#C0C0C0] block">
               فروکروم صنعتی
             </span>
-            <span className="block text-gray-300 mt-2 text-xl md:text-2xl font-medium">
+            <span className="block text-gray-300 mt-2 text-lg md:text-xl font-medium">
               برای صنایع فولاد و ریخته‌گری
             </span>
           </motion.h1>
 
-          {/* Features */}
-          <div className="flex flex-wrap gap-4 mt-6">
+          <div className="flex flex-wrap gap-4 mt-4 relative z-10">
             {[
               { text: "ISO 9001", color: "bg-yellow-400" },
               { text: "صادرات به ۴۰+ کشور", color: "bg-blue-400" },
@@ -70,12 +104,11 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex gap-6 mt-8 whitespace-nowrap"
+            className="flex gap-6 mt-6 whitespace-nowrap relative z-10"
           >
             <Link
               href="#contact"
@@ -92,33 +125,91 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Product Cards */}
-        <motion.div
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="relative grid gap-6 "
-        >
-          {navItems.map((item, idx) => (
+        {/* Right Animated Visual (Desktop) */}
+        <div className="relative w-full h-[400px] lg:h-[500px] flex items-center justify-center hidden lg:block">
+          {tinyStars.map((_, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ scale: 1.05 }}
-              className="bg-black/40 backdrop-blur-xl border border-gray-600 rounded-xl p-6 text-white shadow-lg flex flex-col justify-between"
-            >
-              <h3 className="text-lg font-bold">{item}</h3>
-              <p className="text-gray-300 text-sm m-2 py-3">
-                محصول با کیفیت بالا و کاربرد گسترده در فولادسازی و ریخته‌گری.
-              </p>
-              <span className="mt-4  text-yellow-400 font-semibold text-[0.80rem] absolute bottom-2 left-3">
-                مشاهده جزئیات
-              </span>
-            </motion.div>
+              animate={{
+                x: [-80, 80, -80],
+                y: [-40, 40, -40],
+                opacity: [0.1, 0.7, 0.1],
+              }}
+              transition={{
+                duration: 10 + idx,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: idx * 0.1,
+              }}
+              className="absolute w-1 h-1 bg-white/70 rounded-full blur-sm"
+            />
           ))}
-        </motion.div>
+
+          {floatingLights.map((_, idx) => (
+            <motion.div
+              key={idx}
+              animate={{
+                x: [-50, 50, -50].map((x) => x + (mousePos.x / 50 || 0)),
+                y: [-30, 30, -30].map((y) => y + (mousePos.y / 50 || 0)),
+                opacity: [0.3, 0.9, 0.3],
+              }}
+              transition={{
+                duration: 6 + idx,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: idx * 0.2,
+              }}
+              className="absolute top-36 left-64 w-6 h-6 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] rounded-full blur-xl"
+            />
+          ))}
+
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.6, 1, 0.6],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-36 h-36 rounded-full bg-gradient-to-r from-[#FFD700]/50 to-[#F4D03F]/50 blur-3xl absolute top-36 left-64"
+          />
+
+          {/* Vertical Light Lines */}
+          <motion.div
+            animate={{ y: [-60, 60, -60], opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-1/4 w-[2px] h-64 bg-gradient-to-b from-[#FFD700] to-transparent rounded"
+          />
+          <motion.div
+            animate={{ y: [60, -60, 60], opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 right-1/4 w-[2px] h-64 bg-gradient-to-t from-[#F4D03F] to-transparent rounded"
+          />
+          <motion.div
+            animate={{ y: [-50, 50, -50], opacity: [0.2, 0.7, 0.2] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 right-1/3 w-[2px] h-56 bg-gradient-to-b from-[#C0C0C0] to-transparent rounded"
+          />
+        </div>
+      </div>
+
+      {/* Bottom Scroll Hint */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+        {[0, 1].map((_, idx) => (
+          <motion.div
+            key={idx}
+            animate={{ y: [0, 2, 0] }}
+            transition={{
+              repeat: Infinity,
+              duration: 1,
+              ease: "easeInOut",
+              delay: idx * 0.2,
+            }}
+            className="w-4 h-4 border-b-2 border-r-2 border-white/60 rotate-45"
+          />
+        ))}
       </div>
 
       {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A1A] to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0A0A1A] to-transparent"></div>
     </section>
   );
 }
