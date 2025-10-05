@@ -5,9 +5,10 @@ import Header from "./(sections)/Header";
 import Hero from "./(sections)/Hero";
 import Products from "./(sections)/Product";
 import ProductCarousel from "./(sections)/ProductCarousel";
-import Navbar from "./(sections)/Navbar";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
+import ScrollToTopButton from "@/components/ui/ScrollTopButton";
+
 export default function Home() {
   return (
     <main>
@@ -20,7 +21,7 @@ export default function Home() {
         <About />
       </section>
 
-      <section id="ferrochrome" >
+      <section id="ferrochrome">
         <WhatIsFerroChrome />
       </section>
 
@@ -41,6 +42,9 @@ export default function Home() {
       </section>
 
       <Footer />
+
+      {/* دکمه Scroll to Top */}
+      <ScrollToTopButton />
     </main>
   );
 }
