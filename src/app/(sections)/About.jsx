@@ -11,6 +11,7 @@ export default function About() {
 
   const images = [
     "/images/high-carbon-ferrochrome.webp",
+    "/images/low-carbon-ferrochrome.jpg", // وسطی
     "/images/micro-carbon-ferrochrome.webp",
   ];
 
@@ -52,6 +53,18 @@ export default function About() {
       opacity: [0.9, 1, 0.9],
       transition: {
         duration: 6,
+        repeat: Infinity,
+        repeatDelay: 1,
+        ease: "easeInOut",
+      },
+    },
+    floatAlt: {
+      y: [0, 10, -10, 0],
+      rotateX: [0, -8, 8, 0],
+      rotateY: [0, -10, 10, 0],
+      opacity: [1, 0.95, 1],
+      transition: {
+        duration: 7,
         repeat: Infinity,
         repeatDelay: 1,
         ease: "easeInOut",
@@ -133,9 +146,13 @@ export default function About() {
                 custom={idx}
                 variants={fallVariants}
                 initial="initial"
-                animate={["animate", "float"]}
+                animate={
+                  idx === 2 ? ["animate", "floatAlt"] : ["animate", "float"]
+                }
                 whileHover="hover"
-                className="relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer"
+                className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer transition-transform ${
+                  idx === 1 ? "translate-x-3 sm:translate-x-24" : ""
+                }`}
                 style={{ perspective: 1000, zIndex: 10 + idx }}
               >
                 <Image
