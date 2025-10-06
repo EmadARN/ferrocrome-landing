@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { useState, useRef, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "خانه", href: "#hero" },
@@ -13,75 +13,48 @@ const navItems = [
 ];
 
 export default function Header() {
-  const [showMobileNav, setShowMobileNav] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const drawerRef = useRef(null);
 
-  // Spark Effect
-  useEffect(() => {
-    const createSpark = () => {
-      const spark = document.createElement("div");
-      spark.className =
-        "absolute w-1 h-1 rounded-full bg-furnace-orange shadow-[0_0_10px_#FF6B35] animate-spark-float";
-      spark.style.top = Math.random() * 100 + "%";
-      spark.style.left = Math.random() * 100 + "%";
-      spark.style.animationDelay = Math.random() * 2 + "s";
-      document.getElementById("header")?.appendChild(spark);
-      setTimeout(() => spark.remove(), 6000);
-    };
-    const interval = setInterval(createSpark, 1500);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Scroll listener برای نمایش نوبار موبایل و مخفی/نمایش هدر دسکتاپ
+  // مدیریت نمایش هدر دسکتاپ هنگام اسکرول
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-
-      // نوبار موبایل
-      if (currentScroll > 50) {
-        setShowMobileNav(true);
-      } else {
-        setShowMobileNav(false);
-      }
-
-      // هدر دسکتاپ: وقتی اسکرول به پایین، هدر مخفی؛ به بالا، هدر ظاهر
       if (currentScroll > lastScroll && currentScroll > 100) {
         setShowHeader(false);
       } else {
         setShowHeader(true);
       }
-
       setLastScroll(currentScroll);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScroll]);
 
   return (
     <>
-      {/* Header دسکتاپ با Framer Motion */}
+      {/* هدر دسکتاپ */}
       <AnimatePresence>
         {showHeader && (
           <motion.header
             key="header"
-            id="header"
             initial={{ y: -120, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -120, opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="w-full overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black steel-texture z-50 lg:fixed top-0 left-0"
+            className="w-full overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black steel-texture z-50 fixed top-0 left-0"
           >
             <div className="container px-6 lg:mr-24 flex items-center justify-between h-32 relative z-10">
               {/* منوی دسکتاپ */}
-              <nav className="hidden lg:flex items-center space-x-4 ">
+              <nav className="hidden lg:flex items-center space-x-4">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "nav-item text-gray-300 font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 hover:text-blue-200   p-2"
+                      "nav-item text-gray-300 font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 hover:text-blue-200 p-2"
                     )}
                   >
                     {item.label}
@@ -114,42 +87,72 @@ export default function Header() {
                   درخواست همکاری
                 </button>
               </Link>
+
+              {/* همبرگر موبایل */}
+              <div className="lg:hidden flex items-center">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMobileMenuOpen(!mobileMenuOpen);
+                  }}
+                  className="flex flex-col justify-center items-center w-10 h-10 relative z-50"
+                >
+                  <span
+                    className={cn(
+                      "block w-6 h-[2px] bg-gray-300 rounded transition-all duration-300",
+                      mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                    )}
+                  ></span>
+                  <span
+                    className={cn(
+                      "block w-6 h-[2px] bg-gray-300 rounded my-1 transition-all duration-300",
+                      mobileMenuOpen ? "opacity-0" : ""
+                    )}
+                  ></span>
+                  <span
+                    className={cn(
+                      "block w-6 h-[2px] bg-gray-300 rounded transition-all duration-300",
+                      mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                    )}
+                  ></span>
+                </button>
+              </div>
             </div>
           </motion.header>
         )}
       </AnimatePresence>
 
-      {/* خطوط هندسی */}
-      <div className="absolute w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[20%] left-[10%] w-[200px] h-[2px] bg-gradient-to-r from-transparent via-blue-200 to-transparent animate-slide-right"></div>
-        <div className="absolute bottom-[30%] right-[15%] w-[150px] h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent animate-slide-left"></div>
-      </div>
-
-      {/* نوبار موبایل با Framer Motion */}
+      {/* منوی همبرگر موبایل */}
       <AnimatePresence>
-        {showMobileNav && (
-          <motion.nav
-            initial={{ y: "100%", opacity: 0 }}
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobileDrawer"
+            ref={drawerRef}
+            initial={{ y: "-100%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
+            exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="lg:hidden fixed top-12 left-0 w-full z-20 flex justify-around py-3 overflow-x-auto
-                 bg-gradient-to-t from-black/80 via-black/60 to-black/20
-                 backdrop-blur-xl
-                 border-t border-blue-500/30
-                 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]
-                 rounded-t-xl"
+            className="fixed top-0 left-0 w-full h-[60vh] md:h-[45vh] bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#1658a8] flex flex-col items-center justify-center z-40 rounded-b-xl shadow-xl pt-28 "
           >
+            {/* دکمه ضربدر داخل drawer */}
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute  top-4 right-4 text-gray-300 text-2xl hover:text-blue-200 transition-all duration-300"
+            >
+              ✕
+            </button>
+
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-300 font-rajdhani font-medium text-sm hover:text-blue-200 transition-all duration-300 whitespace-nowrap px-3"
+                onClick={() => setMobileMenuOpen(false)}
+                className=" text-gray-300 font-rajdhani font-medium text-[10px] md:text-[16px] my-4 hover:text-blue-200 transition-all duration-300"
               >
                 {item.label}
               </Link>
             ))}
-          </motion.nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
