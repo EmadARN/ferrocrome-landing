@@ -96,7 +96,7 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-6 order-1 lg:order-2"
           >
-            <h2 className="text-2xl md:text-5xl font-extrabold text-[#c76700] tracking-tight">
+            <h2 className="text-2xl md:text-4xl font-extrabold text-[#c76700] tracking-tight">
               درباره ما
             </h2>
 

@@ -44,7 +44,7 @@ export default function Home() {
         <WhatIsFerroChrome />
       </section>
 
-      <section id="product">
+      <section  id="product">
         <Products />
       </section>
 
