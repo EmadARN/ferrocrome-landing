@@ -5,6 +5,7 @@ import { z } from "zod";
 import { sendCustomerRequest } from "@/services/api";
 import Button from "../ui/Button";
 import { customerRequestSchema } from "@/lib/validations";
+import toast from "react-hot-toast";
 
 export default function ContactForm() {
   const {
@@ -35,11 +36,11 @@ export default function ContactForm() {
 
     try {
       await sendCustomerRequest(formData);
-      alert("پیام شما با موفقیت ارسال شد! ✅");
+      toast.success("پیام شما با موفقیت ارسال شد!");
       reset();
     } catch (err) {
       console.error(err);
-      alert("خطا در ارسال پیام ❌");
+       toast.error("خطا در ارسال پیام ");
     }
   };
   return (

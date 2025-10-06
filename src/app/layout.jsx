@@ -1,3 +1,4 @@
+import ToastProvider from "@/components/ui/ToastProvider";
 import "./globals.css";
 import { fontIranYekan } from "@/lib/font";
 export const metadata = {
@@ -9,6 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body className={`${fontIranYekan.variable} bg-black text-white`}>
+          <ToastProvider />
         {children}
       </body>
     </html>
