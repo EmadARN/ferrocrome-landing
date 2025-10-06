@@ -52,7 +52,7 @@ export default function ContactForm() {
       {/* نام و ایمیل */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-gray-200 mb-2">نام کامل *</label>
+          <label className="block text-gray-200 mb-2 text-start">نام کامل *</label>
           <input
             type="text"
             {...register("name")}
@@ -65,7 +65,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-gray-200 mb-2">ایمیل *</label>
+          <label className="block text-gray-200 mb-2 text-start">ایمیل *</label>
           <input
             type="email"
             {...register("email")}
@@ -81,7 +81,7 @@ export default function ContactForm() {
       {/* شماره و شرکت */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-gray-200 mb-2">شماره تلفن</label>
+          <label className="block text-gray-200 mb-2 text-start">شماره تلفن</label>
           <input
             type="tel"
             {...register("phone_number")}
@@ -91,7 +91,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-gray-200 mb-2">نام شرکت *</label>
+          <label className="block text-gray-200 mb-2 text-start">نام شرکت *</label>
           <input
             type="text"
             {...register("company_name")}
@@ -108,7 +108,7 @@ export default function ContactForm() {
 
       {/* انتخاب نوع درخواست */}
       <div>
-        <label className="block text-gray-200 mb-3">نوع درخواست *</label>
+        <label className="block text-gray-200 mb-3 text-start">نوع درخواست *</label>
         <div className="flex flex-col sm:flex-row gap-4">
           <label className="flex items-center gap-2">
             <input
@@ -146,10 +146,40 @@ export default function ContactForm() {
           </p>
         )}
       </div>
+        <div>
+  <label className="block text-gray-200 mb-2 text-start">فایل ضمیمه (اختیاری)</label>
+
+  <label
+    htmlFor="fileUpload"
+    className="flex items-center justify-center w-full bg-gray-700/40 rounded-xl p-3 text-gray-200 cursor-pointer hover:bg-gray-700/60 transition"
+  >
+    <span className=" bg-[#c76700] text-gray-900 px-4 py-2 rounded-lg ml-3 hover:bg-[#a35603] transition">
+      انتخاب فایل
+    </span>
+    <span className="truncate text-sm opacity-80" id="fileName">
+      فایلی انتخاب نشده است
+    </span>
+  </label>
+
+  <input
+    id="fileUpload"
+    type="file"
+    {...register("file")}
+    className="hidden"
+    onChange={(e) => {
+      const fileName = e.target.files?.[0]?.name || "فایلی انتخاب نشده است";
+      document.getElementById("fileName").textContent = fileName;
+    }}
+  />
+
+  {errors.file && (
+    <p className="text-red-400 text-sm mt-1">{errors.file.message}</p>
+  )}
+</div>
 
       {/* پیام */}
       <div>
-        <label className="block text-gray-200 mb-2">پیام *</label>
+        <label className="block text-gray-200 mb-2 text-start">پیام *</label>
         <textarea
           {...register("message")}
           rows={4}
@@ -161,18 +191,8 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* آپلود فایل (اختیاری) */}
-      <div>
-        <label className="block text-gray-200 mb-2">فایل ضمیمه (اختیاری)</label>
-        <input
-          type="file"
-          {...register("file")}
-          className="w-full text-gray-200 bg-gray-700/40 rounded-xl p-3 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-yellow-400 file:text-gray-900 hover:file:bg-yellow-300"
-        />
-        {errors.file && (
-          <p className="text-red-400 text-sm mt-1">{errors.file.message}</p>
-        )}
-      </div>
+      
+   
 
       {/* دکمه ارسال */}
       <Button
