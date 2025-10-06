@@ -40,7 +40,7 @@ export default function ProductCarousel() {
   return (
     <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-gray-300 relative">
       <div className="container mx-auto px-6 text-center relative">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#c76700] mb-8">
+        <h2 className="text-2xl md:text-5xl font-bold text-[#c76700] mb-8">
           تصاویر محصولات
         </h2>
 
