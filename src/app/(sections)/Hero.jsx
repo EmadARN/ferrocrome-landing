@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section
       onMouseMove={handleMouseMove}
-      className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh]  md:min-h-[60vh] Xl:min-h-[80vh] pt-24 lg:pt-2"
+      className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh]  md:min-h-[60vh] xl:min-h-[80vh] pt-24 lg:pt-2"
     >
       <div className="container mx-auto px-6 lg:px-24 py-16 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Text */}

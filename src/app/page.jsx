@@ -10,6 +10,7 @@ import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import ContactModal from "./(sections)/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
+import { motion } from "framer-motion";
 
 
 
