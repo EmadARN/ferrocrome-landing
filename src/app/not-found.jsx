@@ -1,37 +1,50 @@
 "use client";
 import useMoveBack from "@/hooks/useMoveBack";
 import { HiArrowRight } from "react-icons/hi";
+import { motion } from "framer-motion";
 
-function NotFound() {
+export default function NotFound() {
   const moveBack = useMoveBack();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
-      <div className="container xl:max-w-screen-xl mx-auto px-4">
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="w-full max-w-md">
-            <h1 className="text-9xl font-bold text-secondary-700 mb-4">
-             404
-            </h1>
-            <h2 className="text-2xl font-bold text-primary-800 mb-8">
-              صفحه‌ای که دنبالش بودید پیدا نشد
-            </h2>
-            <p className="text-gray-600 mb-8">
-              متاسفانه صفحه مورد نظر شما در دسترس نیست. لطفاً به صفحه قبل
-              برگردید یا از منوی اصلی استفاده کنید.
-            </p>
-            <button
-              onClick={moveBack}
-              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-secondary-700 rounded-lg hover:bg-primary-800 transition-colors duration-200 gap-x-2"
-            >
-              <HiArrowRight className="w-6 h-6" />
-              <span>برگشت</span>
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-hero-dark1 to-hero-dark2">
+      <div className="text-center px-6 lg:px-0">
+        {/* Floating 404 */}
+        <motion.h1
+          className="text-[12rem] lg:text-[16rem] font-extrabold text-transparent bg-clip-text drop-shadow-2xl mb-6"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, #FFD700, #F4D03F, #D4AF37)",
+          }}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          404
+        </motion.h1>
+
+        <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+          صفحه‌ای که دنبالش بودید پیدا نشد
+        </h2>
+
+        <p className="text-gray-300 text-lg lg:text-xl mb-10 max-w-xl mx-auto drop-shadow-sm">
+          متاسفانه صفحه مورد نظر شما در دسترس نیست. لطفاً به صفحه قبل برگردید یا
+          از منوی اصلی استفاده کنید.
+        </p>
+
+        <motion.button
+          onClick={moveBack}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center px-8 py-4 text-lg font-semibold text-black rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 gap-x-3 cursor-pointer"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, #FFD700, #F4D03F, #D4AF37)",
+          }}
+        >
+          <HiArrowRight className="w-6 h-6" />
+          برگشت
+        </motion.button>
       </div>
     </div>
   );
 }
-
-export default NotFound;

@@ -23,7 +23,7 @@ export default function WhatIsFerroChrome() {
           viewport={{ once: true }}
           className="space-y-6 order-1 lg:order-1"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#c76700] tracking-tight">
             فرو کروم چیست؟
           </h2>
 

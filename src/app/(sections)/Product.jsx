@@ -52,7 +52,7 @@ export default function ProductsWithModal() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4"
+          className="text-4xl md:text-5xl font-bold text-[#c76700] mb-4"
         >
           محصولات ما
         </motion.h2>
@@ -98,7 +98,7 @@ export default function ProductsWithModal() {
               </div>
 
               <div className="p-6 text-right relative z-10">
-                <h3 className="text-2xl font-bold text-yellow-400 mb-3">
+                <h3 className="text-2xl font-bold text-[#cac8c7] mb-3">
                   {product.name}
                 </h3>
                 <p className="text-gray-400 mb-4 leading-relaxed">

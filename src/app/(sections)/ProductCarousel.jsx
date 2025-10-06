@@ -6,18 +6,38 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const products = [
-  { id: 1, name: "فروکروم پرکربن", image: "/images/high-carbon-ferrochrome.webp" },
-  { id: 2, name: "فروکروم کم‌کربن", image: "/images/low-carbon-ferrochrome.jpg" },
-  { id: 3, name: "فروکروم میکروکربن", image: "/images/micro-carbon-ferrochrome.webp" },
-   { id: 4, name: "فروکروم میکروکربن", image: "/images/micro-carbon-ferrochrome.webp" },
-    { id: 5, name: "فروکروم میکروکربن", image: "/images/micro-carbon-ferrochrome.webp" },
+  {
+    id: 1,
+    name: "فروکروم پرکربن",
+    image: "/images/high-carbon-ferrochrome.webp",
+  },
+  {
+    id: 2,
+    name: "فروکروم کم‌کربن",
+    image: "/images/low-carbon-ferrochrome.jpg",
+  },
+  {
+    id: 3,
+    name: "فروکروم میکروکربن",
+    image: "/images/micro-carbon-ferrochrome.webp",
+  },
+  {
+    id: 4,
+    name: "فروکروم میکروکربن",
+    image: "/images/micro-carbon-ferrochrome.webp",
+  },
+  {
+    id: 5,
+    name: "فروکروم میکروکربن",
+    image: "/images/micro-carbon-ferrochrome.webp",
+  },
 ];
 
 export default function ProductCarousel() {
   return (
     <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-gray-300">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#c76700] mb-8">
           تصاویر محصولات
         </h2>
         <Swiper
@@ -43,7 +63,9 @@ export default function ProductCarousel() {
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 className="text-xl font-bold text-yellow-400">{product.name}</h3>
+                  <h3 className="text-xl font-bold text-[#a15300]">
+                    {product.name}
+                  </h3>
                 </div>
               </div>
             </SwiperSlide>

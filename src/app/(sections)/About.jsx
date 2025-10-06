@@ -4,14 +4,14 @@ import Image from "next/image";
 
 export default function About() {
   const stats = [
-    { value: "30+", label: "سال تجربه", color: "text-yellow-400" },
+    { value: "30+", label: "سال تجربه", color: "text-[#c76700]" },
     { value: "500K+", label: "تن تولید سالانه", color: "text-blue-400" },
-    { value: "40+", label: "کشور مقصد صادرات", color: "text-yellow-400" },
+    { value: "40+", label: "کشور مقصد صادرات", color: "text-[#c76700]" },
   ];
 
   const images = [
     "/images/high-carbon-ferrochrome.webp",
-    "/images/low-carbon-ferrochrome.jpg", // وسطی
+    "/images/low-carbon-ferrochrome.jpg",
     "/images/micro-carbon-ferrochrome.webp",
   ];
 
@@ -96,7 +96,7 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-6 order-1 lg:order-2"
           >
-            <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#c76700] tracking-tight">
               درباره ما
             </h2>
 
@@ -132,7 +132,7 @@ export default function About() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mt-10 border-l-4 border-yellow-400 pl-5 italic text-gray-400"
+              className="mt-10 border-l-4 border-[#a15300] pl-5 italic text-gray-400"
             >
               "کیفیت نتیجه تخصص، نوآوری و سه دهه تجربه است."
             </motion.div>

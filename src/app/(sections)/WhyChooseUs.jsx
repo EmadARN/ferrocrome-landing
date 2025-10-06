@@ -4,7 +4,7 @@ import { FaAward, FaGlobe, FaCheckCircle, FaLeaf } from "react-icons/fa";
 
 const items = [
   {
-    icon: <FaAward className="w-10 h-10 mx-auto text-yellow-400" />,
+    icon: <FaAward className="w-10 h-10 mx-auto text-[#a15300]" />,
     title: "کیفیت ممتاز",
     desc: "تولید با گواهی ISO 9001 و کنترل کیفیت دقیق در تمامی مراحل.",
   },
@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4"
+          className="text-4xl md:text-5xl font-bold text-[#c76700] mb-4"
         >
           چرا شرکت‌های پیشرو ما را انتخاب می‌کنند
         </motion.h2>
@@ -55,7 +55,9 @@ export default function WhyChooseUs() {
               className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-2xl hover:scale-105 transition-transform"
             >
               <div className="mb-4">{item.icon}</div>
-              <h3 className="text-xl font-bold text-gray-200 mb-2">{item.title}</h3>
+              <h3 className="text-xl font-bold text-gray-200 mb-2">
+                {item.title}
+              </h3>
               <p className="text-gray-400 text-sm">{item.desc}</p>
             </motion.div>
           ))}
