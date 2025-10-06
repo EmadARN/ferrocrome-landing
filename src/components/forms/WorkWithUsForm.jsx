@@ -19,6 +19,9 @@ export default function ContactForm() {
     resolver: zodResolver(customerRequestSchema),
     mode: "onTouched",
     reValidateMode: "onChange", // هر بار که تغییر کرد دوباره چک کن
+    defaultValues: {
+      sale_type: "خرید فروکروم",
+    },
   });
 
   const handleFileChange = (e) => {
