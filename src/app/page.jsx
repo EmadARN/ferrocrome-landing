@@ -8,6 +8,7 @@ import ProductCarousel from "./(sections)/ProductCarousel";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
+import WorkWithUs from "./(sections)/WorkWithUs";
 
 export default function Home() {
   return (
@@ -37,8 +38,8 @@ export default function Home() {
         <ProductCarousel />
       </section>
 
-      <section id="contact">
-        <Contact />
+      <section id="WorkWithUs">
+        <WorkWithUs />
       </section>
 
       <Footer />
