@@ -130,12 +130,12 @@ export default function ProductsWithModal() {
             >
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 left-4 text-gray-400 hover:text-yellow-400 text-2xl"
+                className="absolute top-4 left-4 text-gray-400 hover:text-[#c76700] text-2xl"
               >
                 &times;
               </button>
 
-              <h3 className="text-3xl font-bold text-yellow-400 mb-4">
+              <h3 className="text-3xl font-bold text-[#c76700] mb-4">
                 {selectedProduct.name}
               </h3>
               <img
