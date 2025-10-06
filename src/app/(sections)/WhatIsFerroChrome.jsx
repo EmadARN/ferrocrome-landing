@@ -13,7 +13,7 @@ export default function WhatIsFerroChrome() {
   const [hoveredIdx, setHoveredIdx] = useState(null);
 
   return (
-    <section className="pt-12 pb-[28rem] md:py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-300 relative overflow-hidden">
+    <section className="pt-12 pb-[28rem] md:pb-[28rem] lg:py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-300 relative overflow-hidden ">
       <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
         {/* متن */}
         <motion.div
@@ -69,7 +69,7 @@ export default function WhatIsFerroChrome() {
                   repeatDelay: 10 + idx * 2,
                   ease: "easeInOut",
                 }}
-                className="absolute w-44 h-44 md:w-64 md:h-64 mt-16 rounded-xl overflow-hidden shadow-xl border border-gray-700 cursor-pointer"
+                className="absolute w-44 h-44 md:w-64 md:h-64 mt-16 rounded-md overflow-hidden shadow-md border border-gray-700 cursor-pointer"
                 style={{
                   top: `${offsetY}rem`,
                   left: `${offsetX}rem`,

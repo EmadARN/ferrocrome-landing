@@ -7,7 +7,7 @@ export default function Button({
   ...props
 }) {
   const base =
-    "font-bold py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer";
+    "font-bold py-3 px-6 rounded-md transition-all duration-300 cursor-pointer";
 
   const variants = {
     primary: "bg-blue-600 hover:bg-blue-700 text-white",

@@ -88,14 +88,14 @@ export default function ProductCarousel() {
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="bg-gray-800/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-700 hover:scale-105 transition-transform duration-300">
+              <div className="bg-gray-800/40 backdrop-blur-lg rounded-md overflow-hidden border border-gray-700 hover:scale-105 transition-transform duration-300">
                 <img
                   src={product.image}
                   alt={product.name}
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-md font-bold text-center text-white">
                     {product.name}
                   </h3>
                 </div>

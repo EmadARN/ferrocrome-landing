@@ -52,7 +52,7 @@ export default function WhyChooseUs() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
-              className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-2xl hover:scale-105 transition-transform"
+              className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-md hover:scale-105 transition-transform"
             >
               <div className="mb-4">{item.icon}</div>
               <h3 className="text-xl font-bold text-gray-200 mb-2">
