@@ -5,11 +5,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { label: "خانه", href: "home" },
-  { label: "محصولات", href: "products" },
-  { label: "خدمات", href: "whyus" },
-  { label: "درباره ما", href: "about" },
-  { label: "تماس با ما", href: "contact" },
+  { label: "خانه", href: "#hero" },
+  { label: "محصولات", href: "#product" },
+  { label: "خدمات", href: "#whyus" },
+  { label: "درباره ما", href: "#about" },
+  { label: "تماس با ما", href: "#contact" },
 ];
 
 export default function Header() {
@@ -81,7 +81,7 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "nav-item text-chrome-silver font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 hover:text-blue-200   p-2"
+                      "nav-item text-gray-300 font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 hover:text-blue-200   p-2"
                     )}
                   >
                     {item.label}
@@ -97,7 +97,7 @@ export default function Header() {
                   </h1>
                   <div className="flex items-center justify-center space-x-4">
                     <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
-                    <p className="text-chrome-silver font-rajdhani font-medium text-sm md:text-base tracking-widest">
+                    <p className="text-gray-300 font-rajdhani font-medium text-sm md:text-base tracking-widest">
                       صنایع
                     </p>
                     <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
@@ -109,7 +109,7 @@ export default function Header() {
               </div>
 
               {/* دکمه دسکتاپ */}
-              <button className="tech-border pulse-glow bg-gradient-to-r from-blue-950 to-amber-950 text-chrome-silver px-12 py-2 rounded-sm font-rajdhani font-semibold text-sm tracking-wide hover:bg-gradient-to-r hover:from-blue-900 hover:to-furnace-orange/30 transition-all duration-300 cursor-pointer hidden lg:block">
+              <button className="tech-border pulse-glow bg-gradient-to-r from-blue-950 to-amber-950 text-gray-300 px-12 py-2 rounded-sm font-rajdhani font-semibold text-sm tracking-wide hover:bg-gradient-to-r hover:from-blue-900 hover:to-furnace-orange/30 transition-all duration-300 cursor-pointer hidden lg:block">
                 درخواست پشتیبانی
               </button>
             </div>
@@ -142,7 +142,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-chrome-silver font-rajdhani font-medium text-sm hover:text-blue-200 transition-all duration-300 whitespace-nowrap px-3"
+                className="text-gray-300 font-rajdhani font-medium text-sm hover:text-blue-200 transition-all duration-300 whitespace-nowrap px-3"
               >
                 {item.label}
               </Link>

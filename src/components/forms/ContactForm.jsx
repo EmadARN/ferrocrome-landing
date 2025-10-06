@@ -5,35 +5,51 @@ import { z } from "zod";
 import { sendCustomerRequest } from "@/services/api";
 import Button from "../ui/Button";
 import { customerRequestSchema } from "@/lib/validations";
+import toast from "react-hot-toast";
 
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(customerRequestSchema),
   });
 
   const onSubmit = async (data) => {
-    const payload = {
-      ...data,
-      is_response: false,
-    };
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (key === "file") {
+        // فقط اگر فایل وجود داره و کاربر فایلی انتخاب کرده:
+        if (value && value.length > 0 && value[0] instanceof File) {
+          formData.append("file", value[0]);
+        }
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    formData.append("is_response", false);
 
     try {
-      await sendCustomerRequest(payload);
-      alert("پیام شما با موفقیت ارسال شد! ✅");
+      await sendCustomerRequest(formData);
+      toast.success("پیام شما با موفقیت ارسال شد!");
       reset();
     } catch (err) {
       console.error(err);
-      alert("خطا در ارسال پیام ❌");
+       toast.error("خطا در ارسال پیام ");
     }
   };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6"
+      encType="multipart/form-data"
+    >
+      {/* نام و ایمیل */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-gray-200 mb-2">نام کامل *</label>
@@ -43,10 +59,8 @@ export default function ContactForm() {
             className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="نام خود را وارد کنید"
           />
-          {errors.fullName && (
-            <p className="text-red-400 text-sm mt-1">
-              {errors.fullName.message}
-            </p>
+          {errors.name && (
+            <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
 
@@ -64,6 +78,7 @@ export default function ContactForm() {
         </div>
       </div>
 
+      {/* شماره و شرکت */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-gray-200 mb-2">شماره تلفن</label>
@@ -83,14 +98,56 @@ export default function ContactForm() {
             className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="نام شرکت"
           />
-          {errors.company && (
+          {errors.company_name && (
             <p className="text-red-400 text-sm mt-1">
-              {errors.company.message}
+              {errors.company_name.message}
             </p>
           )}
         </div>
       </div>
 
+      {/* انتخاب نوع درخواست */}
+      <div>
+        <label className="block text-gray-200 mb-3">نوع درخواست *</label>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              value="خرید فروکروم"
+              {...register("sale_type")}
+              className="accent-yellow-400"
+            />
+            <span className="text-gray-300">خرید فروکروم</span>
+          </label>
+
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              value="فروش فروکروم"
+              {...register("sale_type")}
+              className="accent-yellow-400"
+            />
+            <span className="text-gray-300">فروش فروکروم</span>
+          </label>
+
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              value="سایر"
+              {...register("sale_type")}
+              className="accent-yellow-400"
+            />
+            <span className="text-gray-300">سایر</span>
+          </label>
+        </div>
+        {errors.request_type && (
+          <p className="text-red-400 text-sm mt-1">
+            {errors.request_type.message}
+          </p>
+        )}
+      </div>
+
+      {/* پیام */}
       <div>
         <label className="block text-gray-200 mb-2">پیام *</label>
         <textarea
@@ -104,6 +161,20 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* آپلود فایل (اختیاری) */}
+      <div>
+        <label className="block text-gray-200 mb-2">فایل ضمیمه (اختیاری)</label>
+        <input
+          type="file"
+          {...register("file")}
+          className="w-full text-gray-200 bg-gray-700/40 rounded-xl p-3 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-yellow-400 file:text-gray-900 hover:file:bg-yellow-300"
+        />
+        {errors.file && (
+          <p className="text-red-400 text-sm mt-1">{errors.file.message}</p>
+        )}
+      </div>
+
+      {/* دکمه ارسال */}
       <Button
         type="submit"
         variant="premium"
