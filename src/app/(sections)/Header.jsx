@@ -147,7 +147,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className=" text-gray-300 font-rajdhani font-medium text-[10px] md:text-[16px] my-4 hover:text-blue-200 transition-all duration-300"
+                className=" text-gray-300 font-rajdhani font-medium text-[14px] md:text-[16px] my-4 hover:text-blue-200 transition-all duration-300"
               >
                 {item.label}
               </Link>

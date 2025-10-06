@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section
       onMouseMove={handleMouseMove}
-      className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[90vh] md:min-h-[60vh] lg:min-h-[80vh] pt-24 lg:pt-2"
+      className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh]  md:min-h-[60vh] Xl:min-h-[80vh] pt-24 lg:pt-2"
     >
       <div className="container mx-auto px-6 lg:px-24 py-16 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Text */}
@@ -191,23 +191,6 @@ export default function Hero() {
             className="absolute top-1/3 right-1/3 w-[2px] h-56 bg-gradient-to-b from-[#9c3b03] to-transparent rounded"
           />
         </div>
-      </div>
-
-      {/* Bottom Scroll Hint */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-        {[0, 1].map((_, idx) => (
-          <motion.div
-            key={idx}
-            animate={{ y: [0, 2, 0] }}
-            transition={{
-              repeat: Infinity,
-              duration: 1,
-              ease: "easeInOut",
-              delay: idx * 0.2,
-            }}
-            className="w-4 h-4 border-b-2 border-r-2 border-white/60 rotate-45"
-          />
-        ))}
       </div>
 
       {/* Bottom Gradient Overlay */}
