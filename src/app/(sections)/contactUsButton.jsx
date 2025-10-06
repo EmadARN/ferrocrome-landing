@@ -21,7 +21,6 @@ export default function ContactModal() {
     document.body.style.overflow = "auto";
   };
 
-  // Close modal with Escape key
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape") {
@@ -150,6 +149,42 @@ export default function ContactModal() {
                       className="contact-link"
                     >
                       @ferrochrome_industry
+                    </a>
+                  </span>
+                </div>
+
+                {/* Telegram */}
+                <div className="contact-item">
+                  <svg className="item-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 8l-2.8 2.8c-.2.2-.5.3-.7.2-.2-.1-.3-.3-.3-.5v-1.5L14 10c-.2-.2-.5-.3-.7-.2-.2.1-.3.3-.3.5v2l-1.5-.5-2-2L16.5 10z" />
+                  </svg>
+                  <span className="contact-text">
+                    تلگرام:{" "}
+                    <a
+                      href="https://t.me/ferrochrome"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-link"
+                    >
+                      @ferrochrome
+                    </a>
+                  </span>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="contact-item">
+                  <svg className="item-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12c0 1.66.41 3.23 1.14 4.62L2 22l5.38-1.14C8.77 21.59 10.34 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5 14c-.3.9-1.1 1.8-2.3 2.2-1.2.4-2.6.5-4 .1-1.4-.4-2.5-1.2-3.3-2.4C7.6 15.3 7 14.2 7 13s.6-2.3 1.7-3.1L9 10l1.1-.3c.2-.1.3-.2.5-.2l.8.2c.2.1.3.2.4.4l.6 1c.1.1.1.3.2.4l.2 1c.1.3.1.6.1.9 0 .3 0 .6-.1.9z" />
+                  </svg>
+                  <span className="contact-text">
+                    واتس‌اپ:{" "}
+                    <a
+                      href="https://wa.me/989123456789"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-link"
+                    >
+                      09123456789
                     </a>
                   </span>
                 </div>

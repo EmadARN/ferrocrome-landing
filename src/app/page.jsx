@@ -52,8 +52,6 @@ export default function Home() {
       {/* دکمه Scroll to Top */}
       <ScrollToTopButton />
 
-      {/* دکمه تماس سریع */}
-      <FloatingContactButton />
     </main>
   );
 }

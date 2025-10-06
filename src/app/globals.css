@@ -179,12 +179,12 @@ body {
 /* Contact Button */
 .contact-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 10px;
+  right: 15px;
   background: linear-gradient(45deg, #c76700, #ff8f00);
   color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 6px;
   padding: 15px 25px;
   font-size: 16px;
   font-weight: bold;
@@ -195,12 +195,25 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  /* Animation for subtle movement */
+  animation: float 2s ease-in-out infinite;
 }
 
 .contact-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(199, 103, 0, 0.6);
   background: linear-gradient(45deg, #ff8f00, #c76700);
+}
+
+/* Keyframes for floating effect */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Modal Overlay */
@@ -231,6 +244,7 @@ body {
   border-radius: 20px;
   padding: 0;
   max-width: 600px;
+  overflow-y: hidden;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
