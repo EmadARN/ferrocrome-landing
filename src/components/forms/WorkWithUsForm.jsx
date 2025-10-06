@@ -17,6 +17,8 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(customerRequestSchema),
+    mode: "onTouched",
+    reValidateMode: "onChange", // هر بار که تغییر کرد دوباره چک کن
   });
 
   const handleFileChange = (e) => {
@@ -124,7 +126,7 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
-                شماره تلفن
+                شماره تلفن *
               </label>
               <input
                 type="tel"
@@ -132,6 +134,11 @@ export default function ContactForm() {
                 placeholder="+98 912 123 4567"
                 className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
+              {errors.phone_number && (
+                <p className="text-red-400 text-xs sm:text-sm mt-1">
+                  {errors.phone_number.message}
+                </p>
+              )}
             </div>
 
             <div>
