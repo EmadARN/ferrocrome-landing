@@ -9,6 +9,8 @@ import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
+import FloatingContactButton from "@/components/ui/FloatingContactButton";
+
 
 export default function Home() {
   return (
@@ -46,6 +48,9 @@ export default function Home() {
 
       {/* دکمه Scroll to Top */}
       <ScrollToTopButton />
+
+      {/* دکمه تماس سریع */}
+      <FloatingContactButton />
     </main>
   );
 }
