@@ -8,6 +8,7 @@ import ProductCarousel from "./(sections)/ProductCarousel";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
+import ContactModal from "./(sections)/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
 import FloatingContactButton from "@/components/ui/FloatingContactButton";
 
@@ -44,13 +45,13 @@ export default function Home() {
         <WorkWithUs />
       </section>
 
+      <ContactModal/>
+
       <Footer />
 
       {/* دکمه Scroll to Top */}
       <ScrollToTopButton />
 
-      {/* دکمه تماس سریع */}
-      <FloatingContactButton />
     </main>
   );
 }
