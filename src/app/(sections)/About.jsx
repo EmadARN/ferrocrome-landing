@@ -96,7 +96,7 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-6 order-1 lg:order-2"
           >
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#c76700] tracking-tight">
+            <h2 className="text-2xl md:text-5xl font-extrabold text-[#c76700] tracking-tight">
               درباره ما
             </h2>
 
@@ -120,7 +120,7 @@ export default function About() {
                   transition={{ delay: idx * 0.2 }}
                   className="bg-gray-800/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-gray-600 hover:scale-105 transition-transform cursor-default"
                 >
-                  <div className={`text-3xl font-bold ${stat.color} mb-2`}>
+                  <div className={`text-xl md:text-3xl font-bold ${stat.color} mb-2`}>
                     {stat.value}
                   </div>
                   <div className="text-gray-400 text-sm">{stat.label}</div>

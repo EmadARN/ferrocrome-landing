@@ -34,11 +34,11 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-[#c76700] mb-4"
+          className="text-2xl md:text-5xl font-bold text-[#c76700] mb-4"
         >
           چرا شرکت‌های پیشرو ما را انتخاب می‌کنند
         </motion.h2>
-        <p className="text-gray-400 text-lg max-w-3xl mx-auto">
+        <p className="text-gray-400 text-[12px] md:text-lg mx-auto">
           ارائه برتری از طریق نوآوری، اطمینان و فرآیندهای پایدار
         </p>
       </div>

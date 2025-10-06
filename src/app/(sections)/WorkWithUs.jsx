@@ -10,11 +10,11 @@ export default function WorkWithUs() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-[#c76700] mb-4"
+          className="text-2xl md:text-5xl font-bold text-[#c76700] mb-4"
         >
           همکاری با ما را آغاز کنید
         </motion.h2>
-        <p className="text-gray-300 mb-12 text-lg">
+        <p className="text-gray-300 mb-12 text-[10px] md:text-lg">
           آماده همکاری با شرکت‌های پیشرو هستید؟ نیازهای فروکروم خود را با ما به
           اشتراک بگذارید و یک همکاری موفق بسازیم.
         </p>
