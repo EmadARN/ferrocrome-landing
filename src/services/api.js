@@ -1,24 +1,19 @@
 // services/api.js
-
-export const sendCustomerRequest = async (data) => {
-  const payload = {
-    ...data,
-    is_response: false,
-  };
-
+export const sendCustomerRequest = async (formData) => {
+  console.log(formData)
   try {
-    const res = await fetch("http://192.168.1.129:8000/customer-request/", {
+    const res = await fetch("http://192.168.1.95:8000/customer-request/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: formData,
     });
+    console.log("res",res)
 
     if (!res.ok) {
       const errorText = await res.text();
       throw new Error(errorText || "خطا در ارسال درخواست");
     }
 
-    return await res.json(); // یا res.text() بسته به API
+    return await res.json();
   } catch (err) {
     throw err;
   }
