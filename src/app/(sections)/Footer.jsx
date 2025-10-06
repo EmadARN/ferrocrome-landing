@@ -33,7 +33,7 @@ export default function Footer() {
               <motion.a
                 key={idx}
                 href={item.href}
-                className={`w-12 h-12 ${item.bg} rounded-md flex items-center justify-center text-white shadow-lg`}
+                className={`w-8 h-8 ${item.bg} rounded-md flex items-center justify-center text-white shadow-lg`}
                 whileHover={{
                   scale: 1.2,
                   rotate: 5,
