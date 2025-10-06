@@ -113,13 +113,13 @@ export default function Hero() {
             className="flex gap-6 mt-6 whitespace-nowrap relative z-10"
           >
             <Link
-              href="#contact"
+              href="#WorkWithUs"
               className="px-4 py-3 rounded-lg bg-gradient-to-r from-[#a15300] via-[#521f01] to-[#521f01] font-bold text-sm md:text-md text-white shadow-lg hover:scale-105 transition-transform"
             >
               درخواست قیمت
             </Link>
             <Link
-              href="#products"
+              href="#product"
               className="px-4 py-3 rounded-lg border border-gray-400 text-sm md:text-m text-gray-200 hover:bg-gray-700 transition-all"
             >
               مشاهده محصولات
