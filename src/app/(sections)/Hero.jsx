@@ -59,7 +59,7 @@ export default function Hero() {
 
             <motion.div
               animate={{
-                scale: [1, 1.3, 1],
+                scale: [4, 1.4, 4],
                 opacity: [0.6, 1, 0.6],
               }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
