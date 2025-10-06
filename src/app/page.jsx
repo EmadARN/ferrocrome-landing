@@ -1,5 +1,4 @@
 import About from "./(sections)/About";
-import Contact from "./(sections)/Contact";
 import Footer from "./(sections)/Footer";
 import Header from "./(sections)/Header";
 import Hero from "./(sections)/Hero";
@@ -10,7 +9,7 @@ import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import ContactModal from "./(sections)/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
-import FloatingContactButton from "@/components/ui/FloatingContactButton";
+
 
 
 export default function Home() {

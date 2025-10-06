@@ -17,6 +17,9 @@ export default function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(customerRequestSchema),
+      defaultValues: {
+    sale_type: "خرید فروکروم", 
+  },
   });
 
   const handleFileChange = (e) => {
@@ -164,6 +167,7 @@ export default function ContactForm() {
                   className="flex items-center gap-2 p-2 sm:p-3 rounded-sm border-2 border-transparent cursor-pointer transition-all bg-white/10 hover:bg-[#c76700]/20 text-sm sm:text-base"
                 >
                   <input
+                  
                     type="radio"
                     value={option}
                     {...register("sale_type")}
