@@ -6,47 +6,41 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const products = [
-  {
-    id: 1,
-    name: "فروکروم پرکربن",
-    image: "/images/high-carbon-ferrochrome.webp",
-  },
-  {
-    id: 2,
-    name: "فروکروم کم‌کربن",
-    image: "/images/low-carbon-ferrochrome.jpg",
-  },
-  {
-    id: 3,
-    name: "فروکروم میکروکربن",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
-  {
-    id: 4,
-    name: "فروکروم میکروکربن",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
-  {
-    id: 5,
-    name: "فروکروم میکروکربن",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
+  { id: 1, name: "فروکروم پرکربن", image: "/images/high-carbon-ferrochrome.webp" },
+  { id: 2, name: "فروکروم کم‌کربن", image: "/images/low-carbon-ferrochrome.jpg" },
+  { id: 3, name: "فروکروم میکروکربن", image: "/images/micro-carbon-ferrochrome.webp" },
+  { id: 4, name: "فروکروم سیلیکون", image: "/images/micro-carbon-ferrochrome.webp" },
+  { id: 5, name: "فروکروم نیتروژن‌دار", image: "/images/micro-carbon-ferrochrome.webp" },
 ];
 
 export default function ProductCarousel() {
   return (
     <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-gray-300">
-      <div className="container mx-auto px-6 text-center">
+      <div className="container mx-auto px-6 text-center relative">
         <h2 className="text-4xl md:text-5xl font-bold text-[#c76700] mb-8">
           تصاویر محصولات
         </h2>
+
+        {/* فلش‌های ناوبری */}
+        <div className="hidden md:flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-4 pointer-events-none">
+          <div className="swiper-button-prev-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-full p-3 shadow-lg transition duration-300 cursor-pointer">
+            ❮
+          </div>
+          <div className="swiper-button-next-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-full p-3 shadow-lg transition duration-300 cursor-pointer">
+            ❯
+          </div>
+        </div>
+
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
           loop={true}
           autoplay={{ delay: 3000 }}
-          navigation
+          navigation={{
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+          }}
           pagination={{ clickable: true }}
           breakpoints={{
             640: { slidesPerView: 1 },
@@ -63,7 +57,7 @@ export default function ProductCarousel() {
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 className="text-xl font-bold text-[#a15300]">
+                  <h3 className="text-xl font-bold text-white">
                     {product.name}
                   </h3>
                 </div>
