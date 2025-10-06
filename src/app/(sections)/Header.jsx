@@ -9,7 +9,6 @@ const navItems = [
   { label: "محصولات", href: "#product" },
   { label: "خدمات", href: "#whyus" },
   { label: "درباره ما", href: "#about" },
-  { label: "تماس با ما", href: "#WorkWithUs" },
 ];
 
 export default function Header() {

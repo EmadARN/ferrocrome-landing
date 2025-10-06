@@ -85,7 +85,7 @@ export default function ProductsWithModal() {
                   transition={{ duration: 2, ease: "easeInOut" }}
                   className="absolute inset-0 pointer-events-none"
                 >
-                  <div className="w-full h-full bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-3xl"></div>
+                  <div className="w-full h-full bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-xl"></div>
                 </motion.div>
               )}
 
@@ -125,7 +125,7 @@ export default function ProductsWithModal() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-900 rounded-3xl max-w-lg w-full p-6 relative text-right"
+              className="bg-gray-900 rounded-xl max-w-lg w-full p-6 relative text-right"
               onClick={(e) => e.stopPropagation()}
             >
               <button
