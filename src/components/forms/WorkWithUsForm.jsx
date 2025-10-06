@@ -70,7 +70,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="relative z-10 w-full sm:max-w-2xl bg-white/5 backdrop-blur-lg rounded-3xl p-4 sm:p-10 shadow-2xl border border-[#c76700]/20">
+      <div className="relative z-10 w-full sm:max-w-2xl bg-white/5 backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl border border-[#c76700]/20">
         <h1 className="text-center text-[#c76700] text-xl sm:text-3xl font-bold mb-2 drop-shadow-lg">
           فرم درخواست همکاری
         </h1>
@@ -93,7 +93,7 @@ export default function ContactForm() {
                 type="text"
                 {...register("name")}
                 placeholder="نام خود را وارد کنید"
-                className="w-full p-3 sm:p-4 rounded-xl bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
               {errors.name && (
                 <p className="text-red-400 text-xs sm:text-sm mt-1">
@@ -110,7 +110,7 @@ export default function ContactForm() {
                 type="email"
                 {...register("email")}
                 placeholder="example@email.com"
-                className="w-full p-3 sm:p-4 rounded-xl bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
               {errors.email && (
                 <p className="text-red-400 text-xs sm:text-sm mt-1">
@@ -130,7 +130,7 @@ export default function ContactForm() {
                 type="tel"
                 {...register("phone_number")}
                 placeholder="+98 912 123 4567"
-                className="w-full p-3 sm:p-4 rounded-xl bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function ContactForm() {
                 type="text"
                 {...register("company_name")}
                 placeholder="نام شرکت"
-                className="w-full p-3 sm:p-4 rounded-xl bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
               {errors.company_name && (
                 <p className="text-red-400 text-xs sm:text-sm mt-1">
@@ -161,7 +161,7 @@ export default function ContactForm() {
               {saleOptions.map((option) => (
                 <label
                   key={option}
-                  className="flex items-center gap-2 p-2 sm:p-3 rounded-xl border-2 border-transparent cursor-pointer transition-all bg-white/10 hover:bg-[#c76700]/20 text-sm sm:text-base"
+                  className="flex items-center gap-2 p-2 sm:p-3 rounded-sm border-2 border-transparent cursor-pointer transition-all bg-white/10 hover:bg-[#c76700]/20 text-sm sm:text-base"
                 >
                   <input
                     type="radio"
@@ -189,7 +189,7 @@ export default function ContactForm() {
               {...register("message")}
               rows={4}
               placeholder="پیام خود را وارد کنید"
-              className="w-full p-3 sm:p-4 rounded-xl bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] resize-y text-sm sm:text-base"
+              className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] resize-y text-sm sm:text-base"
             ></textarea>
             {errors.message && (
               <p className="text-red-400 text-xs sm:text-sm mt-1">
@@ -210,7 +210,7 @@ export default function ContactForm() {
                 onChange={handleFileChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
-              <div className="p-6 sm:p-8 rounded-xl border-2 border-[#c76700]/50 bg-white/5 text-center cursor-pointer transition-all hover:bg-[#c76700]/10 hover:border-[#c76700] text-sm sm:text-base">
+              <div className="p-6 sm:p-8 rounded-sm border-2 border-[#c76700]/50 bg-white/5 text-center cursor-pointer transition-all hover:bg-[#c76700]/10 hover:border-[#c76700] text-sm sm:text-base">
                 <div className="text-2xl sm:text-3xl text-[#c76700] mb-2">
                   📎
                 </div>
@@ -233,7 +233,7 @@ export default function ContactForm() {
             type="submit"
             variant="premium"
             disabled={isSubmitting}
-            className="w-full mt-4 py-3  sm:py-4 rounded-xl bg-gradient-to-br from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
+            className="w-full mt-4 py-3  sm:py-4 rounded-md bg-gradient-to-br from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
           >
             {isSubmitting ? "در حال ارسال..." : "ارسال درخواست"}
           </Button>

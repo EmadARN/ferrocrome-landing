@@ -74,7 +74,7 @@ export default function ProductsWithModal() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative bg-gray-800/40 backdrop-blur-lg rounded-3xl overflow-hidden border border-gray-700 hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
+              className="relative bg-gray-800/40 backdrop-blur-lg rounded-md overflow-hidden border border-gray-700 hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
               onClick={() => setSelectedProduct(product)}
             >
               {/* موج رندوم */}

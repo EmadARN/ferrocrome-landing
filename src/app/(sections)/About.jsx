@@ -118,7 +118,7 @@ export default function About() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.2 }}
-                  className="bg-gray-800/20 backdrop-blur-md p-6 rounded-xl shadow-lg border border-gray-600 hover:scale-105 transition-transform cursor-default"
+                  className="bg-gray-800/20 backdrop-blur-md p-6 rounded-md shadow-lg border border-gray-600 hover:scale-105 transition-transform cursor-default"
                 >
                   <div className={`text-xl md:text-3xl font-bold ${stat.color} mb-2`}>
                     {stat.value}
@@ -150,7 +150,7 @@ export default function About() {
                   idx === 2 ? ["animate", "floatAlt"] : ["animate", "float"]
                 }
                 whileHover="hover"
-                className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer transition-transform ${
+                className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-md overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer transition-transform ${
                   idx === 1 ? "translate-x-3 sm:translate-x-24" : ""
                 }`}
                 style={{ perspective: 1000, zIndex: 10 + idx }}
