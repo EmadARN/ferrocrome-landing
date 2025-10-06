@@ -13,11 +13,10 @@ export default function Hero() {
   };
 
   return (
- <section
-  onMouseMove={handleMouseMove}
-  className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh] lg:min-h-[80vh]"
->
-
+    <section
+      onMouseMove={handleMouseMove}
+      className="relative bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] overflow-hidden min-h-[60vh] lg:min-h-[80vh]"
+    >
       <div className="container mx-auto px-6 lg:px-24 py-16 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Text */}
         <div className="space-y-6 lg:pr-8 relative z-10">
@@ -36,7 +35,7 @@ export default function Hero() {
                   ease: "easeInOut",
                   delay: idx * 0.1,
                 }}
-                className="absolute w-1 h-1 bg-white/70 rounded-full blur-sm"
+                className="absolute w-1 h-1 bg-white/30 rounded-full blur-sm"
               />
             ))}
 
@@ -72,12 +71,15 @@ export default function Hero() {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight relative z-10"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight relative z-10"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] block">
+            <span
+              className="block"
+              style={{ backgroundClip: "text", color: "#c76700" }}
+            >
               بهترین
             </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#C0C0C0] via-white to-[#C0C0C0] block">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-200 via-white to-gray-300 block">
               فروکروم صنعتی
             </span>
             <span className="block text-gray-300 mt-2 text-lg md:text-xl font-medium">
@@ -87,9 +89,9 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4 mt-4 relative z-10">
             {[
-              { text: "ISO 9001", color: "bg-yellow-400" },
-              { text: "صادرات به ۴۰+ کشور", color: "bg-blue-400" },
-              { text: "تحویل ۹۹.۸٪ به موقع", color: "bg-slate-400" },
+              { text: "ISO 9001", color: "bg-gray-400" },
+              { text: "صادرات به ۴۰+ کشور", color: "bg-gray-300" },
+              { text: "تحویل ۹۹.۸٪ به موقع", color: "bg-gray-500" },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -112,7 +114,7 @@ export default function Hero() {
           >
             <Link
               href="#contact"
-              className="px-4 py-3 rounded-lg bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] font-bold text-sm md:text-md text-black shadow-lg hover:scale-105 transition-transform"
+              className="px-4 py-3 rounded-lg bg-gradient-to-r from-[#a15300] via-[#521f01] to-[#521f01] font-bold text-sm md:text-md text-white shadow-lg hover:scale-105 transition-transform"
             >
               درخواست قیمت
             </Link>
@@ -141,7 +143,7 @@ export default function Hero() {
                 ease: "easeInOut",
                 delay: idx * 0.1,
               }}
-              className="absolute w-1 h-1 bg-white/70 rounded-full blur-sm"
+              className="absolute w-1 h-1 bg-white/30 rounded-full blur-sm"
             />
           ))}
 
@@ -159,7 +161,7 @@ export default function Hero() {
                 ease: "easeInOut",
                 delay: idx * 0.2,
               }}
-              className="absolute top-36 left-64 w-6 h-6 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#D4AF37] rounded-full blur-xl"
+              className="absolute top-36 left-64 w-6 h-6 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#521f01] rounded-full blur-xl"
             />
           ))}
 
@@ -181,12 +183,12 @@ export default function Hero() {
           <motion.div
             animate={{ y: [60, -60, 60], opacity: [0.2, 0.7, 0.2] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-1/4 right-1/4 w-[2px] h-64 bg-gradient-to-t from-[#F4D03F] to-transparent rounded"
+            className="absolute bottom-1/4 right-1/4 w-[2px] h-64 bg-gradient-to-t from-[#c98404] to-transparent rounded"
           />
           <motion.div
             animate={{ y: [-50, 50, -50], opacity: [0.2, 0.7, 0.2] }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/3 right-1/3 w-[2px] h-56 bg-gradient-to-b from-[#C0C0C0] to-transparent rounded"
+            className="absolute top-1/3 right-1/3 w-[2px] h-56 bg-gradient-to-b from-[#9c3b03] to-transparent rounded"
           />
         </div>
       </div>

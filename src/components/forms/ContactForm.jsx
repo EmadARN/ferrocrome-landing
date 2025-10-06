@@ -56,7 +56,7 @@ export default function ContactForm() {
           <input
             type="text"
             {...register("name")}
-            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="نام خود را وارد کنید"
           />
           {errors.name && (
@@ -69,7 +69,7 @@ export default function ContactForm() {
           <input
             type="email"
             {...register("email")}
-            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="example@email.com"
           />
           {errors.email && (
@@ -85,7 +85,7 @@ export default function ContactForm() {
           <input
             type="tel"
             {...register("phone_number")}
-            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="+98 912 123 4567"
           />
         </div>
@@ -95,7 +95,7 @@ export default function ContactForm() {
           <input
             type="text"
             {...register("company_name")}
-            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300]"
             placeholder="نام شرکت"
           />
           {errors.company_name && (
@@ -153,7 +153,7 @@ export default function ContactForm() {
         <textarea
           {...register("message")}
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-gray-700/40 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a15300] resize-none"
           placeholder="پیام خود را وارد کنید"
         ></textarea>
         {errors.message && (

@@ -34,7 +34,7 @@ export default function ScrollToTopButton() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="fixed bottom-8 left-8 w-12 h-12 bg-yellow-400 text-gray-600 rounded-md shadow-lg flex items-center justify-center hover:bg-yellow-500 active:scale-90 z-50 cursor-pointer"
+          className="fixed bottom-8 left-8 w-12 h-12 bg-[#a15300] text-gray-200 rounded-md shadow-lg flex items-center justify-center hover:bg-[#703a00] active:scale-90 z-50 cursor-pointer"
         >
           ⬆
         </motion.button>

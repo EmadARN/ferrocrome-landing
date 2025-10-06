@@ -17,7 +17,7 @@ export default function ProductCarousel() {
   return (
     <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-gray-300">
       <div className="container mx-auto px-6 text-center relative">
-        <h2 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#c76700] mb-8">
           تصاویر محصولات
         </h2>
 
@@ -57,7 +57,9 @@ export default function ProductCarousel() {
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 className="text-xl font-bold text-yellow-400">{product.name}</h3>
+                  <h3 className="text-xl font-bold text-[#a15300]">
+                    {product.name}
+                  </h3>
                 </div>
               </div>
             </SwiperSlide>

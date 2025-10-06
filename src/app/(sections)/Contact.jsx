@@ -9,9 +9,8 @@ export default function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-yellow-400 mb-4"
+          className="text-4xl md:text-5xl font-bold text-[#c76700] mb-4"
         >
           همکاری با ما را آغاز کنید
         </motion.h2>
