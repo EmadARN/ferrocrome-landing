@@ -9,7 +9,7 @@ const navItems = [
   { label: "محصولات", href: "#product" },
   { label: "خدمات", href: "#whyus" },
   { label: "درباره ما", href: "#about" },
-  { label: "تماس با ما", href: "#contact" },
+  { label: "تماس با ما", href: "#WorkWithUs" },
 ];
 
 export default function Header() {
@@ -109,7 +109,7 @@ export default function Header() {
               </div>
 
               {/* دکمه دسکتاپ */}
-              <Link href={"WorkWithUs"}>
+              <Link href={"#WorkWithUs"}>
                 <button className="tech-border pulse-glow bg-gradient-to-r from-blue-950 to-amber-950 text-gray-300 px-12 py-2 rounded-sm font-rajdhani font-semibold text-sm tracking-wide hover:bg-gradient-to-r hover:from-blue-900 hover:to-furnace-orange/30 transition-all duration-300 cursor-pointer hidden lg:block">
                   درخواست همکاری
                 </button>
