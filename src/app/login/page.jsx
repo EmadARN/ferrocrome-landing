@@ -7,6 +7,7 @@ import * as z from "zod";
 import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
 
+// اسکیما و اعتبارسنجی فرم
 const loginSchema = z.object({
   email: z.string().email("ایمیل معتبر نیست"),
   password: z.string().min(6, "رمز عبور باید حداقل ۶ کاراکتر باشد"),
@@ -35,29 +36,56 @@ export default function LoginPage() {
     setLoading(true);
     setMessage({ type: "", text: "" });
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-      rememberMe: data.remember,
-      callbackUrl: "/panel",
-    });
-
-    if (result.error) {
-      setMessage({ type: "error", text: "ایمیل یا رمز عبور اشتباه است." });
-    } else {
-      setMessage({
-        type: "success",
-        text: "ورود موفقیت‌آمیز بود! در حال هدایت...",
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+        rememberMe: data.remember,
+        callbackUrl: "/panel",
       });
-      setTimeout(() => {
-        window.location.href = result.url || "/panel";
-      }, 1000);
-    }
 
-    setLoading(false);
+      if (result.error) {
+        // ترجمه خطاهای NextAuth به فارسی
+        let msg = "خطا در ورود. دوباره تلاش کنید.";
+        switch (result.error) {
+          case "CredentialsSignin":
+            msg = "ایمیل یا رمز عبور اشتباه است.";
+            break;
+          case "OAuthSignin":
+            msg = "مشکل در ورود با OAuth.";
+            break;
+          case "OAuthCallback":
+            msg = "خطای callback رخ داد.";
+            break;
+          case "OAuthCreateAccount":
+            msg = "امکان ساخت حساب وجود ندارد.";
+            break;
+          default:
+            msg = "خطای سرور. دوباره تلاش کنید.";
+        }
+        setMessage({ type: "error", text: msg });
+      } else {
+        setMessage({
+          type: "success",
+          text: "ورود موفقیت‌آمیز بود! در حال هدایت...",
+        });
+        setTimeout(() => {
+          window.location.href = result.url || "/panel";
+        }, 1000);
+      }
+    } catch (err) {
+      console.error(err);
+      setMessage({
+        type: "error",
+        text: "خطای سرور. دوباره تلاش کنید.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // اشکال شناور پس‌زمینه
   const shapes = [
     {
       size: 52,
@@ -91,7 +119,6 @@ export default function LoginPage() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] flex items-center justify-center overflow-hidden px-4">
-      {/* اشکال شناور */}
       {shapes.map((s, idx) => (
         <motion.div
           key={idx}
@@ -109,8 +136,7 @@ export default function LoginPage() {
         />
       ))}
 
-      {/* کارت لاگین */}
-      <div className="relative z-10 w-full max-w-md bg-white/5 backdrop-blur-2xl rounded-3xl p-10 shadow-2xl border border-white/10 text-right">
+      <div className="relative z-10 w-full max-w-md bg-white/5 backdrop-blur-2xl rounded-2xl p-10 shadow-2xl border border-white/10 text-right">
         <div className="text-center mb-8">
           <h1 className="text-white text-3xl font-extrabold mb-2 drop-shadow-lg">
             خوش آمدید
@@ -121,7 +147,7 @@ export default function LoginPage() {
         {/* پیام‌ها */}
         {message.text && (
           <div
-            className={`mb-4 p-3 rounded-lg text-center font-medium ${
+            className={`mb-4 p-3 rounded-md text-center font-medium ${
               message.type === "success"
                 ? "bg-green-900/20 border border-green-500 text-green-400"
                 : "bg-red-900/20 border border-red-500 text-red-400"
@@ -139,7 +165,7 @@ export default function LoginPage() {
             <input
               type="email"
               {...register("email")}
-              className="w-full p-4 rounded-xl bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#a15300] backdrop-blur-sm transition-all"
+              className="w-full p-4 rounded-md bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#a15300] backdrop-blur-sm transition-all"
               placeholder="ایمیل خود را وارد کنید"
             />
             {errors.email && (
@@ -156,7 +182,7 @@ export default function LoginPage() {
             <input
               type="password"
               {...register("password")}
-              className="w-full p-4 rounded-xl bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#a15300] backdrop-blur-sm transition-all"
+              className="w-full p-4 rounded-md bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#a15300] backdrop-blur-sm transition-all"
               placeholder="رمز عبور خود را وارد کنید"
             />
             {errors.password && (
@@ -170,9 +196,9 @@ export default function LoginPage() {
             <input
               type="checkbox"
               {...register("remember")}
-              className="w-5 h-5 rounded-lg accent-[#a15300]"
+              className="w-5 h-5 rounded-lg accent-[#a15300] cursor-pointer"
             />
-            <label className="text-white/80 font-medium text-sm cursor-pointer">
+            <label className="text-white/80 font-medium text-sm ">
               مرا به خاطر بسپار
             </label>
           </div>
@@ -180,7 +206,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-xl bg-gradient-to-br from-[#a15300] to-[#521f01] font-bold text-white text-lg uppercase tracking-wider shadow-lg hover:shadow-2xl transition-all relative overflow-hidden disabled:opacity-70 cursor-pointer"
+            className="w-full py-4 rounded-md bg-gradient-to-br from-[#a15300] to-[#521f01] font-bold text-white text-lg uppercase tracking-wider shadow-lg hover:shadow-2xl transition-all relative overflow-hidden disabled:opacity-70 cursor-pointer"
           >
             {loading && (
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
@@ -190,15 +216,6 @@ export default function LoginPage() {
             </span>
           </button>
         </form>
-
-        <div className="text-center mt-6 pt-4 border-t border-white/10">
-          <a
-            href="#"
-            className="text-white/70 hover:text-[#a15300] transition-all text-sm"
-          >
-            رمز عبور خود را فراموش کرده‌اید؟
-          </a>
-        </div>
       </div>
     </div>
   );
