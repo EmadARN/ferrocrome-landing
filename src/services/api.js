@@ -1,19 +1,19 @@
-// services/api.js
-export const sendCustomerRequest = async (formData) => {
-  console.log(formData);
+export async function sendCustomerRequest(formData) {
   try {
-    const res = await fetch("http://192.168.1.95:8000/customer-request/", {
+    const res = await fetch("/api/form", {
       method: "POST",
       body: formData,
     });
 
     if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || "خطا در ارسال درخواست");
+      const errText = await res.text();
+      console.error("❌ خطا در پاسخ API:", errText);
+      throw new Error(`خطا در ارسال فرم: ${res.status}`);
     }
 
     return await res.json();
   } catch (err) {
+    console.error("❌ خطا در ارسال درخواست:", err);
     throw err;
   }
-};
+}
