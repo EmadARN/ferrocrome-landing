@@ -128,7 +128,7 @@ export default function Hero() {
         </div>
 
         {/* Right Animated Visual (Desktop) */}
-        <div className="relative w-full h-[400px] lg:h-[500px] flex items-center justify-center hidden lg:block">
+        <div className="relative w-full h-[400px] lg:h-[500px] hidden items-center justify-center  lg:block">
           {tinyStars.map((_, idx) => (
             <motion.div
               key={idx}
@@ -161,7 +161,7 @@ export default function Hero() {
                 ease: "easeInOut",
                 delay: idx * 0.2,
               }}
-              className="absolute top-36 left-64 w-6 h-6 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#521f01] rounded-full blur-xl"
+              className="absolute top-36 left-64 w-8 h-8 bg-gradient-to-r from-[#FFD700] via-[#F4D03F] to-[#521f01] rounded-full blur-2xl"
             />
           ))}
 
