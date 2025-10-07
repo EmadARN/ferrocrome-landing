@@ -11,6 +11,7 @@ import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import ContactModal from "../components/ui/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
 import { motion } from "framer-motion";
+import FloatingChromite from "@/components/ui/FloatingChromite";
 
 export default function Home() {
   return (
@@ -34,7 +35,8 @@ export default function Home() {
           ))}
         </div>
       </section>
-      {/* Bottom Scroll Hint */}
+
+      <FloatingChromite />
 
       <section id="about">
         <About />
@@ -44,7 +46,7 @@ export default function Home() {
         <WhatIsFerroChrome />
       </section>
 
-      <section  id="product">
+      <section id="product">
         <Products />
       </section>
 
