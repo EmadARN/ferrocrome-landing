@@ -18,7 +18,7 @@ export default function ContactForm() {
   } = useForm({
     resolver: zodResolver(customerRequestSchema),
     mode: "onTouched",
-    reValidateMode: "onChange", // هر بار که تغییر کرد دوباره چک کن
+    reValidateMode: "onChange",
     defaultValues: {
       sale_type: "خرید فروکروم",
     },
@@ -29,20 +29,24 @@ export default function ContactForm() {
   };
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      if (key === "file") {
-        if (value && value.length > 0 && value[0] instanceof File) {
-          formData.append("file", value[0]);
-        }
-      } else {
-        formData.append(key, value);
-      }
-    });
-    formData.append("is_response", "false");
-
     try {
+      const formData = new FormData();
+      // اضافه کردن فیلدها به FormData
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phoneNumber", data.phone_number);
+      formData.append("companyName", data.company_name);
+      formData.append("saleType", data.sale_type);
+      formData.append("message", data.message);
+
+      // فایل اگر انتخاب شده بود
+      if (uploadedFiles.length > 0) {
+        formData.append("file", uploadedFiles[0]);
+      }
+
+      // ارسال به API
       await sendCustomerRequest(formData);
+
       toast.success("پیام شما با موفقیت ارسال شد!");
       reset();
       setUploadedFiles([]);
@@ -55,7 +59,7 @@ export default function ContactForm() {
   const saleOptions = ["خرید فروکروم", "فروش فروکروم", "سایر"];
 
   return (
-    <section className="relative min-h-screen  flex items-center justify-center px-4 py-10 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden">
       {/* اشکال شناور */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <motion.div
@@ -83,11 +87,7 @@ export default function ContactForm() {
           بیایید پروژه بعدی شما را بررسی کنیم
         </p>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 sm:space-y-6"
-          encType="multipart/form-data"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6" encType="multipart/form-data">
           {/* نام و ایمیل */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
@@ -100,11 +100,7 @@ export default function ContactForm() {
                 placeholder="نام خود را وارد کنید"
                 className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
-              {errors.name && (
-                <p className="text-red-400 text-xs sm:text-sm mt-1">
-                  {errors.name.message}
-                </p>
-              )}
+              {errors.name && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.name.message}</p>}
             </div>
 
             <div>
@@ -117,11 +113,7 @@ export default function ContactForm() {
                 placeholder="example@email.com"
                 className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
-              {errors.email && (
-                <p className="text-red-400 text-xs sm:text-sm mt-1">
-                  {errors.email.message}
-                </p>
-              )}
+              {errors.email && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.email.message}</p>}
             </div>
           </div>
 
@@ -137,11 +129,7 @@ export default function ContactForm() {
                 placeholder="+98 912 123 4567"
                 className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
-              {errors.phone_number && (
-                <p className="text-red-400 text-xs sm:text-sm mt-1">
-                  {errors.phone_number.message}
-                </p>
-              )}
+              {errors.phone_number && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.phone_number.message}</p>}
             </div>
 
             <div>
@@ -154,11 +142,7 @@ export default function ContactForm() {
                 placeholder="نام شرکت"
                 className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
               />
-              {errors.company_name && (
-                <p className="text-red-400 text-xs sm:text-sm mt-1">
-                  {errors.company_name.message}
-                </p>
-              )}
+              {errors.company_name && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.company_name.message}</p>}
             </div>
           </div>
 
@@ -173,21 +157,12 @@ export default function ContactForm() {
                   key={option}
                   className="flex items-center gap-2 p-2 sm:p-3 rounded-sm border-2 border-transparent cursor-pointer transition-all bg-white/10 hover:bg-[#c76700]/20 text-sm sm:text-base"
                 >
-                  <input
-                    type="radio"
-                    value={option}
-                    {...register("sale_type")}
-                    className="accent-[#c76700]"
-                  />
+                  <input type="radio" value={option} {...register("sale_type")} className="accent-[#c76700]" />
                   <span className="text-white font-medium">{option}</span>
                 </label>
               ))}
             </div>
-            {errors.sale_type && (
-              <p className="text-red-400 text-xs sm:text-sm mt-1">
-                {errors.sale_type.message}
-              </p>
-            )}
+            {errors.sale_type && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.sale_type.message}</p>}
           </div>
 
           {/* پیام */}
@@ -201,11 +176,7 @@ export default function ContactForm() {
               placeholder="پیام خود را وارد کنید"
               className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] resize-y text-sm sm:text-base"
             ></textarea>
-            {errors.message && (
-              <p className="text-red-400 text-xs sm:text-sm mt-1">
-                {errors.message.message}
-              </p>
-            )}
+            {errors.message && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.message.message}</p>}
           </div>
 
           {/* آپلود فایل */}
@@ -221,19 +192,13 @@ export default function ContactForm() {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
               <div className="p-6 sm:p-8 rounded-sm border-2 border-[#c76700]/50 bg-white/5 text-center cursor-pointer transition-all hover:bg-[#c76700]/10 hover:border-[#c76700] text-sm sm:text-base">
-                <div className="text-2xl sm:text-3xl text-[#c76700] mb-2">
-                  📎
-                </div>
+                <div className="text-2xl sm:text-3xl text-[#c76700] mb-2">📎</div>
                 <div className="text-white text-[10px] whitespace-nowrap font-medium mb-1">
                   {uploadedFiles.length > 0
-                    ? `انتخاب شده: ${uploadedFiles
-                        .map((f) => f.name)
-                        .join(", ")}`
+                    ? `انتخاب شده: ${uploadedFiles.map((f) => f.name).join(", ")}`
                     : "فایل‌ها را اینجا بکشید یا کلیک کنید"}
                 </div>
-                <div className="text-white/60 text-[10px] sm:text-sm">
-                  PDF، DOC یا تصاویر تا 10MB
-                </div>
+                <div className="text-white/60 text-[10px] sm:text-sm">PDF، DOC یا تصاویر تا 10MB</div>
               </div>
             </div>
           </div>
@@ -243,7 +208,7 @@ export default function ContactForm() {
             type="submit"
             variant="premium"
             disabled={isSubmitting}
-            className="w-full mt-4 py-3  sm:py-4 rounded-md bg-gradient-to-br from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
+            className="w-full mt-4 py-3 sm:py-4 rounded-md bg-gradient-to-br from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
           >
             {isSubmitting ? "در حال ارسال..." : "ارسال درخواست"}
           </Button>
