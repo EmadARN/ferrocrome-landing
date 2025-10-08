@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.local
+.env.development
+.env.production
 
 # vercel
 .vercel
@@ -40,4 +43,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# prisma & database
+/prisma/dev.db
+/prisma/*.db
+/prisma/migrations/
+/prisma/generated/
 /src/generated/prisma
+
+# optional: lock files (if you use only one package manager)
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
