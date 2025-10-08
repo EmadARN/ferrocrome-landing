@@ -43,12 +43,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma & database
-/prisma/dev.db
-/prisma/*.db
-/prisma/migrations/
-/prisma/generated/
-/src/generated/prisma
+# prisma & database (با مسیر واقعی پروژه)
+src/prisma/dev.db
+src/prisma/*.db
+src/prisma/migrations/
+src/prisma/generated/
+src/generated/prisma
 
 # optional: lock files (if you use only one package manager)
 /package-lock.json
