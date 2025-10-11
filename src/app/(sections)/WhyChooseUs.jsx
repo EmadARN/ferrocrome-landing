@@ -27,18 +27,25 @@ const items = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-20 bg-black">
+    <section
+      style={{
+      background: "var(--color-about-bg)",
+        color: "var(--color-text)",
+      }}
+      className="py-20 bg-black"
+    >
       {/* Header */}
       <div className="container mx-auto px-6 text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-2xl md:text-4xl font-bold text-[#c76700] mb-4"
+          style={{ color: "var(--color-title)" }}
+          className="text-2xl md:text-4xl font-bold  mb-4"
         >
           چرا شرکت‌های پیشرو ما را انتخاب می‌کنند
         </motion.h2>
-        <p className="text-gray-400 text-[12px] md:text-lg mx-auto">
+        <p style={{ color: "var(--color-text-muted)" }} className=" text-[12px] md:text-lg mx-auto">
           ارائه برتری از طریق نوآوری، اطمینان و فرآیندهای پایدار
         </p>
       </div>
@@ -52,13 +59,14 @@ export default function WhyChooseUs() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.2 }}
-              className="bg-gray-800/40 backdrop-blur-lg p-8 rounded-md hover:scale-105 transition-transform"
+              style={{ backgroundColor: "var(--color-card-bg)" }}
+              className=" backdrop-blur-lg p-8 rounded-md hover:scale-105 transition-transform"
             >
               <div className="mb-4">{item.icon}</div>
-              <h3 className="text-xl font-bold text-gray-200 mb-2">
+              <h3  style={{ color: "var(--color-title-secondary)" }} className="text-xl font-bold  mb-2">
                 {item.title}
               </h3>
-              <p className="text-gray-400 text-sm">{item.desc}</p>
+              <p  style={{ color: "var(--color-text-secondary)" }} className="text-sm">{item.desc}</p>
             </motion.div>
           ))}
         </div>

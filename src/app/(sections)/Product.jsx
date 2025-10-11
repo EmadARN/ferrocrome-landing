@@ -39,28 +39,37 @@ export default function ProductsWithModal() {
       const randomIndex = Math.floor(Math.random() * products.length);
       setWaveIndex(randomIndex);
 
-      const timeout = setTimeout(() => setWaveIndex(null), 2000); // طول موج 2 ثانیه
+      const timeout = setTimeout(() => setWaveIndex(null), 2000);
       return () => clearTimeout(timeout);
-    }, 4000); // هر 4 ثانیه موج جدید
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-black to-gray-900 text-gray-300">
+    <section
+      style={{
+       background: "var(--color-about-bg)",
+        color: "var(--color-text)",
+      }}
+      className="py-24"
+    >
       <div className="container mx-auto px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-2xl md:text-4xl font-bold text-[#c76700] mb-4"
+          style={{ color: "var(--color-title)" }}
+          className="text-2xl md:text-4xl font-bold mb-4"
         >
           محصولات ما
         </motion.h2>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-gray-400 mb-16 text-[12px] md:text-lg"
+          style={{ color: "var(--color-text-muted)" }}
+          className="mb-16 text-[12px] md:text-lg"
         >
           ما مجموعه‌ای از فروکروم‌های صنعتی را با بالاترین کیفیت و خلوص ارائه
           می‌دهیم تا نیازهای مختلف صنایع فولاد و آلیاژسازی را برطرف کنیم.
@@ -74,7 +83,12 @@ export default function ProductsWithModal() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative bg-gray-800/40 backdrop-blur-lg rounded-md overflow-hidden border border-gray-700 hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
+              style={{
+                background: "var(--color-card-bg)",
+                borderColor: "var(--color-card-border)",
+                boxShadow: `0 0 20px var(--color-card-shadow)`,
+              }}
+              className="relative backdrop-blur-lg rounded-md overflow-hidden border hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
               onClick={() => setSelectedProduct(product)}
             >
               {/* موج رندوم */}
@@ -85,7 +99,13 @@ export default function ProductsWithModal() {
                   transition={{ duration: 2, ease: "easeInOut" }}
                   className="absolute inset-0 pointer-events-none"
                 >
-                  <div className="w-full h-full bg-gradient-to-r from-yellow-400/20 via-yellow-400/10 to-yellow-400/20 rounded-xl"></div>
+                  <div
+                    className="w-full h-full rounded-xl"
+                    style={{
+                      background:
+                        "linear-gradient(to right, var(--color-glow-1), var(--color-glow-2))",
+                    }}
+                  ></div>
                 </motion.div>
               )}
 
@@ -98,10 +118,16 @@ export default function ProductsWithModal() {
               </div>
 
               <div className="p-6 text-right relative z-10">
-                <h3 className="text-2xl font-bold text-[#cac8c7] mb-3">
+                <h3
+                  style={{ color: "var(--color-title-secondary)" }}
+                  className="text-2xl font-bold mb-3"
+                >
                   {product.name}
                 </h3>
-                <p className="text-gray-400 mb-4 leading-relaxed">
+                <p
+                  style={{ color: "var(--color-text-secondary)" }}
+                  className="mb-4 leading-relaxed"
+                >
                   {product.description}
                 </p>
               </div>
@@ -117,7 +143,10 @@ export default function ProductsWithModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md"
+            style={{
+              backgroundColor: "var(--color-bg-hero)",
+            }}
             onClick={() => setSelectedProduct(null)}
           >
             <motion.div
@@ -125,34 +154,49 @@ export default function ProductsWithModal() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-gray-900 rounded-xl max-w-lg w-full p-6 relative text-right"
+              style={{
+                backgroundColor: "#ffffff",
+                borderColor: "var(--color-card-border)",
+                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
+              }}
+              className="rounded-2xl max-w-lg w-full p-6 relative text-right border"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 left-4 text-gray-400 hover:text-[#c76700] text-2xl"
+                style={{
+                  color: "#111",
+                }}
+                className="absolute cursor-pointer top-4 left-4 hover:text-[var(--color-title)] text-2xl"
               >
                 &times;
               </button>
 
-              <h3 className="text-xl font-bold text-[#ddd] mb-4">
+              <h3 style={{ color: "#000" }} className="text-xl font-bold mb-4">
                 {selectedProduct.name}
               </h3>
+
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
                 className="w-full h-64 object-cover rounded-xl mb-4"
               />
-              <p className="text-gray-400 mb-4">
+
+              <p style={{ color: "#111" }} className="mb-4">
                 {selectedProduct.description}
               </p>
+
               <ul className="text-sm space-y-2">
                 {selectedProduct.features.map((f, i) => (
                   <li
                     key={i}
                     className="flex items-center justify-start gap-x-2"
+                    style={{ color: "#000000" }}
                   >
-                    <span className="w-2 h-2 rounded-full bg-yellow-400"></span>
+                    <span
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: "var(--color-title)" }}
+                    ></span>
                     {f}
                   </li>
                 ))}

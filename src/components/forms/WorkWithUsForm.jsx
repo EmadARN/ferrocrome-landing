@@ -31,22 +31,15 @@ export default function ContactForm() {
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
-      // اضافه کردن فیلدها به FormData
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phoneNumber", data.phone_number);
       formData.append("companyName", data.company_name);
       formData.append("saleType", data.sale_type);
       formData.append("message", data.message);
+      if (uploadedFiles.length > 0) formData.append("file", uploadedFiles[0]);
 
-      // فایل اگر انتخاب شده بود
-      if (uploadedFiles.length > 0) {
-        formData.append("file", uploadedFiles[0]);
-      }
-
-      // ارسال به API
       await sendCustomerRequest(formData);
-
       toast.success("پیام شما با موفقیت ارسال شد!");
       reset();
       setUploadedFiles([]);
@@ -59,129 +52,165 @@ export default function ContactForm() {
   const saleOptions = ["خرید فروکروم", "فروش فروکروم", "سایر"];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden  bg-[var(--color-section-bg)] transition-colors">
       {/* اشکال شناور */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <motion.div
-          className="absolute w-12 h-12 rounded-md bg-gradient-to-br from-[#c76700] to-[#f59e0b] opacity-10 top-1/5 left-1/10"
+          className="absolute w-12 h-12 rounded-md bg-gradient-to-br from-[var(--color-title)] to-[#d4a373] opacity-10 top-1/5 left-1/10"
           animate={{ y: [-10, 10, -10], rotate: [0, 35, 0] }}
           transition={{ duration: 6, repeat: Infinity }}
         />
         <motion.div
-          className="absolute w-12 h-12 rounded-md bg-gradient-to-br from-[#c76700] to-[#f59e0b] opacity-10 top-3/5 right-1/6"
+          className="absolute w-12 h-12 rounded-md bg-gradient-to-br from-[var(--color-title)] to-[#d4a373] opacity-10 top-3/5 right-1/6"
           animate={{ y: [-15, 15, -15], rotate: [0, 35, 0] }}
           transition={{ duration: 6, repeat: Infinity, delay: 2 }}
         />
-        <motion.div
-          className="absolute w-12 h-12 rounded-md bg-gradient-to-br from-[#c76700] to-[#f59e0b] opacity-10 top-4/5 left-1/5"
-          animate={{ y: [-8, 8, -8], rotate: [0, 35, 0] }}
-          transition={{ duration: 6, repeat: Infinity, delay: 4 }}
-        />
       </div>
 
-      <div className="relative z-10 w-full sm:max-w-2xl bg-white/5 backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl border border-[#c76700]/20">
-        <h1 className="text-center text-[#c76700] text-xl sm:text-3xl font-bold mb-2 drop-shadow-lg">
+      {/* فرم */}
+      <div
+        className="relative z-10 w-full sm:max-w-2xl
+    bg-[var(--color-form-bg)] dark:bg-[var(--color-form-bg-dark)] 
+    backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl border border-[var(--color-form-border)] dark:border-[var(--color-form-border-dark)]
+    transition-colors"
+      >
+        <h1 className="text-center text-[var(--color-title)] text-[15px] sm:text-3xl font-bold mb-2 drop-shadow-lg">
           فرم درخواست همکاری
         </h1>
-        <p className="text-center text-white/80 mb-6 sm:mb-8 font-light text-[0.65rem] sm:text-base">
+        <p className="text-center text-[var(--color-text-muted)] mb-6 sm:mb-8 font-light text-[0.65rem] sm:text-base">
           بیایید پروژه بعدی شما را بررسی کنیم
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6" encType="multipart/form-data">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4 sm:space-y-6"
+          encType="multipart/form-data"
+        >
           {/* نام و ایمیل */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+              <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
                 نام کامل *
               </label>
               <input
                 type="text"
                 {...register("name")}
                 placeholder="نام خود را وارد کنید"
-                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
               />
-              {errors.name && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.name.message}</p>}
+              {errors.name && (
+                <p className="text-red-400 text-xs sm:text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+              <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
                 ایمیل *
               </label>
               <input
                 type="email"
                 {...register("email")}
                 placeholder="example@email.com"
-                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
               />
-              {errors.email && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-red-400 text-xs sm:text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
           </div>
 
           {/* شماره و شرکت */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
-                شماره تلفن *
-              </label>
-              <input
-                type="tel"
-                {...register("phone_number")}
-                placeholder="+98 912 123 4567"
-                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
-              />
-              {errors.phone_number && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.phone_number.message}</p>}
-            </div>
-
-            <div>
-              <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+              <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
                 نام شرکت *
               </label>
               <input
                 type="text"
                 {...register("company_name")}
                 placeholder="نام شرکت"
-                className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
               />
-              {errors.company_name && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.company_name.message}</p>}
+              {errors.company_name && (
+                <p className="text-red-400 text-xs sm:text-sm mt-1">
+                  {errors.company_name.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+                شماره تلفن *
+              </label>
+              <input
+                type="tel"
+                {...register("phone_number")}
+                placeholder="09121234567"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
+              />
+              {errors.phone_number && (
+                <p className="text-red-400 text-xs sm:text-sm mt-1">
+                  {errors.phone_number.message}
+                </p>
+              )}
             </div>
           </div>
 
           {/* نوع درخواست */}
           <div>
-            <label className="block text-[#bdbdbd] text-right mb-2 text-sm sm:text-base">
+            <label className="block text-[var(--color-input-label)] text-right mb-2 text-sm sm:text-base">
               نوع درخواست *
             </label>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
               {saleOptions.map((option) => (
                 <label
                   key={option}
-                  className="flex items-center gap-2 p-2 sm:p-3 rounded-sm border-2 border-transparent cursor-pointer transition-all bg-white/10 hover:bg-[#c76700]/20 text-sm sm:text-base"
+                  className="flex items-center gap-2 p-2 sm:p-3 rounded-sm border-2 border-transparent cursor-pointer transition-all bg-[var(--color-input-bg)] hover:bg-[var(--color-title)]/10 text-[12px] sm:text-sm"
                 >
-                  <input type="radio" value={option} {...register("sale_type")} className="accent-[#c76700]" />
-                  <span className="text-white font-medium">{option}</span>
+                  <input
+                    type="radio"
+                    value={option}
+                    {...register("sale_type")}
+                    className="accent-[var(--color-title)]"
+                  />
+                  <span className="text-[var(--color-input-text)] font-medium">
+                    {option}
+                  </span>
                 </label>
               ))}
             </div>
-            {errors.sale_type && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.sale_type.message}</p>}
+            {errors.sale_type && (
+              <p className="text-red-400 text-xs sm:text-sm mt-1">
+                {errors.sale_type.message}
+              </p>
+            )}
           </div>
 
           {/* پیام */}
           <div>
-            <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+            <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
               پیام *
             </label>
             <textarea
               {...register("message")}
               rows={4}
               placeholder="پیام خود را وارد کنید"
-              className="w-full p-3 sm:p-4 rounded-sm bg-white/20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-[#c76700] resize-y text-sm sm:text-base"
+              className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] resize-y text-sm sm:text-base"
             ></textarea>
-            {errors.message && <p className="text-red-400 text-xs sm:text-sm mt-1">{errors.message.message}</p>}
+            {errors.message && (
+              <p className="text-red-400 text-xs sm:text-sm mt-1">
+                {errors.message.message}
+              </p>
+            )}
           </div>
 
           {/* آپلود فایل */}
           <div>
-            <label className="block text-[#bdbdbd] text-right mb-1 sm:mb-2 text-sm sm:text-base">
+            <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
               فایل ضمیمه (اختیاری)
             </label>
             <div className="relative">
@@ -191,14 +220,20 @@ export default function ContactForm() {
                 onChange={handleFileChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
-              <div className="p-6 sm:p-8 rounded-sm border-2 border-[#c76700]/50 bg-white/5 text-center cursor-pointer transition-all hover:bg-[#c76700]/10 hover:border-[#c76700] text-sm sm:text-base">
-                <div className="text-2xl sm:text-3xl text-[#c76700] mb-2">📎</div>
-                <div className="text-white text-[10px] whitespace-nowrap font-medium mb-1">
+              <div className="p-6 sm:p-8 rounded-sm border-2 border-[var(--color-title)]/30 bg-[var(--color-input-bg)] text-center cursor-pointer transition-all hover:bg-[var(--color-title)]/10 hover:border-[var(--color-title)] text-sm sm:text-base">
+                <div className="text-2xl sm:text-3xl text-[var(--color-title)] mb-2">
+                  📎
+                </div>
+                <div className="text-[var(--color-input-text)] text-[10px] sm:text-sm font-medium mb-1">
                   {uploadedFiles.length > 0
-                    ? `انتخاب شده: ${uploadedFiles.map((f) => f.name).join(", ")}`
+                    ? `انتخاب شده: ${uploadedFiles
+                        .map((f) => f.name)
+                        .join(", ")}`
                     : "فایل‌ها را اینجا بکشید یا کلیک کنید"}
                 </div>
-                <div className="text-white/60 text-[10px] sm:text-sm">PDF، DOC یا تصاویر تا 10MB</div>
+                <div className="text-[var(--color-text-muted)] text-[10px] sm:text-sm">
+                  PDF، DOC یا تصاویر تا 10MB
+                </div>
               </div>
             </div>
           </div>
@@ -208,7 +243,7 @@ export default function ContactForm() {
             type="submit"
             variant="premium"
             disabled={isSubmitting}
-            className="w-full mt-4 py-3 sm:py-4 rounded-md bg-gradient-to-br from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
+            className="w-full mt-4 py-3 sm:py-4 rounded-md bg-gradient-to-br from-[var(--color-title)] to-[#7a3c00] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
           >
             {isSubmitting ? "در حال ارسال..." : "ارسال درخواست"}
           </Button>

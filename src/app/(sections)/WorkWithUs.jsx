@@ -4,17 +4,27 @@ import { motion } from "framer-motion";
 
 export default function WorkWithUs() {
   return (
-    <section className="py-20 bg-gradient-to-b from-black to-gray-900">
+    <section
+      style={{
+        background: "var(--color-about-bg)",
+        color: "var(--color-text)",
+      }}
+      className="py-20 "
+    >
       <div className="container mx-auto px-6 max-w-4xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-2xl md:text-4xl font-bold text-[#c76700] mb-4"
+          style={{ color: "var(--color-title)" }}
+          className="text-2xl md:text-4xl font-bold  mb-4"
         >
           همکاری با ما را آغاز کنید
         </motion.h2>
-        <p className="text-gray-300 mb-12 text-[10px] md:text-lg">
+        <p
+          style={{ color: "var(--color-text-muted)" }}
+          className="mb-12 text-[10px] md:text-lg"
+        >
           آماده همکاری با شرکت‌های پیشرو هستید؟ نیازهای فروکروم خود را با ما به
           اشتراک بگذارید و یک همکاری موفق بسازیم.
         </p>
@@ -24,7 +34,7 @@ export default function WorkWithUs() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-gray-800/50 backdrop-blur-lg p-8 md:p-12 rounded-md shadow-lg">
+          <div className=" backdrop-blur-lg p-8 md:p-12 rounded-md">
             <WorkWithUsForm />
           </div>
         </motion.div>

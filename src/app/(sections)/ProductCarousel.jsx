@@ -38,9 +38,18 @@ export default function ProductCarousel() {
   const paginationRef = useRef(null);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-gray-300 relative">
+    <section
+      style={{
+         background: "var(--color-about-bg)",
+        color: "var(--color-text)",
+      }}
+      className="py-20  relative"
+    >
       <div className="container mx-auto px-6 text-center relative">
-        <h2 className="text-2xl md:text-4xl font-bold text-[#c76700] mb-8">
+        <h2
+          style={{ color: "var(--color-title)" }}
+          className="text-2xl md:text-4xl font-bold  mb-8"
+        >
           تصاویر محصولات
         </h2>
 
@@ -53,12 +62,6 @@ export default function ProductCarousel() {
             ❯
           </div>
         </div>
-
-        {/* Pagination خارج از اسلایدر
-        <div
-          ref={paginationRef}
-          className="flex justify-center gap-3 mb-8 mt-4 z-20 relative"
-        ></div> */}
 
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -88,14 +91,17 @@ export default function ProductCarousel() {
         >
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="bg-gray-800/40 backdrop-blur-lg rounded-md overflow-hidden border border-gray-700 hover:scale-105 transition-transform duration-300">
+              <div
+                style={{ backgroundColor: "var(--color-card-bg)" }}
+                className=" backdrop-blur-lg rounded-md overflow-hidden  hover:scale-105 transition-transform duration-300"
+              >
                 <img
                   src={product.image}
                   alt={product.name}
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 className="text-md font-bold text-center text-white">
+                  <h3 style={{ color: "var(--color-title-secondary)" }} className="text-md font-bold text-center text-white">
                     {product.name}
                   </h3>
                 </div>
