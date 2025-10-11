@@ -1,8 +1,166 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* bg */
+  --color-bg-navbar: linear-gradient(to right, #f9f7f3, #f2f0eb);
+  --color-bg-hero: linear-gradient(to bottom right, #ffffff, #f2f6ff, #e0ebff);
+  --color-btn-bg: #b35c00;
+  --color-btn-hover-bg: linear-gradient(to right, #914800, #7a3c00);
+  --color-about-bg: linear-gradient(to bottom, #f7f6f2 0%, #fcf7ef 100%);
+  --color-card-bg: rgba(255, 255, 255, 0.9);
+  --color-tab-bg: rgba(255, 255, 255, 0.4);
+  --color-tab-active-bg: linear-gradient(to right, #b35c00, #7a3c00);
+
+  /* text */
+  --color-text: #1f1f1f;
+  --color-btn-text: #ffffff;
+  --color-about-text-secondary: #5e4b36;
+  --color-navlink-text: #2a2a2a;
+  --color-btn-secondary-text: #000000;
+  --color-tab-text: #333333;
+  --color-text-muted: #666666;
+
+  /* badge */
+  --color-badge-1: #b6b6b6;
+  --color-badge-2: #dcdcdc;
+  --color-badge-3: #9c9c9c;
+
+  /* title */
+  --color-title: #b35c00;
+  --color-title-secondary: #111111;
+
+  /*btn*/
+  --color-btn-border: rgba(0, 0, 0, 0.15);
+  --color-btn-hover-border: rgba(0, 0, 0, 0.3);
+  --color-btn-shadow: rgba(0, 0, 0, 0.15);
+  --color-btn-primary-hover: linear-gradient(to right, #914800, #7a3c00);
+  --color-btn-secondary-border: transparent;
+
+  /* card */
+  --color-card-border: rgba(0, 0, 0, 0.08);
+  --color-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+
+  /* navbar */
+  --color-navlink-hover: #b35c00;
+
+  /* highlight / glow */
+  --color-highlight: #f2b35c;
+  --color-glow-1: rgba(255, 200, 100, 0.1);
+  --color-glow-2: rgba(100, 160, 255, 0.1);
+  --color-glow-3: rgba(80, 220, 130, 0.1);
+  --color-glow-4: rgba(50, 255, 200, 0.1);
+
+  /* form */
+  --color-form-bg: #f9f7f3;
+  --color-form-border: #d1d1d1;
+  --color-input-bg: #ffffff;
+  --color-input-text: #1f1f1f;
+  --color-input-label: #5e4b36;
+  --color-form-btn-bg: #b35c00;
+  --color-form-btn-hover-bg: #914800;
+  --color-form-btn-text: #ffffff;
+
+  /* modal */
+  --color-modal-bg: #ffffff;
+  --color-modal-border: #e5e5e5;
+  --color-modal-text: #1f1f1f;
+  --color-modal-link: #c76700;
+  --color-section-bar: linear-gradient(to bottom, #c76700, #ffc107);
+
+  /* mobile menu */
+  --color-bg-mobile-menu: rgba(255, 255, 255, 0.95);
+  --color-navlink: #1a1a1a;
+  --color-navlinkHover: #c76700;
+
+  /* footer */
+   --color-footer-bg: #f9f9f9;
+  --color-footer-text: #333;
+  --color-footer-heading: #111;
+  --color-footer-muted: #555;
+  --color-footer-border: #ddd;
+  --color-accent: #c76700;
+}
+
+.dark {
+  /* bg */
+  --color-bg-navbar: linear-gradient(to bottom, #0b0b0b, #1a1a1a, #101010);
+  --color-bg-hero: linear-gradient(to bottom right, #0a0a1a, #16213e, #0f3460);
+  --color-about-bg: linear-gradient(to bottom right, #0d0d0d, #1a1a1a, #000000);
+
+  /* text */
+  --color-text: #f5f5f5;
+  --color-text-muted: #a3a3a3;
+  --color-about-text-secondary: #d1c7b8;
+  --color-navlink-text: #e0e0e0;
+  --color-navlink-hover: #f2b35c;
+
+  /* titles */
+  --color-title: #c76700;
+  --color-title-secondary: #ffffff;
+
+  /* btns */
+  --color-btn-bg: #b35c00;
+  --color-btn-text: #ffffff;
+  --color-btn-hover-bg: linear-gradient(to right, #914800, #7a3c00);
+  --color-btn-border: rgba(255, 255, 255, 0.1);
+  --color-btn-hover-border: rgba(255, 255, 255, 0.25);
+  --color-btn-shadow: rgba(0, 0, 0, 0.3);
+  --color-btn-secondary-bg: transparent;
+  --color-btn-secondary-text: #f5f5f5;
+  --color-btn-secondary-hover-bg: rgba(179, 92, 0, 0.15);
+  --color-btn-primary-hover: linear-gradient(to right, #f5f5f5, #eaeaea);
+
+  /* cards */
+  --color-card-bg: rgba(255, 255, 255, 0.05);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-card-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+
+  /* tabs */
+  --color-tab-bg: rgba(255, 255, 255, 0.05);
+  --color-tab-active-bg: linear-gradient(to right, #b35c00, #7a3c00);
+  --color-tab-border: rgba(255, 255, 255, 0.1);
+  --color-tab-text: #d1d5db;
+
+  /* badge */
+  --color-badge-1: #c5c5c5;
+  --color-badge-2: #d8d8d8;
+  --color-badge-3: #9ca3af;
+
+  /* glow / highlight */
+  --color-highlight: #f2b35c;
+  --color-glow-1: rgba(255, 200, 100, 0.1);
+  --color-glow-2: rgba(255, 160, 80, 0.1);
+  --color-glow-3: rgba(200, 120, 60, 0.1);
+  --color-glow-4: rgba(80, 220, 130, 0.1);
+
+  /* form */
+  --color-form-bg: #1f1f1f; /* کمی روشن‌تر از #161616 */
+  --color-form-border: #3a3a3a; /* کمی روشن‌تر از #2d2d2d */
+  --color-input-bg: #3a3a3a; /* کمی روشن‌تر از #0f0f0f */
+  --color-input-text: #f8f8f8; /* کمی روشن‌تر از #f5f5f5 */
+  --color-input-label: #e0d8c8; /* کمی روشن‌تر از #d1c7b8 */
+  --color-form-btn-bg: #c07b2a; /* کمی روشن‌تر و گرم‌تر از #b35c00 */
+  --color-form-btn-hover-bg: #b06920; /* کمی روشن‌تر از #914800 */
+  --color-form-btn-text: #ffffff;
+
+  /* modal */
+  --color-modal-bg: #1f1f1f;
+  --color-modal-border: #3a3a3a;
+  --color-modal-text: #f8f8f8;
+  --color-modal-link: #f6b76b;
+
+  /* mobile menu */
+  --color-bg-mobile-menu: rgba(30, 30, 30, 0.95);
+  --color-navlink: #f5f5f5;
+  --color-navlinkHover: #ffc107;
+
+  /* footer */
+   --color-footer-bg: #0d0d0d;
+  --color-footer-text: #ccc;
+  --color-footer-heading: #fff;
+  --color-footer-muted: #888;
+  --color-footer-border: #333;
+  --color-accent: #c76700;
 }
 
 @theme inline {
@@ -20,8 +178,8 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg-hero);
+  color: var(--color-text);
   padding: 0;
   margin: 0;
   font-family: var(--font-IRANYekan);
@@ -241,7 +399,9 @@ body {
 
 /* Modal Container */
 .modal {
-  background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 50%, #1e1e1e 100%);
+  background-color: var(--color-modal-bg);
+  border-color: "var(--color-modal-border)";
+  color: var(--color-modal-text);
   border-radius: 10px 10px 0 0;
   padding: 0;
   max-width: 600px;
@@ -353,11 +513,13 @@ body {
 }
 
 .contact-section {
-  background: linear-gradient(135deg, #252525 0%, #2f2f2f 100%);
+  background-color: var(--color-about-bg);
+  border-color: var(--color-card-border);
+  box-shadow: var(--color-card-shadow);
   border-radius: 15px;
   padding: 25px;
   margin-bottom: 20px;
-  border: 1px solid rgba(199, 103, 0, 0.2);
+
   position: relative;
   overflow: hidden;
 }
@@ -393,7 +555,7 @@ body {
   align-items: center;
   gap: 12px;
   margin-bottom: 15px;
-  color: #e0e0e0;
+  color: var(--color-text);
   font-size: 16px;
   padding: 8px 0;
 }
@@ -414,7 +576,7 @@ body {
 }
 
 .contact-link {
-  color: rgb(167, 167, 243);
+  color: "var(--color-modal-link)";
   text-decoration: none;
   transition: color 0.3s ease;
 }
