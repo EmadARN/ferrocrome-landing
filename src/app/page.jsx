@@ -12,6 +12,7 @@ import ContactModal from "../components/ui/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
 import { motion } from "framer-motion";
 import FloatingChromite from "@/components/ui/FloatingChromite";
+import WhatsAppButton from "@/components/ui/WhatsappButton";
 
 export default function Home() {
   return (
@@ -36,7 +37,7 @@ export default function Home() {
         </div>
       </section>
 
-      <FloatingChromite />
+      {/* <FloatingChromite /> */}
 
       <section id="about">
         <About />
@@ -61,7 +62,7 @@ export default function Home() {
       <section id="WorkWithUs">
         <WorkWithUs />
       </section>
-
+      <WhatsAppButton />
       <ContactModal />
 
       <Footer />
