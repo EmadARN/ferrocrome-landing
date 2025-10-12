@@ -89,6 +89,7 @@ export default function Header() {
 
               {/* دکمه همکاری دسکتاپ */}
               <div className="hidden lg:flex items-center gap-4">
+                <ThemeToggleSwitch/>
                 <Link href="#WorkWithUs">
                   <button
                     style={{

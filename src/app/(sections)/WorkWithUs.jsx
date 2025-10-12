@@ -34,9 +34,9 @@ export default function WorkWithUs() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className=" backdrop-blur-lg p-8 md:p-12 rounded-md">
+     
             <WorkWithUsForm />
-          </div>
+        
         </motion.div>
       </div>
     </section>

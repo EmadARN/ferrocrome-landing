@@ -40,7 +40,7 @@ export default function ProductCarousel() {
   return (
     <section
       style={{
-         background: "var(--color-about-bg)",
+        background: "var(--color-about-bg)",
         color: "var(--color-text)",
       }}
       className="py-20  relative"
@@ -54,11 +54,11 @@ export default function ProductCarousel() {
         </h2>
 
         {/* فلش‌های ناوبری */}
-        <div className="hidden md:flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-4 pointer-events-none">
-          <div className="swiper-button-prev-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-3 shadow-lg transition duration-300 cursor-pointer">
+        <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
+          <div className="swiper-button-prev-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❮
           </div>
-          <div className="swiper-button-next-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-3 shadow-lg transition duration-300 cursor-pointer">
+          <div className="swiper-button-next-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❯
           </div>
         </div>
@@ -101,7 +101,10 @@ export default function ProductCarousel() {
                   className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
                 />
                 <div className="p-4 text-right">
-                  <h3 style={{ color: "var(--color-title-secondary)" }} className="text-md font-bold text-center text-white">
+                  <h3
+                    style={{ color: "var(--color-title-secondary)" }}
+                    className="text-md font-bold text-center text-white"
+                  >
                     {product.name}
                   </h3>
                 </div>

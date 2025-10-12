@@ -48,7 +48,7 @@ export default function ProductsWithModal() {
   return (
     <section
       style={{
-       background: "var(--color-about-bg)",
+        background: "var(--color-about-bg)",
         color: "var(--color-text)",
       }}
       className="py-24"
@@ -145,7 +145,7 @@ export default function ProductsWithModal() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md"
             style={{
-              backgroundColor: "var(--color-bg-hero)",
+              backgroundColor: "var(--color-backdrop)", // بک‌دراپ توکنی شده
             }}
             onClick={() => setSelectedProduct(null)}
           >
@@ -155,8 +155,8 @@ export default function ProductsWithModal() {
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
               style={{
-                backgroundColor: "#ffffff",
-                borderColor: "var(--color-card-border)",
+                backgroundColor: "var(--color-card-bg)", 
+                borderColor: "var(--color-card-border)", 
                 boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
               }}
               className="rounded-2xl max-w-lg w-full p-6 relative text-right border"
@@ -165,14 +165,17 @@ export default function ProductsWithModal() {
               <button
                 onClick={() => setSelectedProduct(null)}
                 style={{
-                  color: "#111",
+                  color: "var(--color-title)", // رنگ دکمه بستن
                 }}
-                className="absolute cursor-pointer top-4 left-4 hover:text-[var(--color-title)] text-2xl"
+                className="absolute cursor-pointer top-4 left-4 hover:text-[var(--color-title-hover)] text-2xl"
               >
                 &times;
               </button>
 
-              <h3 style={{ color: "#000" }} className="text-xl font-bold mb-4">
+              <h3
+                style={{ color: "var(--color-title)" }}
+                className="text-xl font-bold mb-4"
+              >
                 {selectedProduct.name}
               </h3>
 
@@ -182,7 +185,7 @@ export default function ProductsWithModal() {
                 className="w-full h-64 object-cover rounded-xl mb-4"
               />
 
-              <p style={{ color: "#111" }} className="mb-4">
+              <p style={{ color: "var(--color-text)" }} className="mb-4">
                 {selectedProduct.description}
               </p>
 
@@ -191,11 +194,11 @@ export default function ProductsWithModal() {
                   <li
                     key={i}
                     className="flex items-center justify-start gap-x-2"
-                    style={{ color: "#000000" }}
+                    style={{ color: "var(--color-text)" }}
                   >
                     <span
                       className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: "var(--color-title)" }}
+                      style={{ backgroundColor: "var(--color-accent)" }}
                     ></span>
                     {f}
                   </li>
