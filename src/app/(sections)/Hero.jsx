@@ -7,12 +7,27 @@ export default function Hero() {
   return (
     <section
       className="
-    relative flex flex-col items-center justify-center text-center py-32 overflow-hidden
-    bg-bg-hero
-    transition-colors duration-700
-  "
+        relative flex flex-col items-center justify-center text-center overflow-hidden
+    bg-black
+    [height:60dvh] md:[height:100dvh]
+   mt-28 md:mt-0
+      "
     >
-      {/* --- نور مرکزی طلایی --- */}
+      {/* --- ویدیو پس‌زمینه --- */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/images/fallback.PNG"
+        className="absolute top-0 left-0 w-full h-full object-fill opacity-80"
+      >
+        <source src="/video/iran-china.mp4" type="video/mp4" />
+      </video>
+      {/* --- لایه تیره‌ی نیمه‌شفاف برای وضوح متن --- */}
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/50 z-0" />
+
+      {/* --- نور طلایی مرکزی (اختیاری برای افکت بیشتر) --- */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -20,85 +35,61 @@ export default function Hero() {
           absolute top-1/2 left-1/2 w-[500px] h-[500px]
           -translate-x-1/2 -translate-y-1/2 rounded-full
           bg-gradient-to-br from-[#c76700]/40 via-[#f6b76b]/20 to-transparent
-          blur-3xl
+          blur-3xl z-0
         "
       />
 
-      {/* --- ذرات طلایی جرقه‌ای --- */}
-      {Array.from({ length: 18 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute bottom-0 left-1/2 w-[3px] h-[3px] bg-[#c76700] rounded-full blur-[1.5px]"
-          animate={{
-            y: [0, -200 - Math.random() * 200],
-            opacity: [1, 0],
-            x: [0, Math.random() * 120 - 60],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-            ease: "easeOut",
-          }}
-        />
-      ))}
-
-      {/* --- متن و محتوا --- */}
+      {/* --- محتوا --- */}
       <div className="relative z-10 px-4 md:px-8 max-w-3xl">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-4xl md:text-6xl font-extrabold leading-tight"
+          className="text-2xl md:text-5xl font-extrabold leading-tight text-white"
         >
-          <span
-            className="block"
-            style={{ backgroundClip: "text", color: "var(--color-title)" }}
-          >
-            بهترین
+          <span className="block">پروژه احداث کارخانه فروکروم</span>
+          <span className="text-2xl md:text-4xl block bg-clip-text text-transparent bg-gradient-to-r from-[#f6b76b] via-[#e8a24d] to-[#c76700]">
+            با سرمایه‌گذاری خارجی
           </span>
-          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#b45c00] via-[#e8a24d] to-[#f6b76b] dark:from-[#f6b76b] dark:via-[#e8a24d] dark:to-[#c76700]">
-            فروکروم صنعتی
-          </span>
-          <span
-            className="block mt-2 text-lg md:text-xl font-medium"
-            style={{
-              color: "var(--color-text)", // حالت Light
-            }}
-          >
-            برای صنایع فولاد و ریخته‌گری
+          <span className="block mt-2 text-lg md:text-xl font-medium text-gray-200">
+            در استان کرمان / شهرستان جیرفت
           </span>
         </motion.h1>
 
         {/* --- Badgeها --- */}
-        <div className="flex flex-wrap gap-4 justify-center mt-6">
+        <div className="flex flex-wrap gap-4 justify-center mt-6 text-white">
           {[
-            { text: "ISO 9001", color: "var(--color-badge-1)" },
-            { text: "صادرات به ۴۰+ کشور", color: "var(--color-badge-2)" },
-            { text: "تحویل ۹۹.۸٪ به موقع", color: "var(--color-badge-3)" },
-          ].map((item, idx) => (
+            "میزان سرمایه‌گذاری: 30 میلیون دلار",
+            "ظرفیت تولید: 45 هزار تن سالانه",
+            "اشتغال‌زایی: 300 نفر",
+          ].map((text, i) => (
             <motion.div
-              key={idx}
+              key={i}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.2 }}
-              className="flex items-center gap-2 text-text dark:text-text-muted font-medium"
+              transition={{ delay: i * 0.2 }}
+              className="flex items-center gap-2 font-medium"
             >
               <span
-                style={{ backgroundColor: item.color }}
                 className="w-3 h-3 rounded-full"
+                style={{
+                  backgroundColor:
+                    i === 0
+                      ? "var(--color-badge-1)"
+                      : i === 1
+                      ? "var(--color-badge-2)"
+                      : "var(--color-badge-3)",
+                }}
               ></span>
-              {item.text}
+              {text}
             </motion.div>
           ))}
         </div>
 
-        {/* --- دکمه‌ها هماهنگ --- */}
+        {/* --- دکمه‌ها --- */}
         <div className="flex flex-wrap gap-6 justify-center mt-8">
-          {/* دکمه اصلی */}
           <Link
-            href="#WorkWithUs"
+            href="#about"
             className="
               px-6 py-3 rounded-lg text-sm md:text-md font-bold
               bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
@@ -106,27 +97,24 @@ export default function Hero() {
               transition-all duration-300
             "
           >
-            درخواست قیمت
+           درباره ی ما
           </Link>
 
-          {/* دکمه ثانویه */}
           <Link
-            href="#product"
+            href="#WorkWithUs"
             className="
               px-6 py-3 rounded-lg border text-sm md:text-md font-bold
-              border-[#c76700]/70 text-[#c76700]
-              dark:text-[#f6b76b] dark:border-[#f6b76b]/60
-              hover:bg-[#c76700]/10 dark:hover:bg-[#f6b76b]/10
-              hover:scale-105 transition-all duration-300
+              border-[#f6b76b]/60 text-[#f6b76b]
+              hover:bg-[#f6b76b]/10 hover:scale-105 transition-all duration-300
             "
           >
-            مشاهده محصولات
+            درخواست همکاری
           </Link>
         </div>
       </div>
 
-      {/* --- نور طلایی پایین --- */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#c76700]/20 to-transparent blur-2xl" />
+      {/* --- گرادیان پایین --- */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
     </section>
   );
 }
