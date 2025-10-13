@@ -1,22 +1,24 @@
 "use client";
-import About from "./(sections)/About";
-import Footer from "./(sections)/Footer";
 import Header from "./(sections)/Header";
+import Footer from "./(sections)/Footer";
 import Hero from "./(sections)/Hero";
+import About from "./(sections)/About";
 import Products from "./(sections)/Product";
 import ProductCarousel from "./(sections)/ProductCarousel";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
-import ScrollToTopButton from "@/components/ui/ScrollTopButton";
-import ContactModal from "../components/ui/contactUsButton";
 import WorkWithUs from "./(sections)/WorkWithUs";
-import { motion } from "framer-motion";
+import ContactModal from "../components/ui/contactUsButton";
+import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import FloatingChromite from "@/components/ui/FloatingChromite";
+import { motion } from "framer-motion";
+import Blogs from "./blogs/page";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main>
       <Header />
+
       <section id="hero" className="lg:pt-32 relative">
         <Hero />
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
@@ -64,9 +66,11 @@ export default function Home() {
 
       <ContactModal />
 
-      <Footer />
+      <section>
+        <Blogs />
+      </section>
 
-      {/* دکمه Scroll to Top */}
+      <Footer />
       <ScrollToTopButton />
     </main>
   );
