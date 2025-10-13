@@ -12,8 +12,8 @@ export default function WhatIsFerroChrome() {
     ferrochrome: {
       title: "فرو کروم چیست؟",
       subtitle: "فروکروم",
-      color: "text-[#c76700]",
-      highlight: "text-blue-400",
+      color: "var(--color-title)",
+      highlight: "var(--color-highlight)",
       text1: `کروم به صورت آزاد در طبیعت پیدا نمی‌شود و غنی‌ترین ماده معدنی حاوی
       کروم، کرومیت با فرمول FeO.Cr2O3 است. کروم از کانی کرومیت به‌دست می‌آید
       که یک کانی اکسیدی از کروم، آهن و اکسیژن می‌باشد.`,
@@ -25,14 +25,14 @@ export default function WhatIsFerroChrome() {
         "/images/low-carbon-ferrochrome.jpg",
         "/images/micro-carbon-ferrochrome.webp",
       ],
-      glow1: "bg-yellow-500/10",
-      glow2: "bg-blue-400/10",
+      glow1: "var(--color-glow-1)",
+      glow2: "var(--color-glow-2)",
     },
     chromite: {
       title: "کرومیت چیست؟",
       subtitle: "کانی کرومیت",
-      color: "text-[#c76700]",
-      highlight: "text-blue-400",
+      color: "var(--color-title)",
+      highlight: "var(--color-highlight)",
       text1: `کرومیت (FeCr₂O₄) تنها منبع اقتصادی استخراج کروم است که در سنگ‌های
       اولترامافیک مانند دونیت و سرپانتین یافت می‌شود. این کانی به دلیل داشتن
       ترکیب آهن و کروم اهمیت بالایی در صنایع فولادسازی دارد.`,
@@ -43,16 +43,19 @@ export default function WhatIsFerroChrome() {
         "/images/chromite2.webp",
         "/images/chromite3.webp",
       ],
-      glow1: "bg-green-400/10",
-      glow2: "bg-emerald-400/10",
+      glow1: "var(--color-glow-3)",
+      glow2: "var(--color-glow-4)",
     },
   };
 
   const currentTab = tabs[activeTab];
 
   return (
-    <section className="pt-12 pb-[28rem] md:pb-[28rem] lg:py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-300 relative overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section
+      style={{  background: "var(--color-about-bg)",}}
+      className="pt-12 pb-[28rem] md:pb-[28rem] lg:py-24 relative overflow-hidden"
+    >
+      <div className="container mx-auto px-6 text-[color:var(--color-text)]">
         {/* دکمه‌های تب */}
         <div className="flex justify-center gap-6 mb-12">
           {Object.keys(tabs).map((key) => {
@@ -62,19 +65,22 @@ export default function WhatIsFerroChrome() {
                 key={key}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab(key)}
-                className={`relative px-8 py-3 rounded-md text-lg font-semibold backdrop-blur-md border transition-all duration-300 cursor-pointer ${
+                className={`relative px-8 py-3 rounded-md text-lg font-semibold backdrop-blur-md transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-gradient-to-r from-[#a15300] via-[#521f01] to-[#521f01]  text-white border-transparent shadow-lg shadow-orange-500/20"
-                    : "bg-gray-800/30 border-gray-700 text-gray-400 hover:text-white hover:bg-gray-700/50"
+                    ? "text-white shadow-lg"
+                    : "border text-[color:var(--color-tab-text)] hover:text-[color:var(--color-tab-hover-text)]"
                 }`}
+                style={{
+                  background: isActive
+                    ? "var(--color-tab-active-bg)"
+                    : "var(--color-tab-bg)",
+                  borderColor: "var(--color-tab-border)",
+                  boxShadow: isActive
+                    ? "0 0 15px var(--color-tab-shadow)"
+                    : "none",
+                }}
               >
                 {key === "ferrochrome" ? "فروکروم" : "کرومیت"}
-                {isActive && (
-                  <motion.div
-                    layoutId="tab-highlight"
-                    className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-full blur-md"
-                  />
-                )}
               </motion.button>
             );
           })}
@@ -98,20 +104,24 @@ export default function WhatIsFerroChrome() {
               className="space-y-6"
             >
               <h2
-                className={`text-2xl md:text-4xl font-extrabold tracking-tight ${currentTab.color}`}
+                style={{ color: currentTab.color }}
+                className="text-2xl md:text-4xl font-extrabold tracking-tight"
               >
                 {currentTab.title}
               </h2>
 
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
                 {currentTab.text1}
               </p>
 
-              <h3 className={`text-2xl font-bold mt-6 ${currentTab.highlight}`}>
+              <h3
+                style={{ color: currentTab.highlight }}
+                className="text-2xl font-bold mt-6"
+              >
                 {currentTab.subtitle}
               </h3>
 
-              <p className="text-lg text-gray-400 leading-relaxed">
+              <p className="text-lg leading-relaxed text-[color:var(--color-text-muted)]">
                 {currentTab.text2}
               </p>
             </motion.div>
@@ -139,8 +149,10 @@ export default function WhatIsFerroChrome() {
                       repeatDelay: 10 + idx * 2,
                       ease: "easeInOut",
                     }}
-                    className="absolute w-44 h-44 md:w-64 md:h-64 mt-12 rounded-md overflow-hidden shadow-md border border-gray-700 cursor-pointer"
+                    className="absolute w-44 h-44 md:w-64 md:h-64 mt-12 rounded-md overflow-hidden shadow-md cursor-pointer"
                     style={{
+                      backgroundColor: "var(--color-card-bg)",
+                      border: `1px solid var(--color-card-border)`,
                       top: `${offsetY}rem`,
                       left: `${offsetX}rem`,
                       zIndex: hoveredIdx === idx ? 20 : 10 - idx,
@@ -152,7 +164,13 @@ export default function WhatIsFerroChrome() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.5), transparent)",
+                      }}
+                    />
                   </motion.div>
                 );
               })}
@@ -165,7 +183,14 @@ export default function WhatIsFerroChrome() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className={`absolute w-72 h-72 top-10 left-10 ${currentTab.glow1} rounded-3xl blur-3xl`}
+                className="absolute rounded-3xl blur-3xl"
+                style={{
+                  width: "18rem",
+                  height: "18rem",
+                  top: "2.5rem",
+                  left: "2.5rem",
+                  background: currentTab.glow1,
+                }}
               />
               <motion.div
                 animate={{ opacity: [0.1, 0.25, 0.1] }}
@@ -174,7 +199,14 @@ export default function WhatIsFerroChrome() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className={`absolute w-56 h-56 bottom-0 left-20 ${currentTab.glow2} rounded-3xl blur-3xl`}
+                className="absolute rounded-3xl blur-3xl"
+                style={{
+                  width: "14rem",
+                  height: "14rem",
+                  bottom: 0,
+                  left: "5rem",
+                  background: currentTab.glow2,
+                }}
               />
             </motion.div>
           </motion.div>

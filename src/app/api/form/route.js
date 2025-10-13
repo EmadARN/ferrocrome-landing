@@ -39,7 +39,7 @@ export async function POST(req) {
       },
     });
 
-    console.log("✅ فرم ذخیره شد:", submission.id);
+
 
     return new Response(JSON.stringify(submission), {
       status: 201,

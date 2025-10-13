@@ -47,7 +47,15 @@ export default function ContactModal() {
           id="modalOverlay"
           onClick={closeModal}
         >
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="modal"
+            style={{
+              backgroundColor: "var(--color-modal-bg)",
+              borderColor: "var(--color-modal-border)",
+              color: "var(--color-modal-text)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="modal-header">
               <button className="close-btn" onClick={closeModal}>
                 &times;
@@ -128,6 +136,7 @@ export default function ContactModal() {
                     <a
                       href="mailto:info@ferrochrome.ir"
                       className="contact-link"
+                      style={{ color: "var(--color-modal-link)" }}
                     >
                       info@ferrochrome.ir
                     </a>
@@ -147,6 +156,7 @@ export default function ContactModal() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="contact-link"
+                      style={{ color: "var(--color-modal-link)" }}
                     >
                       @ferrochrome_industry
                     </a>
@@ -165,6 +175,7 @@ export default function ContactModal() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="contact-link"
+                      style={{ color: "var(--color-modal-link)" }}
                     >
                       @ferrochrome
                     </a>
@@ -183,6 +194,7 @@ export default function ContactModal() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="contact-link"
+                      style={{ color: "var(--color-modal-link)" }}
                     >
                       09123456789
                     </a>

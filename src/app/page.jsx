@@ -13,6 +13,7 @@ import ScrollToTopButton from "@/components/ui/ScrollTopButton";
 import FloatingChromite from "@/components/ui/FloatingChromite";
 import { motion } from "framer-motion";
 import Blogs from "./blogs/page";
+import WhatsAppButton from "@/components/ui/WhatsappButton";
 
 export default function HomePage() {
   return (
@@ -38,7 +39,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FloatingChromite />
+      {/* <FloatingChromite /> */}
 
       <section id="about">
         <About />
@@ -63,7 +64,7 @@ export default function HomePage() {
       <section id="WorkWithUs">
         <WorkWithUs />
       </section>
-
+      <WhatsAppButton />
       <ContactModal />
 
       <section>

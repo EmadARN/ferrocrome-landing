@@ -73,7 +73,10 @@ export default function About() {
   };
 
   return (
-    <section className="relative mx-auto px-6 py-24 bg-gradient-to-br from-gray-900 via-gray-950 to-black overflow-hidden text-gray-300">
+    <section
+      style={{ background: "var(--color-about-bg)" }}
+      className="relative mx-auto px-6 py-24  overflow-hidden text-gray-300"
+    >
       {/* اشکال پس‌زمینه */}
       <motion.div
         animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
@@ -96,17 +99,27 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-6 order-1 lg:order-2"
           >
-            <h2 className="text-2xl md:text-4xl font-extrabold text-[#c76700] tracking-tight">
+            <h2
+              style={{ color: "var(--color-title)" }}
+              className="text-2xl md:text-4xl font-extrabold  tracking-tight"
+            >
               درباره ما
             </h2>
 
-            <p className="text-lg text-gray-300 leading-relaxed">
-              صنایع فروکروم با بیش از سه دهه تجربه، پیشرو در تولید و صادرات
-              فروکروم است. ما با استفاده از فناوری مدرن و نیروی متخصص، محصولاتی
-              با کیفیت بالا و قابل اعتماد ارائه می‌کنیم.
+            <p
+              style={{ color: "var(--color-text)" }}
+              className="text-lg  leading-relaxed"
+            >
+              شرکت ذوب فام سپند با سرمایه گذاری صد در صد خارجی از مجموع شرکت های
+              هلدینگ YingHai می باشد که در مرداد ماه 1404 با حضور استاندار محترم
+              استان کرمان و سایر مسئولین کلنگ احداث کارخانه در زمین اختصاص یافته
+              در شهرستان جیرفت زده شد.
             </p>
 
-            <p className="text-lg text-gray-400 leading-relaxed">
+            <p
+              style={{ color: "var(--color-text-muted)" }}
+              className="text-lg  leading-relaxed"
+            >
               مأموریت ما تولید فروکروم با بالاترین خلوص و استحکام است تا نیازهای
               صنایع فولاد و آلیاژسازی در سراسر جهان برآورده شود.
             </p>
@@ -114,16 +127,28 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
               {stats.map((stat, idx) => (
                 <motion.div
+                  style={{
+                    backgroundColor: "var(--color-card-bg)",
+                    borderColor: "var(--color-card-border)",
+                    boxShadow: "var(--color-card-shadow)",
+                  }}
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.2 }}
-                  className="bg-gray-800/20 backdrop-blur-md p-6 rounded-md shadow-lg border border-gray-600 hover:scale-105 transition-transform cursor-default"
+                  className="backdrop-blur-md p-6 rounded-md shadow-lg hover:scale-105 transition-transform cursor-default"
                 >
-                  <div className={`text-xl md:text-3xl font-bold ${stat.color} mb-2`}>
+                  <div
+                    className={`text-xl md:text-3xl font-bold ${stat.color} mb-2`}
+                  >
                     {stat.value}
                   </div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                  <div
+                    style={{ color: "var(--color-text)" }}
+                    className="text-gray-400 text-sm"
+                  >
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -132,7 +157,8 @@ export default function About() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mt-10 border-l-4 border-[#a15300] pl-5 italic text-gray-400"
+              style={{ color: "var(--color-about-text-secondary)" }}
+              className="mt-10 border-l-4 border-[#a15300] pl-5 italic "
             >
               "کیفیت نتیجه تخصص، نوآوری و سه دهه تجربه است."
             </motion.div>
