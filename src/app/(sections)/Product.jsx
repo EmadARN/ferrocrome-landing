@@ -71,8 +71,7 @@ export default function ProductsWithModal() {
           style={{ color: "var(--color-text-muted)" }}
           className="mb-16 text-[12px] md:text-lg"
         >
-          ما مجموعه‌ای از فروکروم‌های صنعتی را با بالاترین کیفیت و خلوص ارائه
-          می‌دهیم تا نیازهای مختلف صنایع فولاد و آلیاژسازی را برطرف کنیم.
+  ما در حال راه اندازی خط تولید محصولات زیر هستیم تا نیازهای مختلف صنایع فولاد و آلیاژسازی را برطرف کنیم 
         </motion.p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -145,7 +144,7 @@ export default function ProductsWithModal() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md"
             style={{
-              backgroundColor: "var(--color-backdrop)", // بک‌دراپ توکنی شده
+              backgroundColor: "var(--color-backdrop)",
             }}
             onClick={() => setSelectedProduct(null)}
           >

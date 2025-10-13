@@ -110,13 +110,14 @@ export default function About() {
               style={{ color: "var(--color-text)" }}
               className="text-lg  leading-relaxed"
             >
-              صنایع فروکروم با بیش از سه دهه تجربه، پیشرو در تولید و صادرات
-              فروکروم است. ما با استفاده از فناوری مدرن و نیروی متخصص، محصولاتی
-              با کیفیت بالا و قابل اعتماد ارائه می‌کنیم.
+              شرکت ذوب فام سپند با سرمایه گذاری صد در صد خارجی از مجموع شرکت های
+              هلدینگ YingHai می باشد که در مرداد ماه 1404 با حضور استاندار محترم
+              استان کرمان و سایر مسئولین کلنگ احداث کارخانه در زمین اختصاص یافته
+              در شهرستان جیرفت زده شد.
             </p>
 
             <p
-              style={{ color: "var(--color-about-text-secondary)" }}
+              style={{ color: "var(--color-text-muted)" }}
               className="text-lg  leading-relaxed"
             >
               مأموریت ما تولید فروکروم با بالاترین خلوص و استحکام است تا نیازهای
@@ -142,8 +143,11 @@ export default function About() {
                   >
                     {stat.value}
                   </div>
-                  <div style={{color:"var(--color-text)"}} className="text-gray-400 text-sm">{stat.label}
-
+                  <div
+                    style={{ color: "var(--color-text)" }}
+                    className="text-gray-400 text-sm"
+                  >
+                    {stat.label}
                   </div>
                 </motion.div>
               ))}

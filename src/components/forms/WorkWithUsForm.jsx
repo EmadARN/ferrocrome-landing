@@ -49,7 +49,7 @@ export default function ContactForm() {
     }
   };
 
-  const saleOptions = ["خرید فروکروم", "فروش فروکروم", "سایر"];
+  const saleOptions = ["تامین مواد اولیه(کلوخه کرومیت)", "سایر"];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden  bg-[var(--color-section-bg)] transition-colors">
@@ -78,7 +78,7 @@ export default function ContactForm() {
           فرم درخواست همکاری
         </h1>
         <p className="text-center text-[var(--color-text-muted)] mb-6 sm:mb-8 font-light text-[0.65rem] sm:text-base">
-          بیایید پروژه بعدی شما را بررسی کنیم
+          ارتباط با کارشناسان بازرگانی
         </p>
 
         <form
@@ -90,7 +90,7 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
-                نام کامل *
+                نام و نام خانوادگی*
               </label>
               <input
                 type="text"
@@ -127,7 +127,7 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label className="block text-[var(--color-input-label)] text-right mb-1 sm:mb-2 text-sm sm:text-base">
-                نام شرکت *
+                نام شرکت / سازمان*
               </label>
               <input
                 type="text"
