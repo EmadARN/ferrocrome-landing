@@ -14,7 +14,8 @@
   /* text */
   --color-text: #1f1f1f;
   --color-btn-text: #ffffff;
-  --color-about-text-secondary: #5e4b36;
+  --color-icon-text:#ffffff
+  --color-about-text-secondary: #2a2a2a;
   --color-navlink-text: #2a2a2a;
   --color-btn-secondary-text: #000000;
   --color-tab-text: #333333;
@@ -73,7 +74,7 @@
   --color-navlinkHover: #c76700;
 
   /* footer */
-   --color-footer-bg: #f9f9f9;
+  --color-footer-bg: #f9f9f9;
   --color-footer-text: #333;
   --color-footer-heading: #111;
   --color-footer-muted: #555;
@@ -101,6 +102,7 @@
   /* btns */
   --color-btn-bg: #b35c00;
   --color-btn-text: #ffffff;
+  --color-icon-text:#111111
   --color-btn-hover-bg: linear-gradient(to right, #914800, #7a3c00);
   --color-btn-border: rgba(255, 255, 255, 0.1);
   --color-btn-hover-border: rgba(255, 255, 255, 0.25);
@@ -155,7 +157,7 @@
   --color-navlinkHover: #ffc107;
 
   /* footer */
-   --color-footer-bg: #0d0d0d;
+  --color-footer-bg: #0d0d0d;
   --color-footer-text: #ccc;
   --color-footer-heading: #fff;
   --color-footer-muted: #888;

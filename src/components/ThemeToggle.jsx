@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggleSwitch() {
   const { theme, setTheme, systemTheme } = useTheme();
@@ -16,36 +17,24 @@ export default function ThemeToggleSwitch() {
   if (!mounted) return null;
 
   const current = theme === "system" ? systemTheme : theme;
+  const isDark = current === "dark";
 
   return (
-    <div
-      className="flex rounded-lg overflow-hidden border border-[var(--color-border)]"
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full  
+                 transition-all duration-300 hover:scale-105 hover:bg-[var(--color-hover-bg)]"
       style={{
         backgroundColor: "var(--color-toggle-bg)",
+        color: "var(--color-navlink-text)",
       }}
     >
-      <button
-        onClick={() => setTheme("light")}
-        className={`px-4 py-2 text-sm font-medium w-full cursor-pointer transition-all 
-          ${
-            current === "light"
-              ? "bg-[var(--color-btn-bg)] text-[var(--color-btn-text)]"
-              : "text-[var(--color-navlink-text)] hover:bg-[var(--color-hover-bg)]"
-          }`}
-      >
-        روشن
-      </button>
-      <button
-        onClick={() => setTheme("dark")}
-        className={`px-4 py-2 text-sm font-medium w-full cursor-pointer transition-all 
-          ${
-            current === "dark"
-              ? "bg-[var(--color-btn-bg)] text-[var(--color-btn-text)]"
-              : "text-[var(--color-navlink-text)] hover:bg-[var(--color-hover-bg)]"
-          }`}
-      >
-        تاریک
-      </button>
-    </div>
+      {isDark ? (
+        <Sun size={18} className="text-[var(--color-icon-text)] " />
+      ) : (
+        <Moon size={18} className="text-[var(--color-icon-text)]  " />
+      )}
+    </button>
   );
 }
