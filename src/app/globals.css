@@ -449,3 +449,46 @@ body {
     font-size: 14px;
   }
 }
+
+/* TABLE */
+
+.tiptap table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tiptap table td,
+.tiptap table th {
+  border: 1px solid #ccc;
+  padding: 6px;
+  position: relative;
+}
+
+.tiptap table td::after,
+.tiptap table th::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 8px 0;
+}
+
+.prose [data-align="center"] {
+  text-align: center;
+}
+.prose [data-align="right"] {
+  text-align: right;
+}
+.prose [data-align="left"] {
+  text-align: left;
+}
