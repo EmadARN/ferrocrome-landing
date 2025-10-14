@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import LoadingState from "@/components/ui/LoadingState";
+import { FiFileText, FiEdit3, FiMessageSquare } from "react-icons/fi";
 
 export default function DashboardPage() {
   const [data, setData] = useState(null);
@@ -38,7 +39,7 @@ export default function DashboardPage() {
       weeklyChart = new Chart(weeklyBlogsRef.current, {
         type: "line",
         data: {
-          labels: data.weeklyPosts.map((w) => w.week || ""), // تاریخ واقعی هفته
+          labels: data.weeklyPosts.map((w) => w.week || ""),
           datasets: [
             {
               label: "بلاگ و اخبار",
@@ -127,29 +128,49 @@ export default function DashboardPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500">
-          <p className="text-gray-200 text-sm font-medium mb-1">
-            تعداد بلاگ و اخبار
-          </p>
-          <p className="text-3xl font-bold text-gray-300">
-            {data.postsCount || 0}
-          </p>
+        {/* بلاگ و اخبار */}
+        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+          <div className="text-blue-500 text-3xl">
+            <FiEdit3 />
+          </div>
+          <div>
+            <p className="text-gray-200 text-sm font-medium mb-1">
+              تعداد بلاگ و اخبار
+            </p>
+            <p className="text-3xl font-bold text-gray-300">
+              {data.postsCount || 0}
+            </p>
+          </div>
         </div>
-        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500">
-          <p className="text-gray-200 text-sm font-medium mb-1">
-            تعداد گزارش‌ها
-          </p>
-          <p className="text-3xl font-bold text-gray-300">
-            {data.reportsCount || 0}
-          </p>
+
+        {/* گزارش‌ها */}
+        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+          <div className="text-green-500 text-3xl">
+            <FiFileText />
+          </div>
+          <div>
+            <p className="text-gray-200 text-sm font-medium mb-1">
+              تعداد گزارش‌ها
+            </p>
+            <p className="text-3xl font-bold text-gray-300">
+              {data.reportsCount || 0}
+            </p>
+          </div>
         </div>
-        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500">
-          <p className="text-gray-200 text-sm font-medium mb-1">
-            تعداد دیدگاه‌ها
-          </p>
-          <p className="text-3xl font-bold text-gray-300">
-            {data.commentsCount || 0}
-          </p>
+
+        {/* دیدگاه‌ها */}
+        <div className="bg-gray-800 rounded-md p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+          <div className="text-yellow-500 text-3xl">
+            <FiMessageSquare />
+          </div>
+          <div>
+            <p className="text-gray-200 text-sm font-medium mb-1">
+              تعداد دیدگاه‌ها
+            </p>
+            <p className="text-3xl font-bold text-gray-300">
+              {data.commentsCount || 0}
+            </p>
+          </div>
         </div>
       </div>
 

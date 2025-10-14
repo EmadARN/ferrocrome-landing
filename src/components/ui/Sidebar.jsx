@@ -8,9 +8,10 @@ import {
   AiOutlineFileText,
   AiOutlineMessage,
   AiOutlineAlert,
+  AiOutlineClose,
 } from "react-icons/ai";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const pathname = usePathname();
 
   const items = [
@@ -33,10 +34,19 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="fixed right-4 top-9 bg-gray-800 text-white shadow-xl rounded-md w-64 p-4">
+    <aside className="fixed right-4 top-9 bg-gray-800 text-white shadow-xl rounded-md w-64 p-4 z-50">
       {/* Header */}
-      <div className="flex items-center justify-center mb-4">
+      <div className="flex items-center justify-between mb-4">
         <span className="text-lg font-bold tracking-wide">پنل مدیریت</span>
+
+        {/* دکمه بستن فقط در موبایل */}
+        <button
+          onClick={onClose}
+          className="md:hidden p-1 hover:bg-gray-700 rounded cursor-pointer"
+          aria-label="بستن منو"
+        >
+          <AiOutlineClose size={20} />
+        </button>
       </div>
 
       {/* Menu Items */}
