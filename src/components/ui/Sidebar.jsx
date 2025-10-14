@@ -33,7 +33,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="fixed right-4 top-9 bg-gray-800 text-white shadow-xl rounded-2xl w-64 p-4">
+    <aside className="fixed right-4 top-9 bg-gray-800 text-white shadow-xl rounded-md w-64 p-4">
       {/* Header */}
       <div className="flex items-center justify-center mb-4">
         <span className="text-lg font-bold tracking-wide">پنل مدیریت</span>
@@ -51,7 +51,7 @@ const Sidebar = () => {
             >
               <Link
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${
+                className={`flex items-center gap-3 px-4 py-2 rounded-sm transition-colors ${
                   active
                     ? "bg-yellow-800 font-semibold shadow-md"
                     : "hover:bg-gray-700"

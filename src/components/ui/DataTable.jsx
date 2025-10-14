@@ -9,7 +9,7 @@ export default function DataTable({
   data,
   searchKey,
   itemsPerPage = 10,
-  searchInput,
+  searchInput = true,
 }) {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,14 +49,16 @@ export default function DataTable({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white/10 backdrop-blur-md rounded-2xl shadow-lg border border-white/20">
-        <table className="min-w-full divide-y divide-white/10 text-center">
-          <thead className="bg-white/5 sticky top-0">
+      <div className="overflow-x-auto rounded-md shadow-lg border border-white/20 bg-white/10 backdrop-blur-md scrollbar-thin scrollbar-thumb-gray-500/40 scrollbar-track-gray-900/20">
+        <table className="min-w-[600px] w-full divide-y divide-white/10 text-center">
+          <thead className="bg-white/5 sticky top-0 z-10">
             <tr>
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`px-4 py-3 font-semibold ${col.className || ""}`}
+                  className={`px-4 py-3 font-semibold whitespace-nowrap ${
+                    col.className || ""
+                  }`}
                 >
                   {col.title}
                 </th>
@@ -78,14 +80,16 @@ export default function DataTable({
               pageData.map((row, index) => (
                 <tr
                   key={row.id || index}
-                  className={`transition-transform transform hover:-translate-y-0.5 cursor-pointer ${
+                  className={`transition-transform transform hover:-translate-y-0.5 ${
                     index % 2 === 0 ? "bg-white/5" : "bg-white/10"
                   } hover:bg-white/20`}
                 >
                   {columns.map((col) => (
                     <td
                       key={col.key}
-                      className={`px-4 py-2 ${col.className || ""}`}
+                      className={`px-4 py-2 whitespace-nowrap ${
+                        col.className || ""
+                      }`}
                     >
                       {col.render
                         ? col.render(row)
