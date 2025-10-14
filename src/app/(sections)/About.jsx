@@ -124,28 +124,28 @@ export default function About() {
               صنایع فولاد و آلیاژسازی در سراسر جهان برآورده شود.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
+            <div className="flex flex-wrap justify-between  gap-4 pt-8">
               {stats.map((stat, idx) => (
                 <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.2 }}
                   style={{
                     backgroundColor: "var(--color-card-bg)",
                     borderColor: "var(--color-card-border)",
                     boxShadow: "var(--color-card-shadow)",
                   }}
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.2 }}
-                  className="backdrop-blur-md p-6 rounded-md shadow-lg hover:scale-105 transition-transform cursor-default"
+                  className="flex-1 min-w-[30%] sm:min-w-[28%] p-4 sm:p-6 rounded-md shadow-lg hover:scale-105 transition-transform cursor-default"
                 >
                   <div
-                    className={`text-xl md:text-3xl font-bold ${stat.color} mb-2`}
+                    className={`text-lg sm:text-2xl font-bold ${stat.color} mb-1 sm:mb-2`}
                   >
                     {stat.value}
                   </div>
                   <div
                     style={{ color: "var(--color-text)" }}
-                    className="text-gray-400 text-sm"
+                    className="text-xs sm:text-sm"
                   >
                     {stat.label}
                   </div>

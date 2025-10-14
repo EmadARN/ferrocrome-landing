@@ -120,13 +120,13 @@ export default function ProductsWithModal() {
               <div className="p-6 text-right relative z-10">
                 <h3
                   style={{ color: "var(--color-title-secondary)" }}
-                  className="text-2xl font-bold mb-3"
+                  className="text-lg md:text-2xl font-bold mb-3"
                 >
                   {product.name}
                 </h3>
                 <p
                   style={{ color: "var(--color-text-secondary)" }}
-                  className="mb-4 leading-relaxed"
+                  className="mb-4 leading-relaxed text-sm md:text-lg"
                 >
                   {product.description}
                 </p>

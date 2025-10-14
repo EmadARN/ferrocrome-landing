@@ -48,16 +48,16 @@ export default function Hero() {
           className="text-2xl md:text-5xl font-extrabold leading-tight text-white"
         >
           <span className="block">پروژه احداث کارخانه فروکروم</span>
-          <span className="text-2xl md:text-4xl block bg-clip-text text-transparent bg-gradient-to-r from-[#f6b76b] via-[#e8a24d] to-[#c76700]">
+          <span className="text-xl md:text-4xl block bg-clip-text text-transparent bg-gradient-to-r from-[#f6b76b] via-[#e8a24d] to-[#c76700]">
             با سرمایه‌گذاری خارجی
           </span>
-          <span className="block mt-2 text-lg md:text-xl font-medium text-gray-200">
+          <span className="block mt-2 text-sm md:text-xl font-medium text-gray-200">
             در استان کرمان / شهرستان جیرفت
           </span>
         </motion.h1>
 
         {/* --- Badgeها --- */}
-        <div className="flex flex-wrap gap-4 justify-center mt-6 text-white">
+        <div className="flex flex-wrap gap-4 justify-center  mt-6 text-white ">
           {[
             "میزان سرمایه‌گذاری: 30 میلیون دلار",
             "ظرفیت تولید: 45 هزار تن سالانه",
@@ -68,14 +68,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
-              className="flex items-center gap-2 font-medium"
+              className="w-full md:w-auto flex items-center gap-2 font-medium  text-[12px]"
             >
               <span
-                className="w-3 h-3 rounded-full"
+                className="w-1 h-1 md:w-3 md:h-3 rounded-full "
                 style={{
                   backgroundColor:
                     i === 0
-                      ? "var(--color-badge-1)"
+                      ? "var(--color-badge-1) "
                       : i === 1
                       ? "var(--color-badge-2)"
                       : "var(--color-badge-3)",

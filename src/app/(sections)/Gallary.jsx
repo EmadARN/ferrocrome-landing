@@ -36,10 +36,10 @@ export default function Gallary() {
 
         {/* فلش‌های ناوبری */}
         <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
-          <div className="swiper-button-prev-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
+          <div className="swiper-button-prev-custom pointer-events-auto bg-[#00000050] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❮
           </div>
-          <div className="swiper-button-next-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
+          <div className="swiper-button-next-custom pointer-events-auto bg-[#00000050]  text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❯
           </div>
         </div>
