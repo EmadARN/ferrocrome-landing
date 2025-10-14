@@ -24,7 +24,7 @@ async function main() {
     create: {
       email: "user@example.com",
       password: userPassword,
-      name: "User Test",
+      npm 
     },
   });
 

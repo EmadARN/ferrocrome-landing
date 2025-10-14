@@ -1,41 +1,21 @@
 "use client";
-import { useRef } from "react";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 const products = [
-  {
-    id: 1,
-    name: "فروکروم پرکربن",
-    image: "/images/high-carbon-ferrochrome.webp",
-  },
-  {
-    id: 2,
-    name: "فروکروم کم‌کربن",
-    image: "/images/low-carbon-ferrochrome.jpg",
-  },
-  {
-    id: 3,
-    name: "فروکروم میکروکربن",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
-  {
-    id: 4,
-    name: "فروکروم سیلیکون",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
-  {
-    id: 5,
-    name: "فروکروم نیتروژن‌دار",
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
+  { id: 1, image: "/images/gallery/1.jpg" },
+  { id: 2, image: "/images/gallery/2.jpg" },
+  { id: 3, image: "/images/gallery/3.jpg" },
+  { id: 4, image: "/images/gallery/4.jpg" },
+  { id: 5, image: "/images/gallery/5.jpg" },
+  { id: 6, image: "/images/gallery/7.jpg" },
 ];
 
 export default function ProductCarousel() {
-  const paginationRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   return (
     <section
@@ -43,14 +23,14 @@ export default function ProductCarousel() {
         background: "var(--color-about-bg)",
         color: "var(--color-text)",
       }}
-      className="py-20  relative"
+      className="py-20 relative"
     >
       <div className="container mx-auto px-6 text-center relative">
         <h2
           style={{ color: "var(--color-title)" }}
-          className="text-2xl md:text-4xl font-bold  mb-8"
+          className="text-2xl md:text-4xl font-bold mb-8"
         >
-          تصاویر محصولات
+          گالری تصاویر
         </h2>
 
         {/* فلش‌های ناوبری */}
@@ -64,7 +44,7 @@ export default function ProductCarousel() {
         </div>
 
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
           loop={true}
@@ -72,16 +52,6 @@ export default function ProductCarousel() {
           navigation={{
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
-          }}
-          // pagination={{
-          //   el: paginationRef.current,
-          //   clickable: true,
-          //   renderBullet: (index, className) => {
-          //     return `<span class="${className} w-4 h-4 md:w-5 md:h-5 rounded-full inline-block cursor-pointer bg-[#c76700]"></span>`;
-          //   },
-          // }}
-          onBeforeInit={(swiper) => {
-            swiper.params.pagination.el = paginationRef.current;
           }}
           breakpoints={{
             640: { slidesPerView: 1 },
@@ -92,26 +62,44 @@ export default function ProductCarousel() {
           {products.map((product) => (
             <SwiperSlide key={product.id}>
               <div
+                onClick={() => setSelectedImage(product.image)}
                 style={{ backgroundColor: "var(--color-card-bg)" }}
-                className=" backdrop-blur-lg rounded-md overflow-hidden  hover:scale-105 transition-transform duration-300"
+                className="backdrop-blur-lg rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer"
               >
                 <img
                   src={product.image}
-                  alt={product.name}
-                  className="object-cover w-full h-64 hover:scale-110 transition-transform duration-500"
+                  alt="gallery"
+                  className="object-cover w-full h-96 hover:scale-110 transition-transform duration-500"
                 />
-                <div className="p-4 text-right">
-                  <h3
-                    style={{ color: "var(--color-title-secondary)" }}
-                    className="text-md font-bold text-center text-white"
-                  >
-                    {product.name}
-                  </h3>
-                </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* نمایش بزرگ تصویر */}
+        {selectedImage && (
+          <div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div
+              className="relative max-w-4xl w-[90%] max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-3 right-3 text-white bg-black/60 hover:bg-black/80 rounded-full w-8 h-8 flex items-center justify-center text-lg"
+              >
+                ×
+              </button>
+              <img
+                src={selectedImage}
+                alt="Selected"
+                className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
