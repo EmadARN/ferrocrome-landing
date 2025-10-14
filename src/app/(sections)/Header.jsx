@@ -5,21 +5,28 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeToggleSwitch from "@/components/ThemeToggle";
 
-const navItems = [
-  { label: "خانه", href: "#hero" },
-  { label: "محصولات", href: "#product" },
-  { label: "خدمات", href: "#whyus" },
-  { label: "درباره ما", href: "#about" },
-];
-
-export default function Header() {
+export default function Header({ blogPath }) {
   const [showHeader, setShowHeader] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerOpacity, setHeaderOpacity] = useState(0.8);
   const drawerRef = useRef(null);
 
-  // مدیریت نمایش هدر و opacity هنگام اسکرول
+  const navItems = [
+    { label: "خانه", href: "#hero" },
+    { label: "محصولات", href: "#product" },
+    { label: "خدمات", href: "#whyus" },
+    { label: "درباره ما", href: "#about" },
+  ];
+
+  // اگر blogPath وجود داشت، href ها تغییر کنن
+  const processedNavItems = navItems.map((item) => {
+    if (blogPath) return { ...item, href: "/" }; // همه لینک‌ها به خانه هدایت میشن
+    return item;
+  });
+
+  const workWithUsHref = blogPath ? "/" : "#WorkWithUs"; // تغییر href دکمه
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -27,7 +34,7 @@ export default function Header() {
         setShowHeader(false);
       } else {
         setShowHeader(true);
-        setHeaderOpacity(1); // وقتی هدر ظاهر شد، کامل دیده شود
+        setHeaderOpacity(1);
       }
       setLastScroll(currentScroll);
     };
@@ -51,10 +58,10 @@ export default function Header() {
               backgroundColor: `rgba(var(--color-bg-navbar), ${headerOpacity})`,
             }}
           >
-            <div className="container  px-6 lg:mr-24 flex items-center justify-between h-24 md:h-28 lg:h-32 relative z-10">
+            <div className="container px-6 lg:mr-24 flex items-center justify-between h-24 md:h-28 lg:h-32 relative z-10">
               {/* منوی دسکتاپ */}
               <nav className="hidden lg:flex items-center space-x-4">
-                {navItems.map((item) => (
+                {processedNavItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
@@ -78,13 +85,13 @@ export default function Header() {
                   {/* متن دسکتاپ */}
                   <div className="flex items-center justify-center space-x-4">
                     <div className="hidden md:block w-12 h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
-                    <p className="text-textBody font-rajdhani  text-[0.7rem] md:text-base tracking-widest">
+                    <p className="text-textBody font-rajdhani text-[0.7rem] md:text-base tracking-widest">
                       تولید کننده و تامین کننده مواد اولیه فولادی
                     </p>
-                    <div className="w-12 hidden md:block  h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
+                    <div className="w-12 hidden md:block h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
                   </div>
 
-                  <p className=" text-metallic-gray font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center">
+                  <p className="text-metallic-gray font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center">
                     Ferrocrome Industries Co
                   </p>
                 </div>
@@ -93,7 +100,7 @@ export default function Header() {
               {/* دکمه همکاری دسکتاپ */}
               <div className="hidden lg:flex items-center gap-4">
                 <ThemeToggleSwitch />
-                <Link href="#WorkWithUs">
+                <Link href={workWithUsHref}>
                   <button
                     style={{
                       backgroundColor: "var(--color-btn-bg)",
@@ -167,7 +174,7 @@ export default function Header() {
             </button>
 
             {/* لینک‌ها */}
-            {navItems.map((item) => (
+            {processedNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -183,8 +190,8 @@ export default function Header() {
               <ThemeToggleSwitch />
             </div>
 
-            {/* دکمه همکاری */}
-            <Link href="#WorkWithUs">
+            {/* دکمه همکاری موبایل */}
+            <Link href={workWithUsHref}>
               <button className="mt-4 cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg hover:btnShadow transition-all duration-300">
                 درخواست همکاری
               </button>
