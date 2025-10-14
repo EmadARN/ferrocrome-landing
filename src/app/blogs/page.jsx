@@ -30,7 +30,13 @@ const Blogs = () => {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-14">
+    <section
+      style={{
+        background: "var(--color-about-bg)",
+        color: "var(--color-text)",
+      }}
+      className=" mx-auto px-4 py-14 pb-20"
+    >
       <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
         آخرین مقالات
       </h2>
@@ -38,6 +44,7 @@ const Blogs = () => {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {blogs.map((blog) => (
           <AnimatedCard
+       
             key={blog.id}
             title={blog.title}
             summary={blog.summary}

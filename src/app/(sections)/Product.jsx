@@ -71,7 +71,8 @@ export default function ProductsWithModal() {
           style={{ color: "var(--color-text-muted)" }}
           className="mb-16 text-[12px] md:text-lg"
         >
-  ما در حال راه اندازی خط تولید محصولات زیر هستیم تا نیازهای مختلف صنایع فولاد و آلیاژسازی را برطرف کنیم 
+          ما در حال راه اندازی خط تولید محصولات زیر هستیم تا نیازهای مختلف صنایع
+          فولاد و آلیاژسازی را برطرف کنیم
         </motion.p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -154,8 +155,8 @@ export default function ProductsWithModal() {
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
               style={{
-                backgroundColor: "var(--color-card-bg)", 
-                borderColor: "var(--color-card-border)", 
+                backgroundColor: "var(--color-card-bg)",
+                borderColor: "var(--color-card-border)",
                 boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
               }}
               className="rounded-2xl max-w-lg w-full p-6 relative text-right border"
