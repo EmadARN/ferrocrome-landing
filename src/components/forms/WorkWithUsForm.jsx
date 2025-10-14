@@ -70,8 +70,8 @@ export default function ContactForm() {
       {/* فرم */}
       <div
         className="relative z-10 w-full sm:max-w-2xl
-    bg-[var(--color-form-bg)] dark:bg-[var(--color-form-bg-dark)] 
-    backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl border border-[var(--color-form-border)] dark:border-[var(--color-form-border-dark)]
+ 
+    backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl 
     transition-colors"
       >
         <h1 className="text-center text-[var(--color-title)] text-[15px] sm:text-3xl font-bold mb-2 drop-shadow-lg">

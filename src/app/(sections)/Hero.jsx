@@ -97,7 +97,7 @@ export default function Hero() {
               transition-all duration-300
             "
           >
-           درباره ی ما
+            درباره ی ما
           </Link>
 
           <Link

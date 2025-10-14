@@ -143,7 +143,7 @@ export default function ProductsWithModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-lg"
             style={{
               backgroundColor: "var(--color-backdrop)",
             }}
@@ -159,7 +159,7 @@ export default function ProductsWithModal() {
                 borderColor: "var(--color-card-border)",
                 boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
               }}
-              className="rounded-2xl max-w-lg w-full p-6 relative text-right border"
+              className="rounded-md max-w-lg w-full p-6 relative text-right border"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -180,7 +180,7 @@ export default function ProductsWithModal() {
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
-                className="w-full h-64 object-cover rounded-xl mb-4"
+                className="w-full h-64 object-cover rounded-sm mb-4"
               />
 
               <p style={{ color: "var(--color-text)" }} className="mb-4">
