@@ -6,9 +6,12 @@ import BlogModal from "@/components/blogs/BlogModal";
 import ConfirmModal from "@/components/blogs/ConfirmModal";
 import SearchInput from "@/components/ui/SearchInput";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import LoadingState from "@/components/ui/LoadingState";
+import EmptyState from "@/components/ui/EmptyState";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
@@ -17,9 +20,10 @@ export default function Blogs() {
   const [editingBlog, setEditingBlog] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
-  // Fetch blogs
+  // ✅ دریافت بلاگ‌ها از API
   const fetchBlogs = async () => {
     try {
+      setLoading(true);
       const res = await fetch(
         `/api/blogs?search=${encodeURIComponent(search)}&page=${page}&limit=10`
       );
@@ -30,6 +34,8 @@ export default function Blogs() {
       console.error(err);
       setBlogs([]);
       setTotalPages(1);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,8 +52,12 @@ export default function Blogs() {
     }
   };
 
+  // ✅ حالت‌های لودینگ و خالی
+  if (loading) return <LoadingState text="در حال بارگذاری بلاگ‌ها..." />;
+  if (!blogs.length) return <EmptyState text="هیچ بلاگی یافت نشد." />;
+
   return (
-    <div className="p-4 rounded shadow bg-gray-900 text-white">
+    <div className="p-4 rounded shadow bg-gray-900 text-white mt-12">
       {/* Search & Add */}
       <div className="flex justify-between mb-4">
         <SearchInput
@@ -80,7 +90,8 @@ export default function Blogs() {
           {
             key: "createdAt",
             title: "تاریخ",
-            render: (row) => new Date(row.createdAt).toLocaleDateString(),
+            render: (row) =>
+              new Date(row.createdAt).toLocaleDateString("fa-IR"),
           },
           {
             key: "actions",
@@ -109,7 +120,7 @@ export default function Blogs() {
       />
 
       {/* Pagination */}
-      <div className="mt-4 flex justify-center items-center gap-2">
+      <div className="mt-4 flex justify-end items-center gap-2">
         <button
           disabled={page <= 1}
           onClick={() => setPage(page - 1)}

@@ -11,8 +11,6 @@ const Blogs = () => {
     async function fetchBlogs() {
       try {
         const data = await getBlogs();
-
-        // اگر data.blogs هست از اون استفاده کن، در غیر اینصورت خود data
         setBlogs(
           Array.isArray(data.blogs)
             ? data.blogs
@@ -30,24 +28,26 @@ const Blogs = () => {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-14">
-      <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
-        آخرین مقالات
-      </h2>
+    <div className="flex flex-col min-h-screen w-full">
+      <main className="flex-1 w-full px-4 py-14">
+        <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+          آخرین مقالات
+        </h2>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {blogs.map((blog) => (
-          <AnimatedCard
-            key={blog.id}
-            title={blog.title}
-            summary={blog.summary}
-            createdAt={blog.createdAt}
-            image={blog.image}
-            href={`/blogs/${blog.id}`}
-          />
-        ))}
-      </div>
-    </section>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full">
+          {blogs.map((blog) => (
+            <AnimatedCard
+              key={blog.id}
+              title={blog.title}
+              summary={blog.summary}
+              createdAt={blog.createdAt}
+              image={blog.image}
+              href={`/blogs/${blog.id}`}
+            />
+          ))}
+        </div>
+      </main>
+    </div>
   );
 };
 
