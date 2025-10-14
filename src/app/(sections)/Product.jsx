@@ -164,16 +164,14 @@ export default function ProductsWithModal() {
             >
               <button
                 onClick={() => setSelectedProduct(null)}
-                style={{
-                  color: "var(--color-title)", // رنگ دکمه بستن
-                }}
+                style={{ color: "var(--color-title-secondary)" }}
                 className="absolute cursor-pointer top-4 left-4 hover:text-[var(--color-title-hover)] text-2xl"
               >
                 &times;
               </button>
 
               <h3
-                style={{ color: "var(--color-title)" }}
+                style={{ color: "var(--color-title-secondary)" }}
                 className="text-xl font-bold mb-4"
               >
                 {selectedProduct.name}
