@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { toast, Toaster } from "react-hot-toast";
+
 const RichTextEditor = dynamic(() => import("@/components/ui/RichTextEditor"), {
   ssr: false,
 });
@@ -15,6 +16,18 @@ export default function BlogModal({ blog, onClose }) {
     image: null,
   });
   const [content, setContent] = useState("");
+  const modalRef = useRef(null);
+
+  // بستن مودال با کلیک بیرون از باکس
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
 
   useEffect(() => {
     if (blog) {
@@ -57,10 +70,15 @@ export default function BlogModal({ blog, onClose }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="bg-gray-800 rounded-md shadow-lg w-11/12 md:w-2/3 p-6 max-h-[90vh] overflow-auto">
+      {/* باکس مودال */}
+      <div
+        ref={modalRef}
+        className="bg-gray-800 rounded-md shadow-lg w-11/12 md:w-2/3 p-6 max-h-[90vh] overflow-auto"
+      >
         <h2 className="text-2xl font-bold mb-4">
           {blog ? "ویرایش بلاگ" : "افزودن بلاگ جدید"}
         </h2>
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             name="title"
@@ -97,10 +115,12 @@ export default function BlogModal({ blog, onClose }) {
               setFormData({ ...formData, image: e.target.files[0] })
             }
           />
+
           <div>
             <label className="block mb-2 font-semibold">محتوا:</label>
             <RichTextEditor content={content} setContent={setContent} />
           </div>
+
           <div className="flex justify-end gap-2">
             <button
               type="button"

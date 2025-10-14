@@ -29,7 +29,11 @@ export default function DashboardUI({ children }) {
               transition={{ type: "spring", stiffness: 120 }}
               className="fixed top-0 right-0 z-50 w-72 h-full"
             >
-              <Sidebar isOpen={true} activePath={pathname} />
+              <Sidebar
+                isOpen={true}
+                activePath={pathname}
+                onClose={() => setSidebarOpen(false)}
+              />
             </motion.div>
 
             {/* بک‌دراپ نیمه شفاف */}
@@ -56,7 +60,7 @@ export default function DashboardUI({ children }) {
         <div className="md:hidden mb-4">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 mt-1 cursor-pointer rounded-md hover:bg-blue-700 transition-colors"
+            className="p-2 mt-1 cursor-pointer rounded-md hover:bg-gray-700 transition-colors"
             aria-label="باز کردن منو"
           >
             <HiOutlineViewBoards size={24} />
