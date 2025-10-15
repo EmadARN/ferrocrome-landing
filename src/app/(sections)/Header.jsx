@@ -159,7 +159,7 @@ export default function Header({ blogPath }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed top-0 left-0 w-full h-[60vh] md:h-[45vh] flex flex-col items-center justify-center z-40 rounded-b-xl shadow-xl pt-28"
+            className="fixed top-0 left-0 w-full h-[50vh]   flex flex-col items-center justify-center z-40 rounded-b-xl shadow-xl pt-10"
             style={{
               backgroundColor: "var(--color-bg-mobile-menu)",
               backdropFilter: "blur(10px)",
@@ -186,13 +186,13 @@ export default function Header({ blogPath }) {
             ))}
 
             {/* Theme Toggle */}
-            <div className="my-4">
+            <div className="my-2">
               <ThemeToggleSwitch />
             </div>
 
             {/* دکمه همکاری موبایل */}
             <Link href={workWithUsHref}>
-              <button className="mt-4 cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg hover:btnShadow transition-all duration-300">
+              <button className=" cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg hover:btnShadow transition-all duration-300">
                 درخواست همکاری
               </button>
             </Link>
