@@ -11,7 +11,7 @@ export const customerRequestSchema = z.object({
     }),
 
   company_name: z.string().min(2, "نام شرکت الزامی است"),
-  sale_type: z.enum(["خرید فروکروم", "فروش فروکروم", "سایر"], {
+  sale_type: z.enum(["تامین مواد اولیه(کلوخه کرومیت)", "سایر"], {
     required_error: "انتخاب نوع درخواست الزامی است",
   }),
   message: z.string().min(5, "پیام خود را وارد کنید"),
