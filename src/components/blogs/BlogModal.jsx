@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { toast, Toaster } from "react-hot-toast";
@@ -16,9 +17,12 @@ export default function BlogModal({ blog, onClose }) {
     image: null,
   });
   const [content, setContent] = useState("");
+  const [editorMounted, setEditorMounted] = useState(false);
   const modalRef = useRef(null);
 
-  // بستن مودال با کلیک بیرون از باکس
+  useEffect(() => setEditorMounted(true), []);
+
+  // بستن مودال با کلیک بیرون
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -29,6 +33,7 @@ export default function BlogModal({ blog, onClose }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  // ست کردن مقادیر هنگام باز کردن ادیت
   useEffect(() => {
     if (blog) {
       setFormData({
@@ -38,7 +43,16 @@ export default function BlogModal({ blog, onClose }) {
         author: blog.author,
         image: null,
       });
-      setContent(blog.content);
+      setContent(blog.content || ""); // اگر content null بود خالی باشه
+    } else {
+      setFormData({
+        title: "",
+        summary: "",
+        category: "",
+        author: "",
+        image: null,
+      });
+      setContent("");
     }
   }, [blog]);
 
@@ -59,18 +73,17 @@ export default function BlogModal({ blog, onClose }) {
         method: blog ? "PUT" : "POST",
         body: form,
       });
-      toast.success("بلاگ ذخیره شد!");
+      toast.success("بلاگ ذخیره شد!", { duration: 3000 });
       onClose();
     } catch (err) {
       console.error(err);
-      toast.error("خطا در ذخیره بلاگ");
+      toast.error("خطا در ذخیره بلاگ", { duration: 3000 });
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <Toaster position="top-right" reverseOrder={false} />
-      {/* باکس مودال */}
       <div
         ref={modalRef}
         className="bg-gray-800 rounded-md shadow-lg w-11/12 md:w-2/3 p-6 max-h-[90vh] overflow-auto"
@@ -118,7 +131,9 @@ export default function BlogModal({ blog, onClose }) {
 
           <div>
             <label className="block mb-2 font-semibold">محتوا:</label>
-            <RichTextEditor content={content} setContent={setContent} />
+            {editorMounted && (
+              <RichTextEditor content={content} setContent={setContent} />
+            )}
           </div>
 
           <div className="flex justify-end gap-2">

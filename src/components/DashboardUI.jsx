@@ -68,8 +68,6 @@ export default function DashboardUI({ children }) {
         </div>
 
         {children}
-
-        <Toaster position="top-right" reverseOrder={false} />
       </motion.div>
     </div>
   );
