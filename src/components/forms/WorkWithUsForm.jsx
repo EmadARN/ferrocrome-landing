@@ -19,13 +19,43 @@ export default function ContactForm() {
     resolver: zodResolver(customerRequestSchema),
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: {
-      sale_type: "خرید فروکروم",
-    },
+    defaultValues: { sale_type: "خرید فروکروم" },
   });
 
+  //  تنظیمات فایل آپلود
+  const allowedFileTypes = [
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "image/jpeg",
+    "image/png",
+  ];
+  const maxFileSize = 10 * 1024 * 1024; // 10MB
+
   const handleFileChange = (e) => {
-    if (e.target.files) setUploadedFiles(Array.from(e.target.files));
+    if (!e.target.files) return;
+
+    const files = Array.from(e.target.files);
+    const validFiles = [];
+
+    files.forEach((file) => {
+      if (!allowedFileTypes.includes(file.type)) {
+        toast.error(`${file.name} فرمت مجاز ندارد!`);
+        return;
+      }
+      if (file.size > maxFileSize) {
+        toast.error(`${file.name} بیش از 10MB است!`);
+        return;
+      }
+      validFiles.push(file);
+    });
+
+    if (validFiles.length > 1) {
+      toast.error("فقط یک فایل می‌توانید آپلود کنید");
+      validFiles.splice(1);
+    }
+
+    setUploadedFiles(validFiles);
   };
 
   const onSubmit = async (data) => {
@@ -52,7 +82,7 @@ export default function ContactForm() {
   const saleOptions = ["تامین مواد اولیه(کلوخه کرومیت)", "سایر"];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden  bg-[var(--color-section-bg)] transition-colors">
+    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden bg-[var(--color-section-bg)] transition-colors">
       {/* اشکال شناور */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <motion.div
@@ -68,12 +98,7 @@ export default function ContactForm() {
       </div>
 
       {/* فرم */}
-      <div
-        className="relative z-10 w-full sm:max-w-2xl
- 
-    backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl 
-    transition-colors"
-      >
+      <div className="relative z-10 w-full sm:max-w-2xl backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl transition-colors">
         <h1 className="text-center text-[var(--color-title)] text-[15px] sm:text-3xl font-bold mb-2 drop-shadow-lg">
           فرم درخواست همکاری
         </h1>
