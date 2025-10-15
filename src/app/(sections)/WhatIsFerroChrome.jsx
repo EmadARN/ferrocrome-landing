@@ -52,8 +52,8 @@ export default function WhatIsFerroChrome() {
 
   return (
     <section
-      style={{  background: "var(--color-about-bg)",}}
-      className="pt-12 pb-[28rem] md:pb-[28rem] lg:py-24 relative overflow-hidden"
+      style={{ background: "var(--color-about-bg)" }}
+      className="pt-12 pb-[28rem] md:pb-[28rem] lg:py-32 relative overflow-hidden"
     >
       <div className="container mx-auto px-6 text-[color:var(--color-text)]">
         {/* دکمه‌های تب */}
@@ -149,7 +149,7 @@ export default function WhatIsFerroChrome() {
                       repeatDelay: 10 + idx * 2,
                       ease: "easeInOut",
                     }}
-                    className="absolute w-44 h-44 md:w-64 md:h-64 mt-12 rounded-md overflow-hidden shadow-md cursor-pointer"
+                    className="absolute w-44 h-44 md:w-64 md:h-64 mt-12 md:mt-1 rounded-md overflow-hidden shadow-md cursor-pointer"
                     style={{
                       backgroundColor: "var(--color-card-bg)",
                       border: `1px solid var(--color-card-border)`,

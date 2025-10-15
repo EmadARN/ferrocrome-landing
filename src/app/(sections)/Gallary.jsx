@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -14,7 +15,7 @@ const products = [
   { id: 6, image: "/images/gallery/7.jpg" },
 ];
 
-export default function ProductCarousel() {
+export default function Gallary() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
@@ -35,10 +36,10 @@ export default function ProductCarousel() {
 
         {/* فلش‌های ناوبری */}
         <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
-          <div className="swiper-button-prev-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
+          <div className="swiper-button-prev-custom pointer-events-auto bg-[#00000050] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❮
           </div>
-          <div className="swiper-button-next-custom pointer-events-auto bg-[#c76700] hover:bg-[#a35603] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
+          <div className="swiper-button-next-custom pointer-events-auto bg-[#00000050]  text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
             ❯
           </div>
         </div>
@@ -64,12 +65,15 @@ export default function ProductCarousel() {
               <div
                 onClick={() => setSelectedImage(product.image)}
                 style={{ backgroundColor: "var(--color-card-bg)" }}
-                className="backdrop-blur-lg rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer"
+                className="backdrop-blur-lg rounded-md overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer relative h-72"
               >
-                <img
+                <Image
                   src={product.image}
                   alt="gallery"
-                  className="object-cover w-full h-96 hover:scale-110 transition-transform duration-500"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="hover:scale-110 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             </SwiperSlide>
@@ -79,11 +83,11 @@ export default function ProductCarousel() {
         {/* نمایش بزرگ تصویر */}
         {selectedImage && (
           <div
-            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
             onClick={() => setSelectedImage(null)}
           >
             <div
-              className="relative max-w-4xl w-[90%] max-h-[90vh]"
+              className="relative w-full max-w-5xl max-h-[80vh] p-4 bg-black/50 rounded-lg shadow-lg"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -92,11 +96,15 @@ export default function ProductCarousel() {
               >
                 ×
               </button>
-              <img
-                src={selectedImage}
-                alt="Selected"
-                className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-lg"
-              />
+              <div className="relative w-full h-[70vh]">
+                <Image
+                  src={selectedImage}
+                  alt="Selected"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  className="rounded-lg"
+                />
+              </div>
             </div>
           </div>
         )}

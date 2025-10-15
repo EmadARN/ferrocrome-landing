@@ -2,7 +2,7 @@
 
 :root {
   /* bg */
-  --color-bg-navbar: linear-gradient(to right, #f9f7f3, #f2f0eb);
+  --color-bg-navbar: linear-gradient(to right, #b4b4b4, #f2f0eb);
   --color-bg-hero: linear-gradient(to bottom right, #ffffff, #f2f6ff, #e0ebff);
   --color-btn-bg: #b35c00;
   --color-btn-hover-bg: linear-gradient(to right, #914800, #7a3c00);

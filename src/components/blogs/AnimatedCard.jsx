@@ -59,7 +59,7 @@ const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
             style={{ color: "var(--color-text-secondary)" }}
             className=" text-sm flex-1 md:hidden overflow-hidden"
           >
-            {truncateText(summary, 270)}
+            {truncateText(summary, 100)}
           </p>
 
           {/* ادامه مطلب */}

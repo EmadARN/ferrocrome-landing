@@ -6,15 +6,15 @@ export default function WhatsAppButton() {
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
-    <div className="fixed bottom-24 right-6 z-50">
+    <div className="fixed bottom-22 right-6 z-50">
       <a
         href={whatsappLink}
         target="_blank"
         rel="noopener noreferrer"
         className="
           flex items-center justify-center
-          w-14 h-14 rounded-full
-          bg-[#25D366] hover:bg-[#1ebe5d]
+          w-10 h-10 rounded-md
+          bg-[#25D366] 
           text-white
           shadow-lg 
           transition-all duration-300

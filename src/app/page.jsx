@@ -4,23 +4,22 @@ import Footer from "./(sections)/Footer";
 import Hero from "./(sections)/Hero";
 import About from "./(sections)/About";
 import Products from "./(sections)/Product";
-import ProductCarousel from "./(sections)/ProductCarousel";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import WorkWithUs from "./(sections)/WorkWithUs";
 import ContactModal from "../components/ui/contactUsButton";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
-import FloatingChromite from "@/components/ui/FloatingChromite";
 import { motion } from "framer-motion";
 import Blogs from "./blogs/page";
 import WhatsAppButton from "@/components/ui/WhatsappButton";
+import Gallary from "./(sections)/Gallary";
 
 export default function HomePage() {
   return (
     <main>
       <Header />
 
-      <section id="hero" className="lg:pt-32 relative">
+      <section id="hero" className=" relative">
         <Hero />
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
           {[0, 1].map((_, idx) => (
@@ -58,7 +57,7 @@ export default function HomePage() {
       </section>
 
       <section id="carousel">
-        <ProductCarousel />
+        <Gallary />
       </section>
 
       <section id="WorkWithUs">
