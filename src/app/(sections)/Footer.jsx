@@ -1,18 +1,12 @@
 "use client";
 import Link from "next/link";
-import {
-  FaLinkedin,
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import { SiMinutemailer } from "react-icons/si";
 export default function Footer() {
   const socialIcons = [
-    { href: "#", icon: <FaLinkedin />, bg: "bg-[#0A66C2]" },
-    { href: "#", icon: <FaFacebookF />, bg: "bg-[#1877F2]" },
-    { href: "#", icon: <FaTwitter />, bg: "bg-[#1DA1F2]" },
+    { href: "#", icon: <FaWhatsapp />, bg: "bg-[#3EBD4E]" },
+    { href: "#", icon: <SiMinutemailer />, bg: "bg-[#EF7501]" },
     { href: "#", icon: <FaInstagram />, bg: "bg-[#E1306C]" },
   ];
 
@@ -34,7 +28,10 @@ export default function Footer() {
           >
             FerroCorp Industries
           </h3>
-          <p className="mb-6 text-sm" style={{ color: "var(--color-footer-muted)" }}>
+          <p
+            className="mb-6 text-sm"
+            style={{ color: "var(--color-footer-muted)" }}
+          >
             پیشرو در صنعت جهانی فروکروم با محصولات ممتاز، تولید پایدار و همکاری
             قابل اعتماد در بیش از 40 کشور.
           </p>
