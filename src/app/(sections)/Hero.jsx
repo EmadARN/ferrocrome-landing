@@ -87,9 +87,10 @@ export default function Hero() {
         </div>
 
         {/* --- دکمه‌ها --- */}
+        <div className="flex justify-center mt-10"></div>
         <div className="flex flex-wrap gap-6 justify-center mt-8">
           <Link
-            href="#about"
+            href="/catalog"
             className="
               px-6 py-3 rounded-lg text-sm md:text-md font-bold
               bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
@@ -97,9 +98,8 @@ export default function Hero() {
               transition-all duration-300
             "
           >
-            درباره ی ما
+            مشاهده کاتالوگ
           </Link>
-
           <Link
             href="#WorkWithUs"
             className="

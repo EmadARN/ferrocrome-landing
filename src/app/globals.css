@@ -656,3 +656,10 @@ body {
 .prose [data-align="left"] {
   text-align: left;
 }
+
+
+.page {
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  backface-visibility: hidden;
+}
