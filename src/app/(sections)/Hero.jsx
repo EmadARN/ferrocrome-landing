@@ -39,7 +39,6 @@ export default function Hero() {
       blur-3xl z-0
     "
       />
-<<<<<<< HEAD
 
       {/* محتوا */}
       <div
@@ -48,10 +47,6 @@ export default function Hero() {
       mt-24 md:mt-0
     "
       >
-=======
-      {/* --- محتوا --- */}
-      <div className="relative z-10 px-4 md:px-8 max-w-3xl">
->>>>>>> 43e2bc4f4fc6e288a95ba9dd2d631ab94d660115
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,12 +117,9 @@ export default function Hero() {
           </Link>
         </div>
       </div>
-<<<<<<< HEAD
 
       {/* گرادیان پایین */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
-=======
->>>>>>> 43e2bc4f4fc6e288a95ba9dd2d631ab94d660115
     </section>
   );
 }
