@@ -29,11 +29,7 @@ export default function WorkWithUs() {
           اشتراک بگذارید و یک همکاری موفق بسازیم.
         </p>
 
-        
-     
-            <WorkWithUsForm />
-        
-
+        <WorkWithUsForm />
       </div>
     </section>
   );
