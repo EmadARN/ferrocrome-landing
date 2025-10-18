@@ -21,7 +21,7 @@ export default function HomePage() {
 
       <section id="hero" className=" relative">
         <Hero />
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+        {/* <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
           {[0, 1].map((_, idx) => (
             <motion.div
               key={idx}
@@ -35,7 +35,7 @@ export default function HomePage() {
               className="w-2 h-2 md:w-4 md:h-4 border-b-2 border-r-2 border-white/60 rotate-45"
             />
           ))}
-        </div>
+        </div> */}
       </section>
 
       <section id="about">

@@ -7,13 +7,13 @@ export default function Hero() {
   return (
     <section
       className="
-        relative flex flex-col items-center justify-center text-center overflow-hidden
+    relative flex flex-col items-center justify-center text-center overflow-hidden
     bg-black
-    [height:60dvh] md:[height:100dvh]
-   mt-28 md:mt-0
-      "
+    h-[70dvh] md:h-[100dvh]
+    mt-0
+  "
     >
-      {/* --- ویدیو پس‌زمینه --- */}
+      {/* ویدیو پس‌زمینه */}
       <video
         autoPlay
         loop
@@ -24,23 +24,29 @@ export default function Hero() {
       >
         <source src="/video/iran-china.mp4" type="video/mp4" />
       </video>
-      {/* --- لایه تیره‌ی نیمه‌شفاف برای وضوح متن --- */}
+
+      {/* لایه تیره */}
       <div className="absolute inset-0 bg-black/40 dark:bg-black/50 z-0" />
 
-      {/* --- نور طلایی مرکزی (اختیاری برای افکت بیشتر) --- */}
+      {/* نور طلایی مرکزی */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         className="
-          absolute top-1/2 left-1/2 w-[500px] h-[500px]
-          -translate-x-1/2 -translate-y-1/2 rounded-full
-          bg-gradient-to-br from-[#c76700]/40 via-[#f6b76b]/20 to-transparent
-          blur-3xl z-0
-        "
+      absolute top-1/2 left-1/2 w-[500px] h-[500px]
+      -translate-x-1/2 -translate-y-1/2 rounded-full
+      bg-gradient-to-br from-[#c76700]/40 via-[#f6b76b]/20 to-transparent
+      blur-3xl z-0
+    "
       />
 
-      {/* --- محتوا --- */}
-      <div className="relative z-10 px-4 md:px-8 max-w-3xl">
+      {/* محتوا */}
+      <div
+        className="
+      relative z-10 px-4 md:px-8 max-w-3xl
+      mt-24 md:mt-0
+    "
+      >
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,8 +62,8 @@ export default function Hero() {
           </span>
         </motion.h1>
 
-        {/* --- Badgeها --- */}
-        <div className="flex flex-wrap gap-4 justify-center  mt-6 text-white ">
+        {/* Badgeها */}
+        <div className="flex flex-wrap gap-4 justify-center mt-6 text-white">
           {[
             "میزان سرمایه‌گذاری: 30 میلیون دلار",
             "ظرفیت تولید: 45 هزار تن سالانه",
@@ -68,14 +74,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
-              className="w-full md:w-auto flex items-center gap-2 font-medium  text-[12px]"
+              className="w-full md:w-auto flex items-center gap-2 font-medium text-[12px]"
             >
               <span
-                className="w-1 h-1 md:w-3 md:h-3 rounded-full "
+                className="w-1 h-1 md:w-3 md:h-3 rounded-full"
                 style={{
                   backgroundColor:
                     i === 0
-                      ? "var(--color-badge-1) "
+                      ? "var(--color-badge-1)"
                       : i === 1
                       ? "var(--color-badge-2)"
                       : "var(--color-badge-3)",
@@ -86,34 +92,33 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* --- دکمه‌ها --- */}
-        <div className="flex justify-center mt-10"></div>
+        {/* دکمه‌ها */}
         <div className="flex flex-wrap gap-6 justify-center mt-8">
           <Link
             href="/catalog"
             className="
-              px-6 py-3 rounded-lg text-sm md:text-md font-bold
-              bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
-              text-white shadow-lg hover:scale-105 hover:shadow-xl
-              transition-all duration-300
-            "
+          px-6 py-3 rounded-lg text-sm md:text-md font-bold
+          bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
+          text-white shadow-lg hover:scale-105 hover:shadow-xl
+          transition-all duration-300
+        "
           >
             مشاهده کاتالوگ
           </Link>
           <Link
             href="#WorkWithUs"
             className="
-              px-6 py-3 rounded-lg border text-sm md:text-md font-bold
-              border-[#f6b76b]/60 text-[#f6b76b]
-              hover:bg-[#f6b76b]/10 hover:scale-105 transition-all duration-300
-            "
+          px-6 py-3 rounded-lg border text-sm md:text-md font-bold
+          border-[#f6b76b]/60 text-[#f6b76b]
+          hover:bg-[#f6b76b]/10 hover:scale-105 transition-all duration-300
+        "
           >
             درخواست همکاری
           </Link>
         </div>
       </div>
 
-      {/* --- گرادیان پایین --- */}
+      {/* گرادیان پایین */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
     </section>
   );

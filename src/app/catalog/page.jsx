@@ -61,20 +61,20 @@ export default function CatalogPage() {
   const handleZoomIn = () => setZoom((z) => Math.min(z + 0.1, 1.2));
   const handleZoomOut = () => setZoom((z) => Math.max(z - 0.1, 0.7));
 
-  const playFlipSound = () => {
-    if (isSoundOn && audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(() => {});
-    }
-  };
+  // const playFlipSound = () => {
+  //   if (isSoundOn && audioRef.current) {
+  //     audioRef.current.currentTime = 0;
+  //     audioRef.current.play().catch(() => {});
+  //   }
+  // };
 
   const handleNextPage = () => {
     if (bookRef.current) bookRef.current.pageFlip().flipNext();
-    playFlipSound();
+    // playFlipSound();
   };
   const handlePrevPage = () => {
     if (bookRef.current) bookRef.current.pageFlip().flipPrev();
-    playFlipSound();
+    // playFlipSound();
   };
   const handleFlip = (e) => setCurrentPage(e.data);
 
@@ -145,7 +145,7 @@ export default function CatalogPage() {
       {/* ---------- نوار کنترل پایین ---------- */}
       <div className="fixed bottom-4 md:bottom-6 flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 bg-white/80 backdrop-blur-md border border-gray-200 shadow-lg px-4 md:px-6 py-2 md:py-3 rounded-full z-50">
         <button
-          onClick={handlePrevPage}
+          onClick={handleNextPage}
           className="cursor-pointer text-gray-700 hover:text-blue-600 transition text-xl md:text-2xl"
         >
           <AiOutlineArrowRight />
@@ -156,7 +156,8 @@ export default function CatalogPage() {
         </span>
 
         <button
-          onClick={handleNextPage}
+          onClick={handlePrevPage}
+          handlePrevPage
           className="cursor-pointer text-gray-700 hover:text-blue-600 transition text-xl md:text-2xl"
         >
           <AiOutlineArrowLeft />
