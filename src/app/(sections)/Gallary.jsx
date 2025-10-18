@@ -90,12 +90,12 @@ export default function Gallary() {
               className="relative w-full max-w-5xl max-h-[80vh] p-4 bg-black/50 rounded-lg shadow-lg"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setSelectedImage(null)}
+              {/* <button
+                onClick={() => setSelectedImage(false)}
                 className="absolute top-3 right-3 text-white bg-black/60 hover:bg-black/80 rounded-full w-8 h-8 flex items-center justify-center text-lg"
               >
                 ×
-              </button>
+              </button> */}
               <div className="relative w-full h-[70vh]">
                 <Image
                   src={selectedImage}

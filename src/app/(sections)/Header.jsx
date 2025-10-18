@@ -13,6 +13,8 @@ export default function Header({ blogPath }) {
   const [scrolled, setScrolled] = useState(false);
 
   const drawerRef = useRef(null);
+  const pathname = usePathname();
+  const isBlogPage = pathname.startsWith("/blog");
 
   const navItems = [
     { label: "خانه", href: "#hero" },
@@ -22,14 +24,14 @@ export default function Header({ blogPath }) {
     { label: " وبلاگ", href: "/blogs" },
   ];
 
-  // اگر blogPath وجود داشت، href ها تغییر کنن
   const processedNavItems = navItems.map((item) => {
-    if (blogPath) return { ...item, href: "/" }; // همه لینک‌ها به خانه هدایت میشن
+    if (blogPath) return { ...item, href: "/" };
     return item;
   });
 
-  const workWithUsHref = blogPath ? "/" : "#WorkWithUs"; // تغییر href دکمه
+  const workWithUsHref = blogPath ? "/" : "#WorkWithUs";
 
+  // کنترل نمایش هدر در اسکرول
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -37,7 +39,6 @@ export default function Header({ blogPath }) {
         setShowHeader(false);
       } else {
         setShowHeader(true);
-        setHeaderOpacity(1);
       }
       setLastScroll(currentScroll);
     };
@@ -45,20 +46,17 @@ export default function Header({ blogPath }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScroll]);
 
+  // تغییر رنگ در اسکرول
   useEffect(() => {
     if (isBlogPage) return;
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 850);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 850);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const pathname = usePathname();
+  }, [isBlogPage]);
 
-  const isBlogPage = pathname.startsWith("/blog");
   return (
     <>
-      {/* هدر دسکتاپ */}
+      {/* Header */}
       <AnimatePresence>
         {showHeader && (
           <motion.header
@@ -67,12 +65,17 @@ export default function Header({ blogPath }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -120, opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="  w-full overflow-hidden steel-texture z-50 fixed top-0 left-0 backdrop-blur-md"
-            style={{
-              backgroundColor: `var(--color-bg-navbar)`,
-            }}
+            className={cn(
+              "fixed top-0 left-0 w-full z-50 overflow-hidden transition-all duration-300",
+              "backdrop-blur-md lg:backdrop-blur-lg",
+              "bg-transparent lg:bg-[var(--color-bg-navbar)]"
+            )}
           >
-            <div className="px-6   flex items-center justify-around h-24 md:h-28 lg:h-32 relative z-10">
+            <div className="px-6 flex items-center justify-around h-20 md:h-24 lg:h-28 relative z-10">
+              <div className="flex items-center lg:hidden">
+                <ThemeToggleSwitch scrolled={scrolled} />
+              </div>
+
               {/* منوی دسکتاپ */}
               <nav className="hidden lg:flex items-center ">
                 {processedNavItems.map((item) => (
@@ -80,7 +83,7 @@ export default function Header({ blogPath }) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      " font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 p-2",
+                      "font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 p-2",
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -93,12 +96,12 @@ export default function Header({ blogPath }) {
                 ))}
               </nav>
 
-              {/* لوگو */}
-              <div className="flex justify-center reflection-effect">
+              {/* لوگو و متن وسط */}
+              <div className="flex justify-center reflection-effect ">
                 <div className="text-center">
                   <h1
                     className={cn(
-                      " logo-glow font-orbitron font-black text-xl md:text-2xl lg:text-3xl tracking-wider mb-1",
+                      "logo-glow font-orbitron font-black text-md md:text-2xl lg:text-3xl mb-1",
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -109,12 +112,11 @@ export default function Header({ blogPath }) {
                     صنایع ذوب فام سپند
                   </h1>
 
-                  {/* متن دسکتاپ */}
-                  <div className="flex items-center text-center justify-center space-x-4">
+                  <div className="flex items-center justify-center text-center">
                     <div className="hidden md:block w-12 h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
                     <p
                       className={cn(
-                        "text-textBody font-rajdhani text-[0.7rem] md:text-base tracking-widest",
+                        "text-textBody font-rajdhani text-[0.7rem] md:text-base",
                         isBlogPage
                           ? "text-[var(--color-navlink)]"
                           : scrolled
@@ -124,12 +126,12 @@ export default function Header({ blogPath }) {
                     >
                       تولید کننده و تامین کننده مواد اولیه فولادی
                     </p>
-                    <div className="w-12 hidden md:block h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
+                    <div className="hidden md:block w-12 h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
                   </div>
 
                   <p
                     className={cn(
-                      " font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center",
+                      "font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center",
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -142,7 +144,7 @@ export default function Header({ blogPath }) {
                 </div>
               </div>
 
-              {/* دکمه همکاری دسکتاپ */}
+              {/* دکمه همکاری (دسکتاپ) */}
               <div className="hidden lg:flex items-center gap-4">
                 <ThemeToggleSwitch scrolled={scrolled} />
                 <Link href={workWithUsHref}>
@@ -160,7 +162,7 @@ export default function Header({ blogPath }) {
                 </Link>
               </div>
 
-              {/* همبرگر موبایل */}
+              {/* منوی همبرگری موبایل */}
               <div className="lg:hidden flex items-center">
                 <button
                   onClick={(e) => {
@@ -171,20 +173,35 @@ export default function Header({ blogPath }) {
                 >
                   <span
                     className={cn(
-                      "block w-6 h-[2px] bg-gray-300 rounded transition-all duration-300",
-                      mobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                      "block w-6 h-[2px] rounded transition-all duration-300",
+                      mobileMenuOpen ? "rotate-45 translate-y-2" : "",
+                      isBlogPage
+                        ? "bg-[var(--color-navlink)]"
+                        : scrolled
+                        ? "bg-[var(--color-navlink)]"
+                        : "bg-white"
                     )}
                   />
                   <span
                     className={cn(
-                      "block w-6 h-[2px] bg-gray-300 rounded my-1 transition-all duration-300",
-                      mobileMenuOpen ? "opacity-0" : ""
+                      "block w-6 h-[2px] rounded my-1 transition-all duration-300",
+                      mobileMenuOpen ? "opacity-0" : "",
+                      isBlogPage
+                        ? "bg-[var(--color-navlink)]"
+                        : scrolled
+                        ? "bg-[var(--color-navlink)]"
+                        : "bg-white"
                     )}
                   />
                   <span
                     className={cn(
-                      "block w-6 h-[2px] bg-gray-300 rounded transition-all duration-300",
-                      mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                      "block w-6 h-[2px] rounded transition-all duration-300",
+                      mobileMenuOpen ? "-rotate-45 -translate-y-2" : "",
+                      isBlogPage
+                        ? "bg-[var(--color-navlink)]"
+                        : scrolled
+                        ? "bg-[var(--color-navlink)]"
+                        : "bg-white"
                     )}
                   />
                 </button>
@@ -194,7 +211,7 @@ export default function Header({ blogPath }) {
         )}
       </AnimatePresence>
 
-      {/* منوی همبرگر موبایل */}
+      {/* منوی موبایل */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -204,10 +221,11 @@ export default function Header({ blogPath }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed top-0 left-0 w-full h-[50vh]   flex flex-col items-center justify-center z-40 rounded-b-xl shadow-xl pt-10"
+            className="fixed top-0 left-0 w-full h-[65vh] flex flex-col items-center justify-evenly z-40 rounded-b-xl shadow-xl pt-10"
             style={{
               backgroundColor: "var(--color-bg-mobile-menu)",
               backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
             }}
           >
             {/* دکمه ضربدر */}
@@ -230,14 +248,9 @@ export default function Header({ blogPath }) {
               </Link>
             ))}
 
-            {/* Theme Toggle */}
-            <div className="my-2">
-              <ThemeToggleSwitch />
-            </div>
-
             {/* دکمه همکاری موبایل */}
             <Link href={workWithUsHref}>
-              <button className=" cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg hover:btnShadow transition-all duration-300">
+              <button className="cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg transition-all duration-300">
                 درخواست همکاری
               </button>
             </Link>
