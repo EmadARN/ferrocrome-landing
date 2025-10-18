@@ -14,8 +14,11 @@ export default async function BlogDetail({ params }) {
   if (!blog) return notFound();
 
   return (
-    <div className=" min-h-screen">
-      <section className="bg-white py-16">
+    <div className=" min-h-screen pt-10">
+      <section
+        style={{ background: "var(--color-about-bg)" }}
+        className=" py-16"
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* بازگشت به همه مقالات */}
           <div className="flex justify-end mb-6 sm:mb-8">
@@ -35,7 +38,9 @@ export default async function BlogDetail({ params }) {
 
           {/* محتوا */}
           <article
-            className="bg-white rounded-sm shadow-md p-6 sm:p-8 md:p-12 leading-relaxed text-gray-700 prose max-w-none"
+     
+            style={{ backgroundColor: "var(--color-form-bg)!important", color: "var(--color-title-secondary)" }}
+            className=" rounded-sm shadow-md p-6 sm:p-8 md:p-12 leading-relaxed text-gray-700 prose max-w-none"
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
         </div>
@@ -46,3 +51,4 @@ export default async function BlogDetail({ params }) {
     </div>
   );
 }
+

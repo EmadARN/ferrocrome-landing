@@ -37,7 +37,7 @@ export default function BlogComments({ blogId, initialComments }) {
   };
 
   const inputClasses = (hasError) =>
-    `w-full px-4 py-3 rounded-md text-gray-900 placeholder-gray-400 
+    `w-full px-4 py-3 rounded-md text-gray-900 text-right placeholder-[var(--color-input-label)] 
      border ${
        hasError ? "border-yellow-900 ring-yellow-900" : "border-gray-300"
      } 
@@ -45,15 +45,26 @@ export default function BlogComments({ blogId, initialComments }) {
      transition-colors`;
 
   return (
-    <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      style={{
+        background: "var(--color-form-bg)!important",
+      }}
+      className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8"
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white rounded-lg shadow-lg p-6 mt-8 flex flex-col gap-4"
+        style={{
+          background: "var(--color-form-bg)!important",
+        }}
+        className=" rounded-lg shadow-lg p-6 mt-8 flex flex-col gap-4"
       >
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        <h3 className="text-2xl font-bold text-[var(--color-title)] mb-2">
           ثبت دیدگاه شما
         </h3>
-        <p className="text-gray-600 text-sm mb-4">
+        <p
+          style={{ color: "var(--color-title-secondary)" }}
+          className=" text-sm mb-4"
+        >
           نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
           *
         </p>
