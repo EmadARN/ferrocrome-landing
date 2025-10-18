@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function About() {
   const stats = [
@@ -15,12 +16,23 @@ export default function About() {
     "/images/micro-carbon-ferrochrome.webp",
   ];
 
-  const fallVariants = {
-    initial: () => ({
-      y: -500,
-      opacity: 0,
+  // ✅ ایجاد چرخش تصادفی فقط در کلاینت (بعد از mount)
+  const [randomRotations, setRandomRotations] = useState([]);
+
+  useEffect(() => {
+    const rotations = images.map(() => ({
       rotateX: Math.random() * 60 - 30,
       rotateY: Math.random() * 60 - 30,
+    }));
+    setRandomRotations(rotations);
+  }, []);
+
+  const fallVariants = {
+    initial: (idx) => ({
+      y: -500,
+      opacity: 0,
+      rotateX: randomRotations[idx]?.rotateX || 0,
+      rotateY: randomRotations[idx]?.rotateY || 0,
       x: 0,
     }),
     animate: (idx) => {
@@ -72,10 +84,13 @@ export default function About() {
     },
   };
 
+  // 🚫 تا زمانی که مقدار تصادفی تولید نشده، چیزی رندر نکن
+  if (randomRotations.length === 0) return null;
+
   return (
     <section
       style={{ background: "var(--color-about-bg)" }}
-      className="relative mx-auto px-6 py-24  overflow-hidden text-gray-300"
+      className="relative mx-auto px-6 py-24 overflow-hidden text-gray-300"
     >
       {/* اشکال پس‌زمینه */}
       <motion.div
@@ -101,30 +116,30 @@ export default function About() {
           >
             <h2
               style={{ color: "var(--color-title)" }}
-              className="text-2xl md:text-4xl font-extrabold  tracking-tight"
+              className="text-2xl md:text-4xl font-extrabold tracking-tight"
             >
               درباره ما
             </h2>
 
             <p
               style={{ color: "var(--color-text)" }}
-              className="text-lg  leading-relaxed"
+              className="text-lg leading-relaxed"
             >
-              شرکت ذوب فام سپند با سرمایه گذاری صد در صد خارجی از مجموع شرکت های
-              هلدینگ YingHai می باشد که در مرداد ماه 1404 با حضور استاندار محترم
+              شرکت ذوب فام سپند با سرمایه‌گذاری صددرصد خارجی از مجموع شرکت‌های
+              هلدینگ YingHai می‌باشد که در مرداد ماه ۱۴۰۴ با حضور استاندار محترم
               استان کرمان و سایر مسئولین کلنگ احداث کارخانه در زمین اختصاص یافته
               در شهرستان جیرفت زده شد.
             </p>
 
             <p
               style={{ color: "var(--color-text-muted)" }}
-              className="text-lg  leading-relaxed"
+              className="text-lg leading-relaxed"
             >
               مأموریت ما تولید فروکروم با بالاترین خلوص و استحکام است تا نیازهای
               صنایع فولاد و آلیاژسازی در سراسر جهان برآورده شود.
             </p>
 
-            <div className="flex flex-wrap justify-between  gap-4 pt-8">
+            <div className="flex flex-wrap justify-between gap-4 pt-8">
               {stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
@@ -158,7 +173,7 @@ export default function About() {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
               style={{ color: "var(--color-about-text-secondary)" }}
-              className="mt-10 border-l-4 border-[#a15300] pl-5 italic "
+              className="mt-10 border-l-4 border-[#a15300] pl-5 italic"
             >
               "کیفیت نتیجه تخصص، نوآوری و سه دهه تجربه است."
             </motion.div>
@@ -172,9 +187,10 @@ export default function About() {
                 custom={idx}
                 variants={fallVariants}
                 initial="initial"
-                animate={
-                  idx === 2 ? ["animate", "floatAlt"] : ["animate", "float"]
-                }
+                animate={[
+                  "animate",
+                  idx === 2 ? "floatAlt" : "float",
+                ]}
                 whileHover="hover"
                 className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-md overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer transition-transform ${
                   idx === 1 ? "translate-x-3 sm:translate-x-24" : ""
@@ -189,7 +205,7 @@ export default function About() {
                   sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 33vw"
                   priority={idx === 0}
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30" />
               </motion.div>
             ))}
           </div>
