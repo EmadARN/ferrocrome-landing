@@ -5,7 +5,12 @@ import { ThemeProvider } from "next-themes";
 
 export default function Providers({ children }) {
   return (
-    <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <SessionProvider>{children}</SessionProvider>
     </ThemeProvider>
   );
