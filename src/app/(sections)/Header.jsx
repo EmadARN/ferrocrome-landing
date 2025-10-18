@@ -4,12 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeToggleSwitch from "@/components/ThemeToggle";
+import { usePathname } from "next/navigation";
 
 export default function Header({ blogPath }) {
   const [showHeader, setShowHeader] = useState(true);
   const [lastScroll, setLastScroll] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [headerOpacity, setHeaderOpacity] = useState(0.8);
+  const [scrolled, setScrolled] = useState(false);
+
   const drawerRef = useRef(null);
 
   const navItems = [
@@ -17,6 +19,7 @@ export default function Header({ blogPath }) {
     { label: "محصولات", href: "#product" },
     { label: "خدمات", href: "#whyus" },
     { label: "درباره ما", href: "#about" },
+    { label: "اخبار و بلاگ", href: "/blogs" },
   ];
 
   // اگر blogPath وجود داشت، href ها تغییر کنن
@@ -42,6 +45,17 @@ export default function Header({ blogPath }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScroll]);
 
+  useEffect(() => {
+    if (isBlogPage) return;
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 850);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  const pathname = usePathname();
+
+  const isBlogPage = pathname.startsWith("/blog");
   return (
     <>
       {/* هدر دسکتاپ */}
@@ -55,10 +69,10 @@ export default function Header({ blogPath }) {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className=" w-full overflow-hidden steel-texture z-50 fixed top-0 left-0 backdrop-blur-md"
             style={{
-              backgroundColor: `rgba(var(--color-bg-navbar), ${headerOpacity})`,
+              backgroundColor: `var(--color-bg-navbar)`,
             }}
           >
-            <div className="container px-6 lg:mr-24 flex items-center justify-between h-24 md:h-28 lg:h-32 relative z-10">
+            <div className="container px-6  flex items-center justify-between h-24 md:h-28 lg:h-32 relative z-10">
               {/* منوی دسکتاپ */}
               <nav className="hidden lg:flex items-center space-x-4">
                 {processedNavItems.map((item) => (
@@ -66,8 +80,12 @@ export default function Header({ blogPath }) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "nav-item font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 p-2",
-                      "text-navlink"
+                      " font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 p-2",
+                      isBlogPage
+                        ? "text-[var(--color-navlink)]"
+                        : scrolled
+                        ? "text-[var(--color-navlink)]"
+                        : "text-white"
                     )}
                   >
                     {item.label}
@@ -78,20 +96,47 @@ export default function Header({ blogPath }) {
               {/* لوگو */}
               <div className="flex-1 flex justify-center reflection-effect">
                 <div className="text-center">
-                  <h1 className="logo-chrome logo-glow font-orbitron font-black text-xl md:text-2xl lg:text-3xl tracking-wider mb-1">
+                  <h1
+                    className={cn(
+                      " logo-glow font-orbitron font-black text-xl md:text-2xl lg:text-3xl tracking-wider mb-1",
+                      isBlogPage
+                        ? "text-[var(--color-navlink)]"
+                        : scrolled
+                        ? "text-[var(--color-navlink)]"
+                        : "text-white"
+                    )}
+                  >
                     صنایع ذوب فام سپند
                   </h1>
 
                   {/* متن دسکتاپ */}
-                  <div className="flex items-center justify-center space-x-4">
+                  <div className="flex items-center text-center justify-center space-x-4">
                     <div className="hidden md:block w-12 h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
-                    <p className="text-textBody font-rajdhani text-[0.7rem] md:text-base tracking-widest">
+                    <p
+                      className={cn(
+                        "text-textBody font-rajdhani text-[0.7rem] md:text-base tracking-widest",
+                        isBlogPage
+                          ? "text-[var(--color-navlink)]"
+                          : scrolled
+                          ? "text-[var(--color-navlink)]"
+                          : "text-white"
+                      )}
+                    >
                       تولید کننده و تامین کننده مواد اولیه فولادی
                     </p>
                     <div className="w-12 hidden md:block h-[2px] bg-gradient-to-r from-transparent via-orange-200 to-transparent"></div>
                   </div>
 
-                  <p className="text-metallic-gray font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center">
+                  <p
+                    className={cn(
+                      " font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center",
+                      isBlogPage
+                        ? "text-[var(--color-navlink)]"
+                        : scrolled
+                        ? "text-[var(--color-navlink)]"
+                        : "text-white"
+                    )}
+                  >
                     Ferrocrome Industries Co
                   </p>
                 </div>
@@ -99,7 +144,7 @@ export default function Header({ blogPath }) {
 
               {/* دکمه همکاری دسکتاپ */}
               <div className="hidden lg:flex items-center gap-4">
-                <ThemeToggleSwitch />
+                <ThemeToggleSwitch scrolled={scrolled} />
                 <Link href={workWithUsHref}>
                   <button
                     style={{
