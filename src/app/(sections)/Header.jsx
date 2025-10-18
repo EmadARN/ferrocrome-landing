@@ -67,14 +67,14 @@ export default function Header({ blogPath }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -120, opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className=" w-full overflow-hidden steel-texture z-50 fixed top-0 left-0 backdrop-blur-md"
+            className="  w-full overflow-hidden steel-texture z-50 fixed top-0 left-0 backdrop-blur-md"
             style={{
               backgroundColor: `var(--color-bg-navbar)`,
             }}
           >
-            <div className="container px-6  flex items-center justify-between h-24 md:h-28 lg:h-32 relative z-10">
+            <div className="px-6   flex items-center justify-around h-24 md:h-28 lg:h-32 relative z-10">
               {/* منوی دسکتاپ */}
-              <nav className="hidden lg:flex items-center space-x-4">
+              <nav className="hidden lg:flex items-center ">
                 {processedNavItems.map((item) => (
                   <Link
                     key={item.href}
@@ -94,7 +94,7 @@ export default function Header({ blogPath }) {
               </nav>
 
               {/* لوگو */}
-              <div className="flex-1 flex justify-center reflection-effect">
+              <div className="flex justify-center reflection-effect">
                 <div className="text-center">
                   <h1
                     className={cn(
