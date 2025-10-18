@@ -78,7 +78,7 @@ export default function CommentsPanel() {
         <button
           disabled={page <= 1}
           onClick={() => setPage(page - 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           قبلی
         </button>
@@ -88,7 +88,7 @@ export default function CommentsPanel() {
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(page + 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           بعدی
         </button>

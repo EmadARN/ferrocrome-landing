@@ -128,7 +128,7 @@ export default function Blogs() {
             setEditingBlog(null);
             setOpenModal(true);
           }}
-          className="px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white rounded-md"
+          className="max-w-[220px] md:max-w-[400px] px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white text-[0.75rem] md:text-[1rem] rounded-md"
         >
           افزودن بلاگ جدید
         </button>
@@ -179,7 +179,7 @@ export default function Blogs() {
         <button
           disabled={page <= 1}
           onClick={() => setPage(page - 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           قبلی
         </button>
@@ -189,7 +189,7 @@ export default function Blogs() {
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(page + 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           بعدی
         </button>

@@ -19,7 +19,7 @@ export default function SearchInput({
       value={input}
       onChange={(e) => setInput(e.target.value)}
       placeholder={placeholder}
-      className="w-full max-w-md px-4 py-2 rounded-md bg-white/10 backdrop-blur-md border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:border-white/30 focus:bg-white/20 transition"
+      className="w-full max-w-[140px] md:max-w-[400px] px-4 py-2 rounded-md bg-white/10 backdrop-blur-md border border-white/20 placeholder-gray-400 text-white focus:outline-none focus:border-white/30 focus:bg-white/20 transition"
     />
   );
 }

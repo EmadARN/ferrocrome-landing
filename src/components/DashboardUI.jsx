@@ -1,7 +1,6 @@
 "use client";
 
 import Sidebar from "@/components/ui/Sidebar";
-import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";

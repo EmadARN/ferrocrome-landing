@@ -21,7 +21,7 @@ export default function Header({ blogPath }) {
     { label: "محصولات", href: "#product" },
     { label: "خدمات", href: "#whyus" },
     { label: "درباره ما", href: "#about" },
-    { label: "اخبار و بلاگ", href: "/blogs" },
+    { label: " وبلاگ", href: "/blogs" },
   ];
 
   const processedNavItems = navItems.map((item) => {

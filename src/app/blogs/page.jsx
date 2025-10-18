@@ -6,14 +6,14 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 import "swiper/css";
 import "swiper/css/navigation";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
   const pathname = usePathname();
-  const isBlogPage = pathname === "/blogs"; 
+  const isBlogPage = pathname === "/blogs";
 
   useEffect(() => {
     async function fetchBlogs() {

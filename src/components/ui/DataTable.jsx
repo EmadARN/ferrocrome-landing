@@ -33,7 +33,7 @@ export default function DataTable({
   );
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="max-w-[340px] md:max-w-[100%] w-full flex flex-col gap-4">
       {/* Search */}
       {searchKey && searchInput && (
         <div className="flex justify-center mb-4 px-2">
@@ -49,14 +49,14 @@ export default function DataTable({
       )}
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-md shadow-lg border border-white/20 bg-white/10 backdrop-blur-md scrollbar-thin scrollbar-thumb-gray-500/40 scrollbar-track-gray-900/20">
+      <div className=" overflow-x-auto rounded-md shadow-lg border border-white/20 bg-white/10 backdrop-blur-md scrollbar-thin scrollbar-thumb-gray-500/40 scrollbar-track-gray-900/20">
         <table className="min-w-[600px] w-full divide-y divide-white/10 text-center">
-          <thead className="bg-white/5 sticky top-0 z-10">
+          <thead className="bg-white/10 sticky top-0 z-10">
             <tr>
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`px-4 py-3 font-semibold whitespace-nowrap ${
+                  className={`px-4 py-3 font-semibold whitespace-nowrap text-gray-400 ${
                     col.className || ""
                   }`}
                 >
