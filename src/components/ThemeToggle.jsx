@@ -16,8 +16,9 @@ export default function ThemeToggleSwitch({ scrolled }) {
     document.documentElement.classList.toggle("light", current === "light");
   }, [theme, systemTheme]);
 
-  if (!mounted) return null;
   const pathname = usePathname();
+
+  if (!mounted) return null;
 
   const isBlogPage = pathname.startsWith("/blog");
   const current = theme === "system" ? systemTheme : theme;
@@ -39,8 +40,11 @@ export default function ThemeToggleSwitch({ scrolled }) {
           size={18}
           className={cn(
             "text-[var(--color-icon-text)] ",
-          isBlogPage
-                        ? "text-[var(--color-navlink)]" :      scrolled ? "text-[var(--color-navlink)]" : "text-white"
+            isBlogPage
+              ? "text-[var(--color-navlink)]"
+              : scrolled
+              ? "text-[var(--color-navlink)]"
+              : "text-white"
           )}
         />
       ) : (
@@ -48,8 +52,11 @@ export default function ThemeToggleSwitch({ scrolled }) {
           size={18}
           className={cn(
             "text-[var(--color-icon-text)] ",
-           isBlogPage
-                        ? "text-[var(--color-navlink)]" :     scrolled ? "text-[var(--color-navlink)]" : "text-white"
+            isBlogPage
+              ? "text-[var(--color-navlink)]"
+              : scrolled
+              ? "text-[var(--color-navlink)]"
+              : "text-white"
           )}
         />
       )}
