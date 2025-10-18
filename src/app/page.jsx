@@ -38,8 +38,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* <FloatingChromite /> */}
-
       <section id="about">
         <About />
       </section>
