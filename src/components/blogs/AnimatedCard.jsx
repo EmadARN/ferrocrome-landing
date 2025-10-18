@@ -1,10 +1,10 @@
 "use client";
 
+import truncateText from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import truncateText from "@/utils/trancrate";
 
 const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
   const dateObj = createdAt ? new Date(createdAt) : null;
