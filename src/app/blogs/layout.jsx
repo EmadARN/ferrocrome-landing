@@ -8,10 +8,7 @@ export default function BlogLayout({ children }) {
       <Header blogPath />
 
       <div className=" mx-auto ">
-        <div
-          style={{ background: "var(--color-about-bg)" }}
-          className=" rounded-md shadow-md p-8"
-        >
+        <div style={{ background: "var(--color-about-bg)" }} className="  p-8">
           {children}
         </div>
       </div>

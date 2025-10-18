@@ -50,7 +50,7 @@ export default function ClientTable({ initialData = [] }) {
   return (
     <div className="w-full mt-12">
       {/* Search + Export */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+      <div className="flex flex-row text-[12px] md:text-[16px] justify-between items-start sm:items-center gap-2 mb-4">
         <SearchInput
           value={search}
           onChange={(val) => {
@@ -129,7 +129,7 @@ export default function ClientTable({ initialData = [] }) {
         <button
           disabled={currentPage <= 1}
           onClick={() => setCurrentPage(currentPage - 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           قبلی
         </button>
@@ -139,7 +139,7 @@ export default function ClientTable({ initialData = [] }) {
         <button
           disabled={currentPage >= totalPages}
           onClick={() => setCurrentPage(currentPage + 1)}
-          className="px-3 py-1 cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1  text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           بعدی
         </button>
