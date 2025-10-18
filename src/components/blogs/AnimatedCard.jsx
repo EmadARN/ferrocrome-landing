@@ -20,7 +20,7 @@ const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
   };
 
   return (
-    <Link href={href} className="group">
+    <Link href={href}>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
           scale: 1.03,
         }}
         style={{ backgroundColor: "var(--color-card-bg)" }}
-        className="rounded-md max-w-md overflow-hidden cursor-pointer h-[400px] flex flex-col my-5 transition-all"
+        className="rounded-md max-w-md overflow-hidden cursor-pointer h-[400px] flex flex-col my-5 transition-all relative"
       >
         {/* تصویر */}
         {image && (
@@ -69,15 +69,17 @@ const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
           </p>
 
           {/* ادامه مطلب */}
-          <span
-            style={{ color: "var(--color-text-secondary)" }}
-            className="mt-3 flex justify-end  font-medium text-[0.75rem] md:text-[1rem] transition-colors hover:!text-amber-800"
-          >
-            <span>ادامه مطلب</span>
-            <span className="pt-0.5 pr-1">
-              <MdOutlineArrowOutward />
+          <div className="w-[100px] absolute left-4 bottom-4 ">
+            <span
+              style={{ color: "var(--color-text-secondary)" }}
+              className="mt-3 flex justify-end font-medium text-[0.75rem] md:text-[1rem] transition-colors hover:!text-amber-800"
+            >
+              <span>ادامه مطلب</span>
+              <span className="pt-0.5 pr-1">
+                <MdOutlineArrowOutward />
+              </span>
             </span>
-          </span>
+          </div>
         </div>
       </motion.div>
     </Link>

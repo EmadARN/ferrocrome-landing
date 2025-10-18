@@ -26,7 +26,6 @@ export default function Hero() {
       </video>
       {/* --- لایه تیره‌ی نیمه‌شفاف برای وضوح متن --- */}
       <div className="absolute inset-0 bg-black/40 dark:bg-black/50 z-0" />
-
       {/* --- نور طلایی مرکزی (اختیاری برای افکت بیشتر) --- */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
@@ -38,7 +37,6 @@ export default function Hero() {
           blur-3xl z-0
         "
       />
-
       {/* --- محتوا --- */}
       <div className="relative z-10 px-4 md:px-8 max-w-3xl">
         <motion.h1
@@ -112,9 +110,6 @@ export default function Hero() {
           </Link>
         </div>
       </div>
-
-      {/* --- گرادیان پایین --- */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
     </section>
   );
 }

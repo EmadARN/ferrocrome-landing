@@ -21,6 +21,10 @@ export default function HomePage() {
 
       <section id="hero" className=" relative">
         <Hero />
+        <div className="absolute -bottom-5 left-0 right-0 h-16 pointer-events-none z-20">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent blur-3xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent blur-xl"></div>
+        </div>
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
           {[0, 1].map((_, idx) => (
             <motion.div
