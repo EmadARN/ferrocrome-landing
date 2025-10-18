@@ -2,8 +2,10 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-export default function ThemeToggleSwitch() {
+export default function ThemeToggleSwitch({ scrolled }) {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -15,7 +17,9 @@ export default function ThemeToggleSwitch() {
   }, [theme, systemTheme]);
 
   if (!mounted) return null;
+  const pathname = usePathname();
 
+  const isBlogPage = pathname.startsWith("/blog");
   const current = theme === "system" ? systemTheme : theme;
   const isDark = current === "dark";
 
@@ -31,9 +35,23 @@ export default function ThemeToggleSwitch() {
       }}
     >
       {isDark ? (
-        <Sun size={18} className="text-[var(--color-icon-text)] " />
+        <Sun
+          size={18}
+          className={cn(
+            "text-[var(--color-icon-text)] ",
+          isBlogPage
+                        ? "text-[var(--color-navlink)]" :      scrolled ? "text-[var(--color-navlink)]" : "text-white"
+          )}
+        />
       ) : (
-        <Moon size={18} className="text-[var(--color-icon-text)]  " />
+        <Moon
+          size={18}
+          className={cn(
+            "text-[var(--color-icon-text)] ",
+           isBlogPage
+                        ? "text-[var(--color-navlink)]" :     scrolled ? "text-[var(--color-navlink)]" : "text-white"
+          )}
+        />
       )}
     </button>
   );

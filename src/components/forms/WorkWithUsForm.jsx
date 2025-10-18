@@ -82,7 +82,12 @@ export default function ContactForm() {
   const saleOptions = ["تامین مواد اولیه(کلوخه کرومیت)", "سایر"];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-10 overflow-hidden bg-[var(--color-section-bg)] transition-colors">
+    <section
+      style={{
+        background: "var(--color-form-bg)!important",
+      }}
+      className=" relative  flex items-center justify-center px-4 py-10 overflow-hidden transition-colors"
+    >
       {/* اشکال شناور */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
         <motion.div
@@ -98,7 +103,7 @@ export default function ContactForm() {
       </div>
 
       {/* فرم */}
-      <div className="relative z-10 w-full sm:max-w-2xl backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-2xl transition-colors">
+      <div className="relative z-10 w-full  backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-md transition-colors">
         <h1 className="text-center text-[var(--color-title)] text-[15px] sm:text-3xl font-bold mb-2 drop-shadow-lg">
           فرم درخواست همکاری
         </h1>
@@ -121,7 +126,7 @@ export default function ContactForm() {
                 type="text"
                 {...register("name")}
                 placeholder="نام خود را وارد کنید"
-                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
               />
               {errors.name && (
                 <p className="text-red-400 text-xs sm:text-sm mt-1">
