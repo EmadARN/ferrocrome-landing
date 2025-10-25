@@ -4,7 +4,7 @@ import DashboardUI from "@/components/DashboardUI";
 import LoadingSpinner from "@/components/ui/LoadingState";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 
 export default function PanelLayout({ children }) {
   const { data: session, status } = useSession({ required: true });

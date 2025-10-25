@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import ThemeToggleSwitch from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
+import { navItems } from "@/lib/constants";
 
 export default function Header({ blogPath }) {
   const [showHeader, setShowHeader] = useState(true);
@@ -16,17 +17,10 @@ export default function Header({ blogPath }) {
   const pathname = usePathname();
   const isBlogPage = pathname.startsWith("/blog");
 
-  const navItems = [
-    { label: "خانه", href: "#hero" },
-    { label: "محصولات", href: "#product" },
-    { label: "خدمات", href: "#whyus" },
-    { label: "درباره ما", href: "#about" },
-    { label: " وبلاگ", href: "/blogs" },
-  ];
-
-  const processedNavItems = navItems.map((item) => {
-    if (blogPath) return { ...item, href: "/" };
-    return item;
+  // اگر در صفحه بلاگ باشیم، همه لینک‌ها به / هدایت می‌شن ولی key منحصربه‌فرد ساخته میشه
+  const processedNavItems = navItems.map((item, index) => {
+    if (blogPath) return { ...item, href: "/", key: `blog-${index}` };
+    return { ...item, key: `main-${index}` };
   });
 
   const workWithUsHref = blogPath ? "/" : "#WorkWithUs";
@@ -67,23 +61,26 @@ export default function Header({ blogPath }) {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className={cn(
               "fixed top-0 left-0 w-full z-50 overflow-hidden transition-all duration-300",
-              "backdrop-blur-md lg:backdrop-blur-lg",
+              "backdrop-blur-lg lg:backdrop-blur-xl",
               "bg-transparent lg:bg-[var(--color-bg-navbar)]"
             )}
           >
-            <div className="px-6 flex items-center justify-around h-20 md:h-24 lg:h-28 relative z-10">
+            <div className="px-6 flex items-center justify-around h-20 md:h-24 lg:h-28 relative z-50">
               <div className="flex items-center lg:hidden">
-                <ThemeToggleSwitch scrolled={scrolled} />
+                <ThemeToggleSwitch
+                  scrolled={scrolled}
+                  mobileMenuOpen={mobileMenuOpen}
+                />
               </div>
 
               {/* منوی دسکتاپ */}
-              <nav className="hidden lg:flex items-center ">
+              <nav className="hidden lg:flex items-center">
                 {processedNavItems.map((item) => (
                   <Link
-                    key={item.href}
+                    key={item.key}
                     href={item.href}
                     className={cn(
-                      "font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 p-2",
+                      "font-rajdhani font-medium text-sm tracking-wide transition-all duration-300 m-2 z-50",
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -96,12 +93,13 @@ export default function Header({ blogPath }) {
                 ))}
               </nav>
 
-              {/* لوگو و متن وسط */}
-              <div className="flex justify-center reflection-effect ">
+              {/* لوگو */}
+              <div className="flex justify-center reflection-effect">
                 <div className="text-center">
                   <h1
                     className={cn(
                       "logo-glow font-orbitron font-black text-md md:text-2xl lg:text-3xl mb-1",
+                      mobileMenuOpen ? " text-white" : "",
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -117,6 +115,8 @@ export default function Header({ blogPath }) {
                     <p
                       className={cn(
                         "text-textBody font-rajdhani text-[0.7rem] md:text-base",
+                        mobileMenuOpen ? " text-white" : "",
+
                         isBlogPage
                           ? "text-[var(--color-navlink)]"
                           : scrolled
@@ -132,6 +132,8 @@ export default function Header({ blogPath }) {
                   <p
                     className={cn(
                       "font-rajdhani font-light text-[0.6rem] md:text-sm mt-1 tracking-wider text-center",
+                      mobileMenuOpen ? " text-white" : "",
+
                       isBlogPage
                         ? "text-[var(--color-navlink)]"
                         : scrolled
@@ -162,7 +164,7 @@ export default function Header({ blogPath }) {
                 </Link>
               </div>
 
-              {/* منوی همبرگری موبایل */}
+              {/* منوی موبایل */}
               <div className="lg:hidden flex items-center">
                 <button
                   onClick={(e) => {
@@ -174,7 +176,7 @@ export default function Header({ blogPath }) {
                   <span
                     className={cn(
                       "block w-6 h-[2px] rounded transition-all duration-300",
-                      mobileMenuOpen ? "rotate-45 translate-y-2" : "",
+                      mobileMenuOpen ? "rotate-45 translate-y-2 bg-white" : "",
                       isBlogPage
                         ? "bg-[var(--color-navlink)]"
                         : scrolled
@@ -185,7 +187,7 @@ export default function Header({ blogPath }) {
                   <span
                     className={cn(
                       "block w-6 h-[2px] rounded my-1 transition-all duration-300",
-                      mobileMenuOpen ? "opacity-0" : "",
+                      mobileMenuOpen ? "opacity-0 bg-white" : "",
                       isBlogPage
                         ? "bg-[var(--color-navlink)]"
                         : scrolled
@@ -196,7 +198,9 @@ export default function Header({ blogPath }) {
                   <span
                     className={cn(
                       "block w-6 h-[2px] rounded transition-all duration-300",
-                      mobileMenuOpen ? "-rotate-45 -translate-y-2" : "",
+                      mobileMenuOpen
+                        ? "-rotate-45 -translate-y-2 bg-white"
+                        : "",
                       isBlogPage
                         ? "bg-[var(--color-navlink)]"
                         : scrolled
@@ -211,7 +215,7 @@ export default function Header({ blogPath }) {
         )}
       </AnimatePresence>
 
-      {/* منوی موبایل */}
+      {/* Drawer موبایل */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -221,36 +225,35 @@ export default function Header({ blogPath }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "-100%", opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="fixed top-0 left-0 w-full h-[65vh] flex flex-col items-center justify-evenly z-40 rounded-b-xl shadow-xl pt-10"
+            className="fixed top-0 left-0 w-full h-[70dvh] flex flex-col !bg-black/60 items-center justify-evenly z-40 rounded-b-md shadow-xl pt-10"
             style={{
               backgroundColor: "var(--color-bg-mobile-menu)",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
             }}
           >
-            {/* دکمه ضربدر */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-4 right-4 text-navlink text-3xl hover:text-navlinkHover transition-all duration-300"
+              className="absolute top-4 right-4 text-white text-3xl hover:text-navlinkHover transition-all duration-300"
             >
               ✕
             </button>
 
-            {/* لینک‌ها */}
-            {processedNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-navlink font-rajdhani font-medium text-sm md:text-base my-4 hover:text-navlinkHover transition-all duration-300"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <menu className="mt-6 flex flex-col items-center">
+              {processedNavItems.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white font-rajdhani font-medium text-sm md:text-base py-4 hover:text-navlinkHover transition-all duration-300"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </menu>
 
-            {/* دکمه همکاری موبایل */}
             <Link href={workWithUsHref}>
-              <button className="cursor-pointer px-5 py-3 rounded-xl text-sm md:text-base font-medium border border-borderBtn bg-btn text-textBtn hover:bg-btnHover hover:borderBtnHover hover:shadow-lg transition-all duration-300">
+              <button className="cursor-pointer px-5 py-3 rounded-md text-sm md:text-base font-medium border border-borderBtn bg-btn text-white hover:bg-btnHover hover:borderBtnHover hover:shadow-lg transition-all duration-300">
                 درخواست همکاری
               </button>
             </Link>

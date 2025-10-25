@@ -1,89 +1,75 @@
 "use client";
 
+import { forwardRef, useImperativeHandle, useState, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
-import TableRow from "@tiptap/extension-table-row";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import Color from "@tiptap/extension-color";
-import TextAlign from "@tiptap/extension-text-align";
-import Mention from "@tiptap/extension-mention";
-import Suggestion from "@tiptap/suggestion";
-import BulletList from "@tiptap/extension-bullet-list";
-import OrderedList from "@tiptap/extension-ordered-list";
-import Blockquote from "@tiptap/extension-blockquote";
-import HorizontalRule from "@tiptap/extension-horizontal-rule";
-import ImageResize from "tiptap-extension-resize-image";
-import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
+import Strike from "@tiptap/extension-strike";
 import { TextStyle } from "@tiptap/extension-text-style";
-import { useState } from "react";
+import { Color } from "@tiptap/extension-color";
+import { FontFamily } from "@tiptap/extension-font-family";
+import { TextAlign } from "@tiptap/extension-text-align";
 import {
-  AiOutlineBold,
-  AiOutlineItalic,
-  AiOutlineUnderline,
-  AiOutlineAlignLeft,
-  AiOutlineAlignCenter,
-  AiOutlineAlignRight,
-  AiOutlineTable,
-  AiOutlinePicture,
-} from "react-icons/ai";
-import { Table } from "@tiptap/extension-table";
+  Table,
+  TableRow,
+  TableCell,
+  TableHeader,
+} from "@tiptap/extension-table";
+import Superscript from "@tiptap/extension-superscript";
+import Subscript from "@tiptap/extension-subscript";
+import { ResizableImage } from "./ResizableImage";
+import {
+  Bold,
+  Italic,
+  Underline as UnderlineIcon,
+  Strikethrough,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  List,
+  ListOrdered,
+  ImageIcon,
+  TableIcon,
+  Square,
+} from "lucide-react";
 
-export default function RichTextEditor({ content, setContent }) {
-  const [alignment, setAlignment] = useState("left");
+const RichTextEditor = forwardRef(({ initialContent = "" }, ref) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => setIsClient(true), []);
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ heading: { levels: [1, 2, 3, 4, 5, 6] } }),
+      Underline,
+      Strike,
       TextStyle,
       Color,
-      Link,
+      FontFamily,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Mention.configure({
-        suggestion: Suggestion({
-          items: ({ query }) =>
-            ["Emad", "Admin", "Support", "Manager"].filter((item) =>
-              item.toLowerCase().includes(query.toLowerCase())
-            ),
-        }),
-      }),
-      BulletList,
-      OrderedList,
-      Blockquote,
-      HorizontalRule,
-      Image.configure({ inline: false }),
-      ImageResize,
-      Table.configure({
-        resizable: true, // ❌ ریسایز تیبل غیرفعال
-      }),
+      Table.configure({ resizable: true }),
       TableRow,
-      TableCell,
       TableHeader,
+      TableCell,
+      ResizableImage.configure({ inline: false, allowResize: true }),
+      Superscript,
+      Subscript,
     ],
-    content: content || "",
-    onUpdate: ({ editor }) => setContent(editor.getHTML()),
+
+    content: initialContent || "<p></p>",
+    editorProps: { attributes: { class: "rte-editor" } },
     immediatelyRender: false,
-    editorProps: {
-      attributes: {
-        class:
-          "prose max-w-full focus:outline-none min-h-[200px] p-2 border rounded bg-red",
-      },
-    },
   });
 
-  if (!editor) return <p>Loading editor...</p>;
+  useImperativeHandle(ref, () => ({
+    getContent: () => editor?.getHTML() || "",
+  }));
 
-  const setFontSize = (size) =>
-    editor.chain().focus().setMark("textStyle", { fontSize: size }).run();
-  const setFontColor = (color) =>
-    editor.chain().focus().setMark("textStyle", { color }).run();
-  const setTextAlignment = (align) => {
-    editor.chain().focus().setTextAlign(align).run();
-    setAlignment(align);
-  };
+  if (!isClient || !editor) return null;
 
-  const insertImage = (file) => {
+  const buttonClass = "p-2 border rounded hover:bg-gray-400 cursor-pointer";
+
+  const handleFileUpload = (file) => {
     const reader = new FileReader();
     reader.onload = () => {
       editor.chain().focus().setImage({ src: reader.result }).run();
@@ -92,121 +78,204 @@ export default function RichTextEditor({ content, setContent }) {
   };
 
   return (
-    <div className="border rounded p-2">
+    <div className="border p-4 rounded-md rte-container">
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-1 mb-2 bg-gray-700 p-1 rounded">
-        {/* Formatting */}
+      <div className="mb-2 flex flex-wrap gap-2 items-center rte-toolbar ">
         <button
           type="button"
+          className={buttonClass}
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            editor.isActive("bold") ? "bg-gray-300" : ""
-          }`}
         >
-          <AiOutlineBold size={18} />
+          <Bold size={16} />
         </button>
         <button
           type="button"
+          className={buttonClass}
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            editor.isActive("italic") ? "bg-gray-300" : ""
-          }`}
         >
-          <AiOutlineItalic size={18} />
+          <Italic size={16} />
         </button>
         <button
           type="button"
+          className={buttonClass}
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            editor.isActive("underline") ? "bg-gray-300" : ""
-          }`}
         >
-          <AiOutlineUnderline size={18} />
+          <UnderlineIcon size={16} />
+        </button>
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().toggleStrike().run()}
+        >
+          <Strikethrough size={16} />
         </button>
 
-        {/* Alignment */}
+        {[1, 2, 3, 4, 5, 6].map((level) => (
+          <button
+            type="button"
+            key={level}
+            className={buttonClass}
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level }).run()
+            }
+          >
+            H{level}
+          </button>
+        ))}
+
+        <buttonپ
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+        >
+          {" "}
+          <AlignRight size={16} />
+        </buttonپ>
         <button
           type="button"
-          onClick={() => setTextAlignment("left")}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            alignment === "left" ? "bg-gray-300" : ""
-          }`}
+          className={buttonClass}
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
         >
-          <AiOutlineAlignLeft size={18} />
+          <AlignCenter size={16} />
         </button>
         <button
           type="button"
-          onClick={() => setTextAlignment("center")}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            alignment === "center" ? "bg-gray-300" : ""
-          }`}
+          className={buttonClass}
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
         >
-          <AiOutlineAlignCenter size={18} />
-        </button>
-        <button
-          type="button"
-          onClick={() => setTextAlignment("right")}
-          className={`p-2 rounded hover:bg-gray-200 ${
-            alignment === "right" ? "bg-gray-300" : ""
-          }`}
-        >
-          <AiOutlineAlignRight size={18} />
+          <AlignLeft size={16} />
         </button>
 
-        {/* Table */}
         <button
           type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+        >
+          <List size={16} />
+        </button>
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        >
+          <ListOrdered size={16} />
+        </button>
+
+        <button
+          type="button"
+          className={buttonClass}
           onClick={() =>
             editor
               .chain()
               .focus()
-              .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+              .insertTable({ rows: 2, cols: 2, withHeaderRow: true })
               .run()
           }
-          className="p-2 rounded hover:bg-gray-200"
         >
-          <AiOutlineTable size={18} />
+          <TableIcon size={16} />
+        </button>
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        >
+          <Square size={16} />
         </button>
 
-        {/* Image Upload */}
-        <label className="p-2 rounded hover:bg-gray-200 cursor-pointer">
-          <AiOutlinePicture size={18} />
+        {/* Table controls */}
+
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().addRowAfter().run()}
+        >
+          Row
+        </button>
+        <button
+          type="button"
+          className={buttonClass}
+          onClick={() => editor.chain().focus().addColumnBefore().run()}
+        >
+          Col
+        </button>
+
+        {/* Upload image */}
+        <label
+          className={`${buttonClass} cursor-pointer flex items-center gap-1`}
+        >
+          <ImageIcon size={16} /> Upload
           <input
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={(e) => {
-              if (e.target.files?.[0]) insertImage(e.target.files[0]);
-            }}
+            onChange={(e) =>
+              e.target.files[0] && handleFileUpload(e.target.files[0])
+            }
           />
         </label>
-
-        {/* Font size */}
-        <select
-          onChange={(e) => setFontSize(e.target.value)}
-          className="ml-2 border rounded p-1"
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Font Size
-          </option>
-          <option value="14px">14</option>
-          <option value="16px">16</option>
-          <option value="18px">18</option>
-          <option value="24px">24</option>
-          <option value="32px">32</option>
-        </select>
-
-        {/* Font color */}
         <input
           type="color"
-          onChange={(e) => setFontColor(e.target.value)}
-          className="ml-2 w-10 h-10 p-1 border rounded"
+          className="w-8 h-8 p-0 border-0 cursor-pointer"
+          onChange={(e) =>
+            editor.chain().focus().setColor(e.target.value).run()
+          }
         />
       </div>
 
-      {/* Editor */}
-      <EditorContent editor={editor} />
+      <EditorContent
+        editor={editor}
+        className="border p-2 min-h-[300px] rte-editor pr-8"
+      />
+
+      {/* CSS */}
+      <style jsx>{`
+        .rte-editor table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 10px 0;
+        }
+        .rte-editor th,
+        .rte-editor td {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        .rte-editor ul {
+          list-style-type: disc;
+          padding-left: 1.5rem;
+        }
+        .rte-editor ol {
+          list-style-type: decimal;
+          padding-left: 1.5rem;
+        }
+        .rte-editor h1 {
+          @apply text-3xl font-bold my-4;
+        }
+        .rte-editor h2 {
+          @apply text-2xl font-bold my-3;
+        }
+        .rte-editor h3 {
+          @apply text-xl font-bold my-2;
+        }
+        .rte-editor h4 {
+          @apply text-lg font-semibold my-2;
+        }
+        .rte-editor h5 {
+          @apply text-base font-semibold my-1;
+        }
+        .rte-editor h6 {
+          @apply text-sm font-semibold my-1;
+        }
+        .rte-editor p {
+          @apply my-1;
+        }
+        .rte-editor img {
+          @apply max-w-full h-auto block my-2;
+          resize: both;
+          object-fit: contain;
+        }
+      `}</style>
     </div>
   );
-}
+});
+
+export default RichTextEditor;

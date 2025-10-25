@@ -10,27 +10,32 @@ import { FiEdit, FiTrash2 } from "react-icons/fi";
 import LoadingState from "@/components/ui/LoadingState";
 import EmptyState from "@/components/ui/EmptyState";
 
+const ITEMS_PER_PAGE = 5;
+
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
-
+  const [prevSearch, setPrevSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
-  // ✅ دریافت بلاگ‌ها از API
+  // دریافت بلاگ‌ها از API با Pagination
   const fetchBlogs = async () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `/api/blogs?search=${encodeURIComponent(search)}&page=${page}&limit=10`
+        `/api/blogs?search=${encodeURIComponent(
+          search
+        )}&page=${page}&limit=${ITEMS_PER_PAGE}`
       );
       const data = await res.json();
+
       setBlogs(data.blogs || []);
-      setTotalPages(data.totalPages || 1);
+      setTotalPages(Math.ceil((data.total || 0) / ITEMS_PER_PAGE) || 1);
     } catch (err) {
       console.error(err);
       setBlogs([]);
@@ -44,12 +49,20 @@ export default function Blogs() {
     fetchBlogs();
   }, [page, search]);
 
-  // ✅ حذف بلاگ با Toastify و duration
+  // کنترل page پایدار
+  useEffect(() => {
+    if (search !== prevSearch) {
+      setPage(1); // فقط وقتی سرچ تغییر کرد صفحه ریست شود
+      setPrevSearch(search);
+    } else if (page > totalPages) {
+      setPage(totalPages || 1); // اگر داده‌ها کمتر شد، به آخرین صفحه معتبر برو
+    }
+  }, [search, prevSearch, page, totalPages]);
+
   const handleDelete = async (id) => {
     const loadingToast = toast.loading("در حال حذف بلاگ...", {
-      duration: 3000, // خود toast loading بعد از 3 ثانیه بسته میشه
+      duration: 3000,
     });
-
     try {
       const res = await fetch(`/api/blogs/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("خطا در حذف بلاگ");
@@ -64,19 +77,18 @@ export default function Blogs() {
     }
   };
 
-  // ✅ حالت‌های لودینگ و خالی
   if (loading) return <LoadingState text="در حال بارگذاری بلاگ‌ها..." />;
 
-  if (!blogs.length)
+  if (!blogs.length && !search.trim())
     return (
-      <div className="p-4 rounded shadow bg-gray-900 text-white mt-12 flex flex-col items-center justify-center gap-4">
+      <div className="p-4 rounded shadow bg-gray-900 text-white mt-8 sm:mt-12 flex flex-col items-center justify-center gap-4">
         <EmptyState text="هیچ بلاگی یافت نشد." />
         <button
           onClick={() => {
             setEditingBlog(null);
             setOpenModal(true);
           }}
-          className="px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white rounded-md"
+          className="px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white rounded-md w-full sm:w-auto"
         >
           افزودن بلاگ جدید
         </button>
@@ -91,15 +103,12 @@ export default function Blogs() {
           />
         )}
 
-        {/* ✅ Toast با مدت مشخص */}
         <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
       </div>
     );
 
-  // ✅ حالت نرمال
   return (
-    <div className="p-4 rounded shadow bg-gray-900 text-white mt-12">
-      {/* Toast Container با مدت پیش‌فرض ۳ ثانیه */}
+    <div className="p-4 rounded shadow text-white mt-8 sm:mt-12">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -114,13 +123,10 @@ export default function Blogs() {
       />
 
       {/* Search & Add */}
-      <div className="flex justify-between mb-4">
+      <div className="flex flex-row justify-between mb-4 gap-2">
         <SearchInput
           value={search}
-          onChange={(val) => {
-            setSearch(val);
-            setPage(1);
-          }}
+          onChange={(val) => setSearch(val)}
           placeholder="جستجو..."
         />
         <button
@@ -128,7 +134,7 @@ export default function Blogs() {
             setEditingBlog(null);
             setOpenModal(true);
           }}
-          className="max-w-[220px] md:max-w-[400px] px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white text-[0.75rem] md:text-[1rem] rounded-md"
+          className="max-w-[130px] md:max-w-[200px] px-4 py-2 bg-gradient-to-r cursor-pointer from-[#a15300] via-[#521f01] to-[#521f01] text-white text-[0.75rem] sm:text-[1rem] rounded-md w-full sm:w-auto"
         >
           افزودن بلاگ جدید
         </button>
@@ -137,8 +143,9 @@ export default function Blogs() {
       {/* DataTable */}
       <DataTable
         data={blogs}
-        searchKey={[]} // چون سرچ بیرون انجام میشه
+        searchKey={[]}
         searchInput={false}
+        typeKey="type"
         columns={[
           { key: "title", title: "عنوان" },
           { key: "author", title: "نویسنده" },
@@ -175,21 +182,21 @@ export default function Blogs() {
       />
 
       {/* Pagination */}
-      <div className="mt-4 flex justify-end items-center gap-2">
+      <div className="mt-4 flex justify-end items-center gap-2 flex-wrap sm:flex-nowrap">
         <button
           disabled={page <= 1}
           onClick={() => setPage(page - 1)}
-          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] sm:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           قبلی
         </button>
-        <span>
+        <span className="whitespace-nowrap">
           صفحه {page} از {totalPages}
         </span>
         <button
           disabled={page >= totalPages}
           onClick={() => setPage(page + 1)}
-          className="px-3 py-1 text-[12px] md:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
+          className="px-3 py-1 text-[12px] sm:text-[16px] cursor-pointer bg-gray-700 rounded disabled:opacity-50"
         >
           بعدی
         </button>

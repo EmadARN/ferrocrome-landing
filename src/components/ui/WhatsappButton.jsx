@@ -2,8 +2,8 @@
 import Image from "next/image";
 
 export default function WhatsAppButton() {
-  const whatsappNumber = "989123456789";
-  const whatsappLink = `https://wa.me/${whatsappNumber}`;
+
+  const whatsappLink = `https://wa.me/989351946619`;
 
   return (
     <div className="fixed bottom-22 right-6 z-50">

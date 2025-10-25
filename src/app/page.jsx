@@ -7,21 +7,22 @@ import Products from "./(sections)/Product";
 import WhyChooseUs from "./(sections)/WhyChooseUs";
 import WhatIsFerroChrome from "./(sections)/WhatIsFerroChrome";
 import WorkWithUs from "./(sections)/WorkWithUs";
-import ContactModal from "../components/ui/contactUsButton";
 import ScrollToTopButton from "@/components/ui/ScrollTopButton";
-import { motion } from "framer-motion";
 import Blogs from "./blogs/page";
 import WhatsAppButton from "@/components/ui/WhatsappButton";
 import Gallary from "./(sections)/Gallary";
-
+import { useState } from "react";
+import { motion } from "framer-motion";
+import ContactModal from "@/components/ui/contactUsButton";
 export default function HomePage() {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <main>
       <Header />
 
       <section id="hero" className=" relative">
         <Hero />
-        {/* <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
           {[0, 1].map((_, idx) => (
             <motion.div
               key={idx}
@@ -35,7 +36,7 @@ export default function HomePage() {
               className="w-2 h-2 md:w-4 md:h-4 border-b-2 border-r-2 border-white/60 rotate-45"
             />
           ))}
-        </div> */}
+        </div>
       </section>
 
       <section id="about">
@@ -47,7 +48,7 @@ export default function HomePage() {
       </section>
 
       <section id="product">
-        <Products />
+        <Products setModalOpen={setModalOpen} />
       </section>
 
       <section id="whyus">
@@ -61,10 +62,12 @@ export default function HomePage() {
       <section id="WorkWithUs">
         <WorkWithUs />
       </section>
-      <WhatsAppButton />
-      <ContactModal />
+      <div className={` ${modalOpen ? "hidden" : "block"}`}>
+        <WhatsAppButton />
+        <ContactModal />
+      </div>
 
-      <section>
+      <section id="blogs">
         <Blogs />
       </section>
 

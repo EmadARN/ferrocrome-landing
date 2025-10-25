@@ -8,16 +8,17 @@ import {
   FiEdit3,
   FiMessageSquare,
   FiMaximize2,
+  FiClipboard,
 } from "react-icons/fi";
 
 export default function DashboardPage() {
   const [data, setData] = useState(null);
-  const [isFullScreen, setIsFullScreen] = useState(null); // برای مدیریت حالت تمام‌صفحه
+  const [isFullScreen, setIsFullScreen] = useState(null);
   const weeklyBlogsRef = useRef(null);
   const monthlyReportsRef = useRef(null);
-  const fullScreenChartRef = useRef(null); // رفرنس برای نمودار تمام‌صفحه
+  const fullScreenChartRef = useRef(null);
 
-  // fetch داده‌ها از API
+  // Fetch داده‌ها
   useEffect(() => {
     async function fetchData() {
       try {
@@ -35,12 +36,12 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-  // ساخت نمودارهای اصلی
+  // نمودارهای اصلی
   useEffect(() => {
     if (!data || !data.weeklyPosts || !data.monthlyReports) return;
 
-    let weeklyChart;
-    let monthlyChart;
+    let weeklyChart = null;
+    let monthlyChart = null;
 
     if (weeklyBlogsRef.current) {
       weeklyChart = new Chart(weeklyBlogsRef.current, {
@@ -89,7 +90,7 @@ export default function DashboardPage() {
                 color: "#6B7280",
                 maxRotation: 45,
                 minRotation: 45,
-                autoSkip: false, // نمایش همه لیبل‌ها
+                autoSkip: false,
               },
             },
           },
@@ -139,7 +140,7 @@ export default function DashboardPage() {
                 color: "#6B7280",
                 maxRotation: 45,
                 minRotation: 45,
-                autoSkip: false, // نمایش همه لیبل‌ها
+                autoSkip: false,
               },
             },
           },
@@ -153,11 +154,11 @@ export default function DashboardPage() {
     };
   }, [data]);
 
-  // ساخت نمودار در مودال تمام‌صفحه
+  // نمودار تمام‌صفحه
   useEffect(() => {
     if (!isFullScreen || !data || !fullScreenChartRef.current) return;
 
-    let fullScreenChart;
+    let fullScreenChart = null;
 
     const chartConfig =
       isFullScreen === "weekly"
@@ -228,7 +229,7 @@ export default function DashboardPage() {
               color: "#6B7280",
               maxRotation: 45,
               minRotation: 45,
-              autoSkip: false, // نمایش همه لیبل‌ها
+              autoSkip: false,
             },
           },
         },
@@ -240,22 +241,15 @@ export default function DashboardPage() {
     };
   }, [isFullScreen, data]);
 
-  // مدیریت کلیک روی دکمه بزرگنمایی
-  const handleFullScreen = (chartType) => {
-    setIsFullScreen(chartType);
-  };
-
-  // خروج از حالت تمام‌صفحه
-  const closeFullScreen = () => {
-    setIsFullScreen(null);
-  };
+  const handleFullScreen = (chartType) => setIsFullScreen(chartType);
+  const closeFullScreen = () => setIsFullScreen(null);
 
   if (!data) return <LoadingState text="در حال بارگذاری داده‌ها..." />;
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 mt-12">
+    <div className="min-h-screen p-4 sm:p-6 mt-8 sm:mt-12">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-300 mb-2">
           نمای کلی داشبورد
         </h1>
@@ -265,8 +259,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-        <div className="bg-gray-800 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
           <div className="text-blue-500 text-2xl sm:text-3xl">
             <FiEdit3 />
           </div>
@@ -279,7 +273,8 @@ export default function DashboardPage() {
             </p>
           </div>
         </div>
-        <div className="bg-gray-800 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
           <div className="text-green-500 text-2xl sm:text-3xl">
             <FiFileText />
           </div>
@@ -292,7 +287,8 @@ export default function DashboardPage() {
             </p>
           </div>
         </div>
-        <div className="bg-gray-800 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
           <div className="text-yellow-500 text-2xl sm:text-3xl">
             <FiMessageSquare />
           </div>
@@ -305,12 +301,26 @@ export default function DashboardPage() {
             </p>
           </div>
         </div>
+
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 flex items-center gap-4">
+          <div className="text-purple-500 text-2xl sm:text-3xl">
+            <FiClipboard />
+          </div>
+          <div>
+            <p className="text-gray-200 text-sm font-medium mb-1">
+              تعداد لاگ‌ها
+            </p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-300">
+              {data.logsCount || 0}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Weekly Blogs Chart */}
-        <div className="bg-gray-800 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 relative">
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 relative">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-base sm:text-lg font-semibold text-gray-300">
               بلاگ و اخبار هفتگی
@@ -320,18 +330,18 @@ export default function DashboardPage() {
               className="text-gray-400 hover:text-gray-200"
               title="بزرگنمایی"
             >
-              <FiMaximize2 className="text-xl" />
+              <FiMaximize2 className="text-xl cursor-pointer" />
             </button>
           </div>
           <div className="overflow-x-auto">
-            <div className="min-w-[300px] h-64 sm:h-80">
+            <div className="min-w-[300px] h-56 sm:h-64 lg:h-80">
               <canvas ref={weeklyBlogsRef}></canvas>
             </div>
           </div>
         </div>
 
         {/* Monthly Reports Chart */}
-        <div className="bg-gray-800 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 relative">
+        <div className="bg-gray-700 rounded-md p-4 sm:p-6 shadow-sm border border-gray-500 relative">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-base sm:text-lg font-semibold text-gray-300">
               گزارش‌های ماهانه
@@ -341,11 +351,11 @@ export default function DashboardPage() {
               className="text-gray-400 hover:text-gray-200"
               title="بزرگنمایی"
             >
-              <FiMaximize2 className="text-xl" />
+              <FiMaximize2 className="text-xl cursor-pointer" />
             </button>
           </div>
           <div className="overflow-x-auto">
-            <div className="min-w-[300px] h-64 sm:h-80">
+            <div className="min-w-[300px] h-56 sm:h-64 lg:h-80">
               <canvas ref={monthlyReportsRef}></canvas>
             </div>
           </div>
@@ -355,20 +365,20 @@ export default function DashboardPage() {
       {/* Fullscreen Modal */}
       {isFullScreen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
-          <div className="bg-gray-800 rounded-md p-4 sm:p-6 w-full max-w-5xl relative transform transition-transform duration-300 scale-100">
+          <div className="bg-gray-800 rounded-md p-4 sm:p-6 w-full max-w-4xl sm:max-w-5xl relative transform transition-transform duration-300 scale-100">
             <button
               onClick={closeFullScreen}
               className="absolute top-4 left-4 text-gray-400 hover:text-gray-200"
               title="بستن"
             >
-              <FiMaximize2 className="text-2xl rotate-45" />
+              <FiMaximize2 className="text-2xl rotate-45 cursor-pointer" />
             </button>
             <h3 className="text-lg sm:text-xl font-semibold text-gray-300 mb-4">
               {isFullScreen === "weekly"
                 ? "بلاگ و اخبار هفتگی"
                 : "گزارش‌های ماهانه"}
             </h3>
-            <div className="h-[80vh] w-full">
+            <div className="h-[70vh] sm:h-[80vh] w-full">
               <canvas ref={fullScreenChartRef}></canvas>
             </div>
           </div>

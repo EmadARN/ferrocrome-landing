@@ -11,13 +11,13 @@ export default function DashboardUI({ children }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-row-reverse min-h-screen bg-gray-900 text-white font-sans">
-      {/* دسکتاپ: سایدبار ثابت */}
-      <div className="hidden md:flex w-72 flex-shrink-0">
+    <div className="grid grid-cols-12 min-h-screen bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] text-white font-sans">
+      {/* دسکتاپ: سایدبار ثابت از lg به بعد */}
+      <div className="hidden lg:block lg:col-span-2 w-64 flex-shrink-0">
         <Sidebar isOpen={true} activePath={pathname} />
       </div>
 
-      {/* موبایل: سایدبار انیمیشنی */}
+      {/* موبایل و تبلت: سایدبار انیمیشنی */}
       <AnimatePresence>
         {sidebarOpen && (
           <>
@@ -26,7 +26,7 @@ export default function DashboardUI({ children }) {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 300, opacity: 0 }}
               transition={{ type: "spring", stiffness: 120 }}
-              className="fixed top-0 right-0 z-50 w-72 h-full"
+              className="fixed top-0 right-0 z-50 w-64 h-full"
             >
               <Sidebar
                 isOpen={true}
@@ -53,10 +53,10 @@ export default function DashboardUI({ children }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="flex-1 p-6 md:mr-72"
+        className="col-span-12 lg:col-span-10 xl:col-span-9 lg:mr-24 xl:mr-0 p-4 sm:p-6  overflow-x-hidden"
       >
         {/* دکمه موبایل برای باز کردن سایدبار */}
-        <div className="md:hidden mb-4">
+        <div className="lg:hidden mb-4">
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 mt-1 cursor-pointer rounded-md hover:bg-gray-700 transition-colors"

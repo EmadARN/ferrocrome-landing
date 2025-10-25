@@ -9,7 +9,7 @@ export default function Hero() {
       className="
     relative flex flex-col items-center justify-center text-center overflow-hidden
     bg-black
-    h-[70dvh] md:h-[100dvh]
+    h-[75vh] md:h-[100dvh]
     mt-0
   "
     >
@@ -97,20 +97,21 @@ export default function Hero() {
           <Link
             href="/catalog"
             className="
-          px-6 py-3 rounded-lg text-sm md:text-md font-bold
-          bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
+          px-6 py-3 rounded-md text-sm md:text-md font-bold
+          border border-gray-400
           text-white shadow-lg hover:scale-105 hover:shadow-xl
           transition-all duration-300
         "
           >
             مشاهده کاتالوگ
           </Link>
+
           <Link
             href="#WorkWithUs"
             className="
-          px-6 py-3 rounded-lg border text-sm md:text-md font-bold
-          border-[#f6b76b]/60 text-[#f6b76b]
-          hover:bg-[#f6b76b]/10 hover:scale-105 transition-all duration-300
+          px-6 py-3 rounded-md  text-sm md:text-md font-bold
+          bg-gradient-to-r from-[#c76700] via-[#b45c00] to-[#8b3e00]
+          text-white transition-all duration-300
         "
           >
             درخواست همکاری

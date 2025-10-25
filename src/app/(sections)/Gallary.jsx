@@ -5,15 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
-const products = [
-  { id: 1, image: "/images/gallery/1.jpg" },
-  { id: 2, image: "/images/gallery/2.jpg" },
-  { id: 3, image: "/images/gallery/3.jpg" },
-  { id: 4, image: "/images/gallery/4.jpg" },
-  { id: 5, image: "/images/gallery/5.jpg" },
-  { id: 6, image: "/images/gallery/7.jpg" },
-];
+import { gallary } from "@/lib/constants";
 
 export default function Gallary() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -60,7 +52,7 @@ export default function Gallary() {
             1024: { slidesPerView: 3 },
           }}
         >
-          {products.map((product) => (
+          {gallary.map((product) => (
             <SwiperSlide key={product.id}>
               <div
                 onClick={() => setSelectedImage(product.image)}

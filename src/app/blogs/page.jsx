@@ -41,7 +41,7 @@ const Blogs = () => {
         background: "var(--color-about-bg)",
         color: "var(--color-text)",
       }}
-      className="mx-auto px-4 py-30 pb-20"
+      className="mx-auto px-4 py-30 "
     >
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
@@ -54,7 +54,7 @@ const Blogs = () => {
       </motion.h2>
 
       {isBlogPage ? (
-        <div className="grid gap-x-6 gap-y-12 container m-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid  gap-12 container m-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {blogs.map((blog) => (
             <AnimatedCard
               key={blog.id}
@@ -98,7 +98,7 @@ const Blogs = () => {
           </Swiper>
 
           {/* دکمه‌های ناوبری */}
-          <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
+          <div className="flex justify-between absolute top-1/3 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
             <div className="swiper-button-prev-custom pointer-events-auto bg-[#00000050] text-white rounded-md p-2 md:p-3 shadow-lg transition duration-300 cursor-pointer">
               ❮
             </div>

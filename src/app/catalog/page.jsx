@@ -17,7 +17,6 @@ import {
 
 export default function CatalogPage() {
   const bookRef = useRef(null);
-  const audioRef = useRef(null);
 
   const [zoom, setZoom] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -61,20 +60,11 @@ export default function CatalogPage() {
   const handleZoomIn = () => setZoom((z) => Math.min(z + 0.1, 1.2));
   const handleZoomOut = () => setZoom((z) => Math.max(z - 0.1, 0.7));
 
-  // const playFlipSound = () => {
-  //   if (isSoundOn && audioRef.current) {
-  //     audioRef.current.currentTime = 0;
-  //     audioRef.current.play().catch(() => {});
-  //   }
-  // };
-
   const handleNextPage = () => {
     if (bookRef.current) bookRef.current.pageFlip().flipNext();
-    // playFlipSound();
   };
   const handlePrevPage = () => {
     if (bookRef.current) bookRef.current.pageFlip().flipPrev();
-    // playFlipSound();
   };
   const handleFlip = (e) => setCurrentPage(e.data);
 

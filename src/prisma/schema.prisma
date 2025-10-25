@@ -32,7 +32,7 @@ model Blog {
   summary     String
   image       String?
   category    String
-  content     String      // خروجی HTML از ریچ ادیتور
+  content     String      @db.Text      // خروجی HTML از ریچ ادیتور
   author      String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -47,4 +47,19 @@ model Comment {
   createdAt DateTime  @default(now())
   blogId    Int
   blog      Blog      @relation(fields: [blogId], references: [id], onDelete: Cascade)
+}
+
+model ContactClick  {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  ip         String?
+  userAgent  String?
+  referer    String?
+  path       String?
+  country    String?
+  region     String?
+  city       String?
+  latitude   Float?
+  longitude  Float?
+  meta       Json?
 }

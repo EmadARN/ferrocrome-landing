@@ -1,15 +1,8 @@
 "use client";
-import Link from "next/link";
-import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { socialIcons } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { SiMinutemailer } from "react-icons/si";
-export default function Footer() {
-  const socialIcons = [
-    { href: "#", icon: <FaWhatsapp />, bg: "bg-[#3EBD4E]" },
-    { href: "#", icon: <SiMinutemailer />, bg: "bg-[#EF7501]" },
-    { href: "#", icon: <FaInstagram />, bg: "bg-[#E1306C]" },
-  ];
 
+export default function Footer() {
   return (
     <footer
       className="border-t pt-16"
@@ -64,10 +57,9 @@ export default function Footer() {
             اطلاعات تماس
           </h4>
           <div className="space-y-2 text-sm">
-            <p>📧 sales@ferrocorp.com</p>
-            <p>📞 +1 (555) 123-4567</p>
-            <p>🏢 Industrial District, Steel City</p>
-            <p>🌐 www.ferrocorp.com</p>
+            <p>📧 sales@yinghaico.com</p>
+            <p>📞 02126113043</p>
+            <p>🏢 تهران-نیاوران خیابان باهنر ساختمان فارومید</p>
           </div>
         </div>
 
@@ -98,7 +90,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="mt-12 text-center text-sm"
+        className="mt-12 text-center text-[0.7rem] md:text-sm"
         style={{ color: "var(--color-footer-muted)" }}
       >
         © 2025 Ferrochrome Industries. تمامی حقوق محفوظ است.

@@ -3,26 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import {
-  AiOutlineHome,
-  AiOutlineFileText,
-  AiOutlineMessage,
-  AiOutlineAlert,
-  AiOutlineClose,
-  AiOutlineLogout,
-} from "react-icons/ai";
 import { signOut } from "next-auth/react";
 import { toast } from "react-hot-toast";
-
+import { sidebarItems } from "@/lib/constants";
+import { AiOutlineClose, AiOutlineLogout } from "react-icons/ai";
 const Sidebar = ({ isOpen, onClose }) => {
   const pathname = usePathname();
-
-  const items = [
-    { href: "/panel", label: "خانه", icon: <AiOutlineHome size={20} /> },
-    { href: "/panel/blogs", label: "بلاگ‌ها", icon: <AiOutlineFileText size={20} /> },
-    { href: "/panel/comments", label: "نظرات", icon: <AiOutlineMessage size={20} /> },
-    { href: "/panel/reports", label: "گزارش‌ها", icon: <AiOutlineAlert size={20} /> },
-  ];
 
   if (!isOpen) return null;
 
@@ -33,7 +19,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   };
 
   return (
-    <aside className="fixed right-4 top-9 bg-gray-800 text-white shadow-xl rounded-md w-64 p-4 z-50 transition-all duration-300">
+    <aside className="fixed right-4 top-9 bg-[#0d2d55] text-white shadow-xl rounded-md w-64 p-4 z-50 transition-all duration-300">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <span className="text-lg font-bold tracking-wide">پنل مدیریت</span>
@@ -48,14 +34,21 @@ const Sidebar = ({ isOpen, onClose }) => {
 
       {/* Menu Items */}
       <ul className="space-y-3">
-        {items.map((item) => {
+        {sidebarItems.map((item) => {
           const active = pathname === item.href;
           return (
-            <motion.li key={item.href} whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+            <motion.li
+              key={item.href}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              className="list-none"
+            >
               <Link
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-2 rounded-sm transition-colors ${
-                  active ? "bg-yellow-800 font-semibold shadow-md" : "hover:bg-gray-700"
+                  active
+                    ? "bg-yellow-800 font-semibold shadow-md"
+                    : "hover:bg-gray-500"
                 }`}
               >
                 {item.icon}
@@ -66,7 +59,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         })}
 
         {/* دکمه لاگ‌اوت */}
-        <motion.li whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+        <motion.li
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+          className="list-none"
+        >
           <button
             onClick={handleLogout}
             className="flex cursor-pointer items-center gap-3 px-4 py-2 rounded-sm hover:bg-red-700 w-full text-left"

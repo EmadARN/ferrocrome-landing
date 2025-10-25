@@ -4,11 +4,13 @@ import { startOfWeek, endOfWeek, subWeeks } from "date-fns";
 export async function GET() {
   try {
     // شمارنده‌های اصلی
-    const [postsCount, commentsCount, reportsCount] = await Promise.all([
-      prisma.blog.count(),
-      prisma.comment.count(),
-      prisma.formSubmission.count(),
-    ]);
+    const [postsCount, commentsCount, reportsCount, logsCount] =
+      await Promise.all([
+        prisma.blog.count(),
+        prisma.comment.count(),
+        prisma.formSubmission.count(),
+        prisma.contactClick.count(),
+      ]);
 
     // 📅 چهار هفته اخیر (شنبه تا جمعه)
     const weeklyPosts = [];
@@ -72,6 +74,7 @@ export async function GET() {
         reportsCount,
         weeklyPosts,
         monthlyReports,
+        logsCount,
       }),
       {
         status: 200,

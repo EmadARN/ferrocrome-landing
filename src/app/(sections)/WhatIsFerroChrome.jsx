@@ -1,4 +1,5 @@
 "use client";
+import { tabs } from "@/lib/constants";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
@@ -6,47 +7,6 @@ import { useState } from "react";
 export default function WhatIsFerroChrome() {
   const [activeTab, setActiveTab] = useState("ferrochrome");
   const [hoveredIdx, setHoveredIdx] = useState(null);
-
-  // داده‌های هر تب
-  const tabs = {
-    ferrochrome: {
-      title: "فرو کروم چیست؟",
-      subtitle: "فروکروم",
-      color: "var(--color-title)",
-      highlight: "var(--color-highlight)",
-      text1: `کروم به صورت آزاد در طبیعت پیدا نمی‌شود و غنی‌ترین ماده معدنی حاوی
-      کروم، کرومیت با فرمول FeO.Cr2O3 است. کروم از کانی کرومیت به‌دست می‌آید
-      که یک کانی اکسیدی از کروم، آهن و اکسیژن می‌باشد.`,
-      text2: `فرو کروم یکی از اصلی‌ترین فروآلیاژهای مورد استفاده در صنعت فولادسازی
-      و ریخته‌گری است و به عنوان منبع اصلی تأمین عنصر کروم در فولادهای ضدزنگ،
-      فولادهای ابزار و آلیاژهای مقاوم به حرارت شناخته می‌شود.`,
-      images: [
-        "/images/high-carbon-ferrochrome.webp",
-        "/images/low-carbon-ferrochrome.jpg",
-        "/images/micro-carbon-ferrochrome.webp",
-      ],
-      glow1: "var(--color-glow-1)",
-      glow2: "var(--color-glow-2)",
-    },
-    chromite: {
-      title: "کرومیت چیست؟",
-      subtitle: "کانی کرومیت",
-      color: "var(--color-title)",
-      highlight: "var(--color-highlight)",
-      text1: `کرومیت (FeCr₂O₄) تنها منبع اقتصادی استخراج کروم است که در سنگ‌های
-      اولترامافیک مانند دونیت و سرپانتین یافت می‌شود. این کانی به دلیل داشتن
-      ترکیب آهن و کروم اهمیت بالایی در صنایع فولادسازی دارد.`,
-      text2: `کرومیت در فرآیند ذوب به فروکروم تبدیل می‌شود که سپس برای تولید فولاد
-      ضدزنگ و سایر آلیاژهای مقاوم به خوردگی به کار می‌رود.`,
-      images: [
-        "/images/chromite1.webp",
-        "/images/chromite2.webp",
-        "/images/chromite3.webp",
-      ],
-      glow1: "var(--color-glow-3)",
-      glow2: "var(--color-glow-4)",
-    },
-  };
 
   const currentTab = tabs[activeTab];
 
@@ -65,7 +25,7 @@ export default function WhatIsFerroChrome() {
                 key={key}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab(key)}
-                className={`relative px-8 py-3 rounded-md text-lg font-semibold backdrop-blur-md transition-all duration-300 cursor-pointer ${
+                className={`relative px-8 py-3 rounded-md text-sm md:text-lg font-semibold backdrop-blur-md transition-all duration-300 cursor-pointer ${
                   isActive
                     ? "text-white shadow-lg"
                     : "border text-[color:var(--color-tab-text)] hover:text-[color:var(--color-tab-hover-text)]"

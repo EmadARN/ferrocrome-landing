@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import { toast, Toaster } from "react-hot-toast";
+import { IoClose } from "react-icons/io5";
 
 const RichTextEditor = dynamic(() => import("@/components/ui/RichTextEditor"), {
   ssr: false,
@@ -16,51 +17,32 @@ export default function BlogModal({ blog, onClose }) {
     author: "",
     image: null,
   });
-  const [content, setContent] = useState("");
-  const [editorMounted, setEditorMounted] = useState(false);
-  const modalRef = useRef(null);
+  const editorRef = useRef();
 
-  useEffect(() => setEditorMounted(true), []);
-
-  // بستن مودال با کلیک بیرون
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
-
-  // ست کردن مقادیر هنگام باز کردن ادیت
   useEffect(() => {
     if (blog) {
       setFormData({
-        title: blog.title,
-        summary: blog.summary,
-        category: blog.category,
-        author: blog.author,
+        title: blog.title || "",
+        summary: blog.summary || "",
+        category: blog.category || "",
+        author: blog.author || "",
         image: null,
       });
-      setContent(blog.content || ""); // اگر content null بود خالی باشه
-    } else {
-      setFormData({
-        title: "",
-        summary: "",
-        category: "",
-        author: "",
-        image: null,
-      });
-      setContent("");
     }
   }, [blog]);
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // فقط در زمان کلیک روی دکمه ذخیره، محتوای ویرایشگر را بگیریم
+    const content = editorRef.current?.getContent() || "";
+    if (!content) {
+      toast.error("محتوای بلاگ نمی‌تواند خالی باشد!", { duration: 3000 });
+      return;
+    }
 
     const form = new FormData();
     Object.keys(formData).forEach((key) => {
@@ -69,14 +51,22 @@ export default function BlogModal({ blog, onClose }) {
     form.append("content", content);
 
     try {
-      await fetch(blog ? `/api/blogs/${blog.id}` : "/api/blogs", {
-        method: blog ? "PUT" : "POST",
-        body: form,
-      });
-      toast.success("بلاگ ذخیره شد!", { duration: 3000 });
-      onClose();
+      const response = await fetch(
+        blog ? `/api/blogs/${blog.id}` : "/api/blogs",
+        {
+          method: blog ? "PUT" : "POST",
+          body: form,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("خطا در ذخیره‌سازی بلاگ");
+      }
+
+      toast.success("بلاگ با موفقیت ذخیره شد!", { duration: 3000 });
+      onClose(); // بستن مدال پس از ذخیره موفق
     } catch (err) {
-      console.error(err);
+      console.error("خطا در ذخیره بلاگ:", err);
       toast.error("خطا در ذخیره بلاگ", { duration: 3000 });
     }
   };
@@ -84,14 +74,16 @@ export default function BlogModal({ blog, onClose }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <Toaster position="top-right" reverseOrder={false} />
-      <div
-        ref={modalRef}
-        className="bg-gray-800 rounded-md shadow-lg w-11/12 md:w-2/3 p-6 max-h-[90vh] overflow-auto"
-      >
-        <h2 className="text-2xl font-bold mb-4">
+      <div className="bg-gray-800 rounded-md shadow-lg w-11/12 md:w-2/3 p-6 max-h-[90vh] overflow-auto relative">
+        <button
+          onClick={onClose}
+          className="absolute top-2 left-3 text-white cursor-pointer hover:text-amber-600 transition-colors duration-200"
+        >
+          <IoClose size={24} />
+        </button>
+        <h2 className="text-2xl font-bold my-4">
           {blog ? "ویرایش بلاگ" : "افزودن بلاگ جدید"}
         </h2>
-
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             name="title"
@@ -99,6 +91,7 @@ export default function BlogModal({ blog, onClose }) {
             value={formData.title}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            required
           />
           <input
             name="summary"
@@ -106,6 +99,7 @@ export default function BlogModal({ blog, onClose }) {
             value={formData.summary}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            required
           />
           <input
             name="category"
@@ -113,6 +107,7 @@ export default function BlogModal({ blog, onClose }) {
             value={formData.category}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            required
           />
           <input
             name="author"
@@ -120,20 +115,40 @@ export default function BlogModal({ blog, onClose }) {
             value={formData.author}
             onChange={handleChange}
             className="w-full border p-2 rounded"
+            required
           />
-          <input
-            type="file"
-            name="image"
-            onChange={(e) =>
-              setFormData({ ...formData, image: e.target.files[0] })
-            }
-          />
+
+          <div className="mb-4">
+            <label className="block mb-2 font-semibold">
+              تصویر فعلی / جدید:
+            </label>
+            {(formData.image || blog?.image) && (
+              <img
+                src={
+                  formData.image instanceof File
+                    ? URL.createObjectURL(formData.image)
+                    : blog?.image
+                }
+                alt="پیش‌نمایش تصویر"
+                className="w-32 h-32 object-cover rounded mb-2"
+              />
+            )}
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.files[0] })
+              }
+            />
+          </div>
 
           <div>
             <label className="block mb-2 font-semibold">محتوا:</label>
-            {editorMounted && (
-              <RichTextEditor content={content} setContent={setContent} />
-            )}
+            <RichTextEditor
+              ref={editorRef}
+              initialContent={blog?.content || ""}
+            />
           </div>
 
           <div className="flex justify-end gap-2">

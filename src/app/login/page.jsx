@@ -46,7 +46,6 @@ export default function LoginPage() {
       });
 
       if (result.error) {
-        // ترجمه خطاهای NextAuth به فارسی
         let msg = "خطا در ورود. دوباره تلاش کنید.";
         switch (result.error) {
           case "CredentialsSignin":
@@ -118,18 +117,18 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] flex items-center justify-center overflow-hidden px-4">
+    <div className="relative min-h-screen bg-[#16213E] bg-gradient-to-br from-[#0A0A1A] via-[#16213E] to-[#0F3460] flex items-center justify-center overflow-hidden px-4">
       {shapes.map((s, idx) => (
         <motion.div
           key={idx}
-          className={`absolute ${s.gradient} rounded-full`}
+          className={`absolute bg-[#16213E] ${s.gradient} rounded-md `}
           style={{
             width: `${s.size}px`,
             height: `${s.size}px`,
             top: s.top,
             left: s.left,
             right: s.right,
-            opacity: 0.1,
+            opacity: 0.4,
           }}
           animate={{ y: [-10, 10, -10], rotate: [0, 35, 0] }}
           transition={{ duration: 8, repeat: Infinity, delay: s.delay }}
@@ -206,7 +205,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-md bg-gradient-to-br from-[#a15300] to-[#521f01] font-bold text-white text-lg uppercase tracking-wider shadow-lg hover:shadow-2xl transition-all relative overflow-hidden disabled:opacity-70 cursor-pointer"
+            className="w-full py-4 rounded-md bg-[#a15300] bg-gradient-to-br from-[#a15300] to-[#521f01] font-bold text-white text-lg uppercase tracking-wider shadow-lg hover:shadow-2xl transition-all relative overflow-hidden disabled:opacity-70 cursor-pointer"
           >
             {loading && (
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

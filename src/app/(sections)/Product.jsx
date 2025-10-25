@@ -1,37 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { products } from "@/lib/constants";
 
-const products = [
-  {
-    id: 1,
-    name: "فروکروم پرکربن",
-    description:
-      "مناسب برای تولید فولادهای ضدزنگ و آلیاژی. دارای درصد بالای کروم و مقاومت حرارتی عالی.",
-    features: ["کروم: 65٪", "کربن: 6–8٪", "اندازه ذرات: 10–100 میلی‌متر"],
-    image: "/images/high-carbon-ferrochrome.webp",
-  },
-  {
-    id: 2,
-    name: "فروکروم کم‌کربن",
-    description:
-      "ویژه‌ی صنایع دقیق و فولادهای خاص با میزان کربن پایین. مناسب برای استفاده در فولادهای ابزار و مقاوم به خوردگی.",
-    features: ["کروم: 70٪", "کربن: ≤0.1٪", "خلوص بالا و پایداری عالی"],
-    image: "/images/low-carbon-ferrochrome.jpg",
-  },
-  {
-    id: 3,
-    name: "فروکروم میکروکربن",
-    description:
-      "مناسب برای فولادهای آلیاژی با حساسیت بالا نسبت به کربن. تولید شده با فرآیند الکترولیتی دقیق.",
-    features: ["کروم: 75٪", "کربن: ≤0.03٪", "رطوبت پایین و دانه‌بندی یکنواخت"],
-    image: "/images/micro-carbon-ferrochrome.webp",
-  },
-];
-
-export default function ProductsWithModal() {
+export default function ProductsWithModal({ setModalOpen }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [waveIndex, setWaveIndex] = useState(null);
+
+  useEffect(() => {
+    setModalOpen(!!selectedProduct); // true اگر مودال باز باشه، false اگر بسته باشه
+  }, [selectedProduct, setModalOpen]);
 
   // موج رندوم روی یک کارت
   useEffect(() => {
@@ -74,8 +56,8 @@ export default function ProductsWithModal() {
           ما در حال راه اندازی خط تولید محصولات زیر هستیم تا نیازهای مختلف صنایع
           فولاد و آلیاژسازی را برطرف کنیم
         </motion.p>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* product in desktop */}
+        <div className="hidden  md:grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
@@ -134,6 +116,112 @@ export default function ProductsWithModal() {
             </motion.div>
           ))}
         </div>
+
+        {/* product in mobile */}
+        <div className=" relative  md:hidden ">
+          <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-10 px-2 pointer-events-none">
+            <div className="swiper-button-prev-custom pointer-events-auto bg-[#00000050] text-white rounded-md p-2 shadow-lg cursor-pointer">
+              ❮
+            </div>
+            <div className="swiper-button-next-custom pointer-events-auto bg-[#00000050] text-white rounded-md p-2 shadow-lg cursor-pointer">
+              ❯
+            </div>
+          </div>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{ delay: 3000 }}
+            navigation={{
+              nextEl: ".swiper-button-next-custom",
+              prevEl: ".swiper-button-prev-custom",
+            }}
+            onSwiper={(swiper) => {
+              // attach دکمه‌ها وقتی mount شدن
+              swiper.params.navigation.prevEl = document.querySelector(
+                ".swiper-button-prev-custom"
+              );
+              swiper.params.navigation.nextEl = document.querySelector(
+                ".swiper-button-next-custom"
+              );
+              swiper.navigation.destroy(); // reset
+              swiper.navigation.init(); // init دوباره
+              swiper.navigation.update(); // update
+            }}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            {products.map((product, index) => (
+              <SwiperSlide key={product.id}>
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  style={{
+                    background: "var(--color-card-bg)",
+                    borderColor: "var(--color-card-border)",
+                    boxShadow: `0 0 20px var(--color-card-shadow)`,
+                  }}
+                  className="relative backdrop-blur-lg rounded-md overflow-hidden border hover:scale-[1.05] hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  {/* موج رندوم */}
+                  {waveIndex === index && (
+                    <motion.div
+                      initial={{ x: "-100%" }}
+                      animate={{ x: "100%" }}
+                      transition={{ duration: 2, ease: "easeInOut" }}
+                      className="absolute inset-0 pointer-events-none"
+                    >
+                      <div
+                        className="w-full h-full rounded-xl"
+                        style={{
+                          background:
+                            "linear-gradient(to right, var(--color-glow-1), var(--color-glow-2))",
+                        }}
+                      ></div>
+                    </motion.div>
+                  )}
+
+                  <div className="h-56 w-full overflow-hidden relative z-10">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="object-cover w-full h-full hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-6 text-right relative z-10">
+                    <h3
+                      style={{ color: "var(--color-title-secondary)" }}
+                      className="text-lg md:text-2xl font-bold mb-3"
+                    >
+                      {product.name}
+                    </h3>
+                    <p
+                      style={{ color: "var(--color-text-secondary)" }}
+                      className="mb-4 leading-relaxed text-sm md:text-lg"
+                    >
+                      {product.description}
+                    </p>
+
+                    <div>
+                      <span className="inline-block bg-[#7a3c00] bg-gradient-to-br from-[var(--color-title)] to-[#7a3c00] text-white text-xs font-semibold px-3 py-1 rounded-full hover:scale-105 transition-transform cursor-pointer">
+                        مشاهده جزئیات
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
 
       {/* مودال */}
@@ -159,7 +247,7 @@ export default function ProductsWithModal() {
                 borderColor: "var(--color-card-border)",
                 boxShadow: "0 8px 30px rgba(0, 0, 0, 0.3)",
               }}
-              className="rounded-md max-w-lg w-full p-6 relative text-right border"
+              className="rounded-md max-w-lg w-full p-6 relative text-right "
               onClick={(e) => e.stopPropagation()}
             >
               <button

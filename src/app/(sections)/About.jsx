@@ -1,22 +1,11 @@
 "use client";
+import { images, stats } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function About() {
-  const stats = [
-    { value: "30+", label: "سال تجربه", color: "text-[#c76700]" },
-    { value: "500K+", label: "تن تولید سالانه", color: "text-blue-400" },
-    { value: "40+", label: "کشور مقصد صادرات", color: "text-[#c76700]" },
-  ];
-
-  const images = [
-    "/images/high-carbon-ferrochrome.webp",
-    "/images/low-carbon-ferrochrome.jpg",
-    "/images/micro-carbon-ferrochrome.webp",
-  ];
-
-  // ✅ ایجاد چرخش تصادفی فقط در کلاینت (بعد از mount)
+  //  ایجاد چرخش تصادفی فقط در کلاینت (بعد از mount)
   const [randomRotations, setRandomRotations] = useState([]);
 
   useEffect(() => {
@@ -139,7 +128,7 @@ export default function About() {
               صنایع فولاد و آلیاژسازی در سراسر جهان برآورده شود.
             </p>
 
-            <div className="flex flex-wrap justify-between gap-4 pt-8">
+            <div className="flex flex-wrap justify-evenly gap-4 pt-8">
               {stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
@@ -151,7 +140,7 @@ export default function About() {
                     borderColor: "var(--color-card-border)",
                     boxShadow: "var(--color-card-shadow)",
                   }}
-                  className="flex-1 min-w-[30%] sm:min-w-[28%] p-4 sm:p-6 rounded-md shadow-lg hover:scale-105 transition-transform cursor-default"
+                  className=" min-w-[40%] sm:min-w-[38%] p-4 sm:p-6 rounded-md shadow-lg hover:scale-105 transition-transform cursor-default"
                 >
                   <div
                     className={`text-lg sm:text-2xl font-bold ${stat.color} mb-1 sm:mb-2`}
@@ -187,12 +176,9 @@ export default function About() {
                 custom={idx}
                 variants={fallVariants}
                 initial="initial"
-                animate={[
-                  "animate",
-                  idx === 2 ? "floatAlt" : "float",
-                ]}
+                animate={["animate", idx === 2 ? "floatAlt" : "float"]}
                 whileHover="hover"
-                className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-md overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl cursor-pointer transition-transform ${
+                className={`relative w-4/5 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-md overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl  transition-transform ${
                   idx === 1 ? "translate-x-3 sm:translate-x-24" : ""
                 }`}
                 style={{ perspective: 1000, zIndex: 10 + idx }}

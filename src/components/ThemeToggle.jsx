@@ -5,7 +5,7 @@ import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-export default function ThemeToggleSwitch({ scrolled }) {
+export default function ThemeToggleSwitch({ scrolled, mobileMenuOpen }) {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -40,11 +40,7 @@ export default function ThemeToggleSwitch({ scrolled }) {
           size={18}
           className={cn(
             "text-[var(--color-icon-text)] ",
-            isBlogPage
-              ? "text-[var(--color-navlink)]"
-              : scrolled
-              ? "text-[var(--color-navlink)]"
-              : "text-white"
+            isBlogPage ? "text-white" : scrolled ? "text-white" : "text-white"
           )}
         />
       ) : (
@@ -52,8 +48,10 @@ export default function ThemeToggleSwitch({ scrolled }) {
           size={18}
           className={cn(
             "text-[var(--color-icon-text)] ",
+            mobileMenuOpen ? " text-white" : "",
+
             isBlogPage
-              ? "text-[var(--color-navlink)]"
+              ? " text-[var(--color-navlink)]"
               : scrolled
               ? "text-[var(--color-navlink)]"
               : "text-white"

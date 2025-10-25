@@ -29,7 +29,7 @@ const AnimatedCard = ({ title, summary, createdAt, image, href }) => {
           scale: 1.03,
         }}
         style={{ backgroundColor: "var(--color-card-bg)" }}
-        className="rounded-md max-w-md overflow-hidden cursor-pointer h-[400px] flex flex-col my-5 transition-all relative"
+        className="rounded-md max-w-md md:max-w-xl overflow-hidden cursor-pointer h-[400px] flex flex-col my-5 transition-all relative"
       >
         {/* تصویر */}
         {image && (

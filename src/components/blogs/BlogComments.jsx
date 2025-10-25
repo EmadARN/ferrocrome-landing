@@ -38,35 +38,24 @@ export default function BlogComments({ blogId, initialComments }) {
 
   const inputClasses = (hasError) =>
     `w-full px-4 py-3 rounded-md text-gray-900 text-right placeholder-[var(--color-input-label)] 
-     border ${
-       hasError ? "border-yellow-900 ring-yellow-900" : "border-gray-300"
-     } 
+     border ${hasError ? "border-yellow-900 ring-yellow-900" : "border-gray-300"} 
      focus:outline-none focus:ring-1 focus:ring-yellow-900 focus:border-yellow-900
      transition-colors`;
 
   return (
-    <section
-      style={{
-        background: "var(--color-form-bg)!important",
-      }}
-      className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8"
-    >
+    <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        style={{
-          background: "var(--color-form-bg)!important",
-        }}
-        className=" rounded-lg shadow-lg p-6 mt-8 flex flex-col gap-4"
+        className="p-6 mt-8 flex flex-col gap-4"
       >
         <h3 className="text-2xl font-bold text-[var(--color-title)] mb-2">
           ثبت دیدگاه شما
         </h3>
         <p
           style={{ color: "var(--color-title-secondary)" }}
-          className=" text-sm mb-4"
+          className="text-sm mb-4"
         >
-          نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند
-          *
+          نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند *
         </p>
 
         <input
@@ -123,7 +112,7 @@ export default function BlogComments({ blogId, initialComments }) {
         <button
           type="submit"
           disabled={loading}
-          className="bg-gradient-to-r from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold px-5 py-3 rounded-md  transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          className="bg-gradient-to-r from-[#a15300] via-[#521f01] to-[#521f01] text-white font-semibold px-5 py-3 rounded-md transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           {loading ? "در حال ارسال..." : "ارسال دیدگاه"}
         </button>

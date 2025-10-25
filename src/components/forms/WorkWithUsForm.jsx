@@ -79,14 +79,14 @@ export default function ContactForm() {
     }
   };
 
-  const saleOptions = ["تامین مواد اولیه(کلوخه کرومیت)", "سایر"];
+  const saleOptions = ["تامین مواد اولیه (کلوخه کرومیت)", "سایر"];
 
   return (
     <section
       style={{
-        background: "var(--color-form-bg)!important",
+        background: "var(--color-form-bg)!important ",
       }}
-      className=" relative  flex items-center justify-center px-4 py-10 overflow-hidden transition-colors"
+      className=" relative  rounded-md shadow-md flex items-center justify-center px-4 py-10 overflow-hidden transition-colors"
     >
       {/* اشکال شناور */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
@@ -103,7 +103,7 @@ export default function ContactForm() {
       </div>
 
       {/* فرم */}
-      <div className="relative z-10 w-full  backdrop-blur-lg rounded-md p-4 sm:p-10 shadow-md transition-colors">
+      <div className="relative z-10 w-full  backdrop-blur-lg  p-4 sm:p-10  transition-colors">
         <h1 className="text-center text-[var(--color-title)] text-[15px] sm:text-3xl font-bold mb-2 drop-shadow-lg">
           فرم درخواست همکاری
         </h1>
@@ -180,7 +180,7 @@ export default function ContactForm() {
                 type="tel"
                 {...register("phone_number")}
                 placeholder="09121234567"
-                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-sm sm:text-base"
+                className="w-full p-3 sm:p-4 rounded-sm bg-[var(--color-input-bg)] text-[var(--color-input-text)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-title)] text-right text-sm sm:text-base"
               />
               {errors.phone_number && (
                 <p className="text-red-400 text-xs sm:text-sm mt-1">
@@ -273,7 +273,7 @@ export default function ContactForm() {
             type="submit"
             variant="premium"
             disabled={isSubmitting}
-            className="w-full mt-4 py-3 sm:py-4 rounded-md bg-gradient-to-br from-[var(--color-title)] to-[#7a3c00] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
+            className="w-full mt-4 py-3 sm:py-4 rounded-md bg-[#7a3c00] bg-gradient-to-br from-[var(--color-title)] to-[#7a3c00] text-white font-semibold uppercase tracking-wider hover:shadow-lg hover:-translate-y-1 transition-all text-sm sm:text-base"
           >
             {isSubmitting ? "در حال ارسال..." : "ارسال درخواست"}
           </Button>

@@ -1,35 +1,12 @@
 "use client";
+import { items } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { FaAward, FaGlobe, FaCheckCircle, FaLeaf } from "react-icons/fa";
-
-const items = [
-  {
-    icon: <FaAward className="w-10 h-10 mx-auto text-[#a15300]" />,
-    title: "کیفیت ممتاز",
-    desc: "تولید با گواهی ISO 9001 و کنترل کیفیت دقیق در تمامی مراحل.",
-  },
-  {
-    icon: <FaGlobe className="w-10 h-10 mx-auto text-blue-400" />,
-    title: "پوشش جهانی",
-    desc: "خدمات رسانی به بیش از 40 کشور با لجستیک قابل اعتماد.",
-  },
-  {
-    icon: <FaCheckCircle className="w-10 h-10 mx-auto text-gray-400" />,
-    title: "قابلیت اطمینان",
-    desc: "تحویل 99.8٪ به موقع و مدیریت زنجیره تأمین پایدار.",
-  },
-  {
-    icon: <FaLeaf className="w-10 h-10 mx-auto text-green-400" />,
-    title: "پایداری",
-    desc: "فرآیندهای تولید دوستدار محیط زیست با حداقل اثر کربن.",
-  },
-];
 
 export default function WhyChooseUs() {
   return (
     <section
       style={{
-      background: "var(--color-about-bg)",
+        background: "var(--color-about-bg)",
         color: "var(--color-text)",
       }}
       className="py-20 bg-black"
@@ -45,7 +22,10 @@ export default function WhyChooseUs() {
         >
           چرا شرکت‌های پیشرو ما را انتخاب می‌کنند
         </motion.h2>
-        <p style={{ color: "var(--color-text-muted)" }} className=" text-[12px] md:text-lg mx-auto">
+        <p
+          style={{ color: "var(--color-text-muted)" }}
+          className=" text-[12px] md:text-lg mx-auto"
+        >
           ارائه برتری از طریق نوآوری، اطمینان و فرآیندهای پایدار
         </p>
       </div>
@@ -63,10 +43,18 @@ export default function WhyChooseUs() {
               className=" backdrop-blur-lg p-8 rounded-md hover:scale-105 transition-transform"
             >
               <div className="mb-4">{item.icon}</div>
-              <h3  style={{ color: "var(--color-title-secondary)" }} className="text-xl font-bold  mb-2">
+              <h3
+                style={{ color: "var(--color-title-secondary)" }}
+                className="text-xl font-bold  mb-2"
+              >
                 {item.title}
               </h3>
-              <p  style={{ color: "var(--color-text-secondary)" }} className="text-sm">{item.desc}</p>
+              <p
+                style={{ color: "var(--color-text-secondary)" }}
+                className="text-sm"
+              >
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>

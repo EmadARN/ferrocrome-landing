@@ -16,7 +16,6 @@ export default function NewBlogPage() {
     author: "",
     image: null,
   });
-
   const [content, setContent] = useState("");
 
   const handleChange = (e) => {
@@ -31,30 +30,42 @@ export default function NewBlogPage() {
     form.append("summary", formData.summary);
     form.append("category", formData.category);
     form.append("author", formData.author);
-    form.append("content", content);
+    form.append("content", String(content));
 
     if (formData.image) {
-      form.append("image", formData.image); // فایل واقعی
+      form.append("image", formData.image);
     }
 
     try {
-      await fetch("/api/blogs", {
+      const res = await fetch("/api/blogs", {
         method: "POST",
         body: form,
       });
-      toast.success("بلاگ با موفقیت ذخیره شد!");
+
+      if (!res.ok) throw new Error("Failed to save");
+
+      toast.success("✅ بلاگ با موفقیت ذخیره شد!");
+      setFormData({
+        title: "",
+        summary: "",
+        category: "",
+        author: "",
+        image: null,
+      });
+      setContent("");
     } catch (err) {
-      toast.error("خطا در ذخیره بلاگ");
+      toast.error("❌ خطا در ذخیره بلاگ");
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto py-10">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" />
       <h1 className="text-3xl font-bold mb-6">افزودن بلاگ جدید</h1>
+
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 bg-Red shadow p-6 rounded-lg"
+        className="space-y-4 bg-gray-100 dark:bg-gray-900 shadow p-6 rounded-lg"
       >
         <input
           name="title"
@@ -91,6 +102,7 @@ export default function NewBlogPage() {
           onChange={(e) =>
             setFormData({ ...formData, image: e.target.files[0] })
           }
+          className="w-full"
         />
 
         <div>
